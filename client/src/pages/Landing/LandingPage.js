@@ -19,8 +19,9 @@ function LandingPage() {
         <div></div>
     <div className="flex container">
         <div className = "bg-slate-200 w-1/2">
-            <h1> Middle Where</h1>
-            <p>
+            <h1 className = "text-7xl  font-mono"> Middle Where</h1>
+            <br/>
+            <p className="font-serif">
             Middle-Where is a web-based application designed to bring friends together using a calculated, centralized geolocation. The motivation behind this project is to streamline the process of deciding the best place to meet between multiple group members. Individuals can choose to be placed into groups with their friends or colleagues, and by providing their location details, Middle-Where determines a meeting spot based on the closest proximity between all group members.                
             </p>
         </div>
