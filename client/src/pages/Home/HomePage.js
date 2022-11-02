@@ -16,8 +16,6 @@ function HomePage() {
 
   return (
     <div className="homeViewContainer">
-      {/* scoreboard component - currently just placeholder */}
-      {/* conditionally renders <Login /> versus <CreateUser /> based on global context variable */}
       {auth.loggedIn() ? <div /> : existingUser ? <Login /> : <CreateAccount />}
     </div>
   );
