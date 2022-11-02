@@ -1,19 +1,26 @@
 const db = require("../config/connection");
-const { User, Channel, GameCard } = require("../models");
+const { User, Group } = require("../models");
 const userSeeds = require("./userSeeds.json");
+const groupSeeds = require("./groupSeeds.json");
 const chatSeeds = require("./chatSeeds.json");
-const gameCardSeeds = require("./gameCardSeeds.json");
 
 db.once("open", async () => {
-	try {
-		await User.deleteMany({});
-		await User.create(userSeeds);
+  try {
+    await User.deleteMany({});
+    await User.create(userSeeds);
 
-		let users = await User.find();
-		console.log(users);
-		console.log("all done!");
-		process.exit(0);
-	} catch (err) {
-		throw err;
-	}
+    await Group.deleteMany({});
+    await Group.create(groupSeeds);
+
+    let users = await User.find();
+    let groups = await Group.find();
+
+    console.log(users);
+    console.log(groups);
+
+    console.log("Data seeded! 🌱");
+    process.exit(0);
+  } catch (err) {
+    throw err;
+  }
 });
