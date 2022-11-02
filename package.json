@@ -1,0 +1,33 @@
+{
+  "name": "copyStack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "concurrently \"cd client && npm run build\" \"cd server && npm run server\" ",
+    "start": "npm run build && cd server && node server.js",
+    "server": "cd server server.js --ignore client",
+    "build": "cd client && npm run build --max_old_space_size=5120 node_modules/.bin/react-scripts build",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "client": "cd client && npm start",
+    "develop": "concurrently \"cd server && npm run develop\" \"cd client && npm start\"",
+    "seed": "cd server && npm run seed",
+    "install-client": "cd client && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/l1keafox/copyStack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/l1keafox/copyStack/issues"
+  },
+  "homepage": "https://github.com/l1keafox/copyStack#readme",
+  "dependencies": {
+    "apollo-server-express": "^3.10.3",
+    "concurrently": "^7.4.0",
+    "jsonwebtoken": "^8.5.1"
+  }
+}

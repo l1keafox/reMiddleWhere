@@ -1,0 +1,50 @@
+[{
+    "username": "test",
+    "email": "test@test.com",
+    "password": "testtest"
+},
+{
+    "username": "danceman",
+    "email": "danceman@email.com",
+    "password": "danceman123"
+},
+{
+    "username": "rainman",
+    "email": "rainman@email.com",
+    "password": "rainman123"
+},
+{
+    "username": "Queenlady",
+    "email": "queenlady@email.com",
+    "password": "Queenlady123"
+},
+{
+    "username": "wigglemania",
+    "email": "wigglemania@email.com",
+    "password": "danceman123"
+},
+{
+    "username": "demonking",
+    "email": "demonking@email.com",
+    "password": "demonking123"
+},
+{
+    "username": "goodking",
+    "email": "goodking@email.com",
+    "password": "goodking123"
+},
+{
+    "username": "giantpig",
+    "email": "giantpig@email.com",
+    "password": "giantpig123"
+},
+{
+    "username": "tinypig",
+    "email": "tinypig@email.com",
+    "password": "tinypig123"
+},
+{
+    "username": "evilpig",
+    "email": "evilpig@email.com",
+    "password": "evilpig123"
+}]
