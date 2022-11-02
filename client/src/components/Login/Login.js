@@ -122,9 +122,9 @@ const Login = (props) => {
      margin="normal"
      required
      fullWidth
-     id="userName"
-     label="userName"
-     name="userName"
+     id="username"
+     label="username"
+     name="username"
      autoFocus
    />
    <TextField
@@ -132,7 +132,7 @@ const Login = (props) => {
      required
      fullWidth
      name="password"
-     label="Password"
+     label="password"
      type="password"
      id="password"
    />

@@ -1,8 +1,6 @@
 const db = require("../config/connection");
 const { User, Channel, GameCard } = require("../models");
 const userSeeds = require("./userSeeds.json");
-const chatSeeds = require("./chatSeeds.json");
-const gameCardSeeds = require("./gameCardSeeds.json");
 
 db.once("open", async () => {
 	try {
