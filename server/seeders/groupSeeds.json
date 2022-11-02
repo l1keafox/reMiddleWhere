@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Pets",
+    "description": "Pets doing pet things like getting pet",
+    "longitude": -105.1,
+    "latitude": 39.870972
+  },
+  {
+    "name": "Foodies",
+    "description": "Taste testers from around the city",
+    "longitude": -105.1,
+    "latitude": 39.870972
+  },
+  {
+    "name": "Athletes",
+    "description": "Finding the best place to watch the big game",
+    "longitude": -105.1,
+    "latitude": 39.870972
+  }
+]
