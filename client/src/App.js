@@ -57,6 +57,11 @@ function App() {
   }, [auth.loggedIn()]);
 
   function changeStage(nextStage) {
+    console.log(nextStage);
+    if(nextStage === 'logout'){
+      auth.logout();
+      return;
+    }
     setLoading(false);
 
     setTimeout(() => {
@@ -77,7 +82,7 @@ function App() {
     <>
       <ApolloProvider client={client}>
         <ExistingUserProvider>
-          {auth.loggedIn()?<NavBar/>:<div></div>}
+          {auth.loggedIn()?<NavBar navLink={(e) => changeStage(e.target.getAttribute("data-nav"))}/>:<div></div>}
           {displayContent ?? <LandingPage isShowing={loading} />}
 
         </ExistingUserProvider>

@@ -1,6 +1,10 @@
 import React from 'react'
 export default function Navbar({navLink}) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
+  function logout(){
+    console.log('logout?');
+  }
+
   return (
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-slate-300 mb-3">
