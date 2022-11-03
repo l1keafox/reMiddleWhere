@@ -12,6 +12,8 @@ function ProfilePage() {
   return (
     <div className="homeViewContainer">
         <NavBar/>
+
+        Here we could have cards of groups are you in
     </div>
   );
 }
