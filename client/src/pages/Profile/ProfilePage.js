@@ -8,7 +8,7 @@ function ProfilePage() {
   const { existingUser } = useExistingUserContext();
   const { loading, data } = useQuery(QUERY_ME);
   console.log(auth.getUser().data, data);
-
+  console.log(existingUser);
   return (
     <div>
       {loading ? (

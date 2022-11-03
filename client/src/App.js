@@ -8,11 +8,14 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import React from "react";
 import ExistingUserProvider from "./utils/existingUserContext";
+import {useExistingUserContext} from "./utils/existingUserContext";
 import { useState, useEffect } from "react";
 import LandingPage from "./pages/Landing/LandingPage.js";
 import ProfilePage from "./pages/Profile/ProfilePage.js";
 import NavBar from "./components/NavBar/NavBar";
 import auth from "./utils/auth";
+
+
 const Pages = {
   landing: "landing",
   profile: "profile",
@@ -39,6 +42,8 @@ const client = new ApolloClient({
 function App() {
   const [stage, setStage] = useState(Pages.landing);
   const [loading, setLoading] = useState(false);
+  const { existingUser } = useExistingUserContext();
+  console.log(existingUser);
   let displayContent;
 
   useEffect(() => {
