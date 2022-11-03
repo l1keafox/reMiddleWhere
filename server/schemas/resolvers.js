@@ -1,5 +1,5 @@
-const { User, Channel } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
+const { User, Group } = require("../models");
 const { GraphQLScalarType, Kind } = require("graphql");
 const { signToken } = require("../utils/auth");
 //this is a custom decoding strategy for dealing with dates.
@@ -28,17 +28,23 @@ const resolvers = {
   Query: {
     //gets all users
     users: async () => {
-      return User.find();
+      return User.find().populate("groups");
     },
     //Gets user by id
-    user: async (parent, { userId }) => {
-      return User.findById({ _id: userId });
+    user: async (parent, { username }) => {
+      return User.findOne({ username }).populate("groups");
+    },
+    groups: async () => {
+      return Group.find();
+    },
+    group: async (parent, { groupId }) => {
+      return Group.findById({ _id: groupId });
     },
 
     //returns the current user id, must be logged in for it to work.
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        return User.findOne({ _id: context.user._id }).populate("groups");
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -66,6 +72,21 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+    addGroup: async (parent, { name }, context) => {
+      if (context.user) {
+        const group = await Group.create({
+          name,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { groups: group._id } }
+        );
+
+        return thought;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
     login: async (parent, { username, password }) => {
       const user = await User.findOne({ username });
 
@@ -88,7 +109,21 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    removeGroup: async (parent, { groupId }, context) => {
+      if (context.user) {
+        const group = await Group.findOneAndDelete({
+          _id: groupId,
+        });
 
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { groups: group._id } }
+        );
+
+        return group;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
   },
 };
 module.exports = resolvers;
