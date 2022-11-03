@@ -11,6 +11,7 @@ import ExistingUserProvider from "./utils/existingUserContext";
 import { useState, useEffect } from "react";
 import LandingPage from "./pages/Landing/LandingPage.js";
 import ProfilePage from "./pages/Profile/ProfilePage.js";
+import NavBar from "./components/NavBar/NavBar";
 import auth from "./utils/auth";
 const Pages = {
   landing: "landing",
@@ -76,7 +77,9 @@ function App() {
     <>
       <ApolloProvider client={client}>
         <ExistingUserProvider>
+          {auth.loggedIn()?<NavBar/>:<div></div>}
           {displayContent ?? <LandingPage isShowing={loading} />}
+
         </ExistingUserProvider>
       </ApolloProvider>
     </>
