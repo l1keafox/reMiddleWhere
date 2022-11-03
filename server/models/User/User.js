@@ -35,14 +35,21 @@ const userSchema = new Schema(
         ref: "Group",
       },
     ],
-    longitude: {
-      type: DataTypes.DECIMAL(15, 6),
-      allowNull: true,
-    },
-    latitude: {
-      type: DataTypes.DECIMAL(15, 6),
-      allowNull: true,
-    },
+
+    // DataTypes is not allowed with MongoDB, only Sequelize
+    //Per StackOverflow: Before you can execute geospatial queries, you need to create a geospatial index:
+    // --> db.locationcol.createIndex( { loc : "2dsphere" } )
+    // Also, you need to store your locations as valid GeoJSON objects so MongoDB can parse them properly:
+    // --> loc : { type: "Point", coordinates: [ -76.703347, 30.710459 ] },
+
+    // longitude: {
+    //   type: DataTypes.DECIMAL(15, 6),
+    //   allowNull: true,
+    // },
+    // latitude: {
+    //   type: DataTypes.DECIMAL(15, 6),
+    //   allowNull: true,
+    // },
 
     isAdmin: {
       type: Boolean,
