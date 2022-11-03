@@ -55,7 +55,7 @@ function CreateAccount() {
   };
 
   return (
-    <div className="createUserForm">
+    <div className="bg-black text-white">
       <h4 className="createUserCardTitle">Create Account</h4>
 
       <div className="formContainer">
@@ -123,9 +123,6 @@ function CreateAccount() {
             backgroundColor: "black",
           }}
         />
-        <button className="loginSubmitBtn" onClick={toggleExistingUser}>
-          Return to Login 
-        </button>
       </div>
 
       {errorMessage && (
