@@ -10,7 +10,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React from "react";
 import ExistingUserProvider from "./utils/existingUserContext";
 
-import HomePage from "./pages/Home/HomePage.js";
+// import HomePage from "./pages/Home/HomePage.js";
+import LandingPage from "./pages/Landing/LandingPage.js";
 
 
 // Construct our main GraphQL API endpoint
@@ -44,7 +45,7 @@ function App() {
       <Router>
         <ApolloProvider client={client}>
           <ExistingUserProvider>
-            <HomePage />
+            <LandingPage />
           </ExistingUserProvider>
         </ApolloProvider>
       </Router>
