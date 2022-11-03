@@ -7,8 +7,6 @@ import Auth from "../../utils/auth";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -119,9 +117,9 @@ const Login = (props) => {
                 </Link> */}
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2" onClick={props.signUp}>
+                <a href="#" variant="body2" onClick={props.signUp}>
                   {"Don't have an account? Sign Up"}
-                </Link>
+                </a>
               </Grid>
             </Grid>
             <TextField
