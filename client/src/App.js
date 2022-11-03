@@ -6,13 +6,17 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React from "react";
 import ExistingUserProvider from "./utils/existingUserContext";
-
+import { useState, useEffect } from "react";
 // import HomePage from "./pages/Home/HomePage.js";
 import LandingPage from "./pages/Landing/LandingPage.js";
+import ProfilePage from "./pages/Profile/ProfilePage.js";
 
+const Pages = {
+  landing:"landing",
+  profile:"profile"
+};
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -38,17 +42,41 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const [stage, setStage] = useState(Pages.landing);
+  const [loading, setLoading] = useState(false);
+  let displayContent;
+
+  useEffect(() => {
+    setLoading(true);
+  }, []);
 
 
+  function changeStage(nextStage){
+    console.log(nextStage);
+    setLoading(false);
+
+    setTimeout( () =>{
+      setStage(nextStage);
+      setLoading(true);
+    },1000);
+  };
+
+  switch (stage) {
+    case Pages.profile:
+        displayContent = <ProfilePage isShowing={loading} />;
+      break;
+      default:
+        displayContent = <LandingPage isShowing={loading} />;
+      break;      
+  }  
   return (
     <>
-      <Router>
         <ApolloProvider client={client}>
           <ExistingUserProvider>
-            <LandingPage />
+          {displayContent ?? <LandingPage isShowing={loading}/>}
+
           </ExistingUserProvider>
         </ApolloProvider>
-      </Router>
     </>
   );
 }
