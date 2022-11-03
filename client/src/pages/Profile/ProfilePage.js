@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+import NavBar from "./../../components/NavBar/NavBar";
 
 // user context
 import { useExistingUserContext } from "../../utils/existingUserContext";
@@ -10,7 +11,7 @@ function ProfilePage() {
 
   return (
     <div className="homeViewContainer">
-        HI
+        <NavBar/>
     </div>
   );
 }
