@@ -30,11 +30,11 @@ const typeDefs = gql`
     me: User
   }
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
-	addGroup(groupId: ID!:): Group
     login(username: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
     removeUser(userId: ID!): User
-	removeGroup(groupId: ID!): Group
+    addGroup(groupId: ID!): Group
+    removeGroup(groupId: ID!): Group
   }
 `;
 module.exports = typeDefs;
