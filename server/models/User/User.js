@@ -35,6 +35,14 @@ const userSchema = new Schema(
         ref: "Group",
       },
     ],
+    longitude: {
+      type: DataTypes.DECIMAL(15, 6),
+      allowNull: true,
+    },
+    latitude: {
+      type: DataTypes.DECIMAL(15, 6),
+      allowNull: true,
+    },
 
     isAdmin: {
       type: Boolean,
