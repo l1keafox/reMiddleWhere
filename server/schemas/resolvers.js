@@ -72,6 +72,21 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+    addGroup: async (parent, { name }, context) => {
+      if (context.user) {
+        const group = await Group.create({
+          name,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { groups: group._id } }
+        );
+
+        return thought;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
     login: async (parent, { username, password }) => {
       const user = await User.findOne({ username });
 
@@ -91,6 +106,21 @@ const resolvers = {
     removeUser: async (parent, args, context) => {
       if (context.user) {
         return User.findOneAndDelete({ _id: context.user._id });
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    removeGroup: async (parent, { groupId }, context) => {
+      if (context.user) {
+        const group = await Group.findOneAndDelete({
+          _id: groupId,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { groups: group._id } }
+        );
+
+        return group;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
