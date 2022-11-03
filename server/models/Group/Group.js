@@ -13,12 +13,9 @@ const groupSchema = new Schema({
   },
   password: {
     type: String,
+    // data currently does not seed unless password provided
     required: false,
     minlength: 5,
-  },
-  imageUrl: {
-    type: String,
-    required: false,
   },
   users: [
     {

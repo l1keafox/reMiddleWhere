@@ -29,6 +29,27 @@ const userSchema = new Schema(
         ref: "User",
       },
     ],
+    groups: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Group",
+      },
+    ],
+
+    // DataTypes is not allowed with MongoDB, only Sequelize
+    //Per StackOverflow: Before you can execute geospatial queries, you need to create a geospatial index:
+    // --> db.locationcol.createIndex( { loc : "2dsphere" } )
+    // Also, you need to store your locations as valid GeoJSON objects so MongoDB can parse them properly:
+    // --> loc : { type: "Point", coordinates: [ -76.703347, 30.710459 ] },
+
+    // longitude: {
+    //   type: DataTypes.DECIMAL(15, 6),
+    //   allowNull: true,
+    // },
+    // latitude: {
+    //   type: DataTypes.DECIMAL(15, 6),
+    //   allowNull: true,
+    // },
 
     isAdmin: {
       type: Boolean,
@@ -56,6 +77,6 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-const User = model("user", userSchema);
+const User = model("User", userSchema);
 
 module.exports = User;
