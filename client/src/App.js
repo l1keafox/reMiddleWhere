@@ -6,23 +6,22 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React from "react";
 import ExistingUserProvider from "./utils/existingUserContext";
-
-// import HomePage from "./pages/Home/HomePage.js";
+import { useState, useEffect } from "react";
 import LandingPage from "./pages/Landing/LandingPage.js";
+import ProfilePage from "./pages/Profile/ProfilePage.js";
+import auth from "./utils/auth";
+const Pages = {
+  landing: "landing",
+  profile: "profile",
+};
 
-
-// Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
-// Construct request middleware that will attach the JWT token to every request as an `authorization` header
 const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
   const token = localStorage.getItem("id_token");
-  // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
@@ -32,23 +31,54 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
 function App() {
+  const [stage, setStage] = useState(Pages.landing);
+  const [loading, setLoading] = useState(false);
+  let displayContent;
 
+  useEffect(() => {
+    setLoading(true);
+    if (auth.loggedIn()) {
+      setStage(Pages.profile);
+    }
+  }, []);
 
+  useEffect(() => {
+    if (auth.loggedIn()) {
+      changeStage(Pages.profile);
+    } else {
+      changeStage(Pages.landing);
+    }
+  }, [auth.loggedIn()]);
+
+  function changeStage(nextStage) {
+    setLoading(false);
+
+    setTimeout(() => {
+      setStage(nextStage);
+      setLoading(true);
+    }, 1000);
+  }
+
+  switch (stage) {
+    case Pages.profile:
+      displayContent = <ProfilePage isShowing={loading} />;
+      break;
+    default:
+      displayContent = <LandingPage isShowing={loading} />;
+      break;
+  }
   return (
     <>
-      <Router>
-        <ApolloProvider client={client}>
-          <ExistingUserProvider>
-            <LandingPage />
-          </ExistingUserProvider>
-        </ApolloProvider>
-      </Router>
+      <ApolloProvider client={client}>
+        <ExistingUserProvider>
+          {displayContent ?? <LandingPage isShowing={loading} />}
+        </ExistingUserProvider>
+      </ApolloProvider>
     </>
   );
 }

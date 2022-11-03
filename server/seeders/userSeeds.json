@@ -7,11 +7,18 @@
     "password": "dogdog"
   },
   {
-    "username": "Cat",
+    "username": "cat",
     "email": "cat@email.com",
     "longitude": -105.059101,
     "latitude": 39,
     "password": "catcat"
+  },
+  {
+    "username": "test",
+    "email": "test@email.com",
+    "longitude": -107.059101,
+    "latitude": 39,
+    "password": "testtest"
   },
   {
     "username": "Hamster",
