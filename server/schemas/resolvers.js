@@ -26,10 +26,6 @@ const resolvers = {
   //specifies that when "Date" is the datatype dateScalar should be used to resolve it.
   Date: dateScalar,
   Query: {
-    //gets all users
-    users: async () => {
-      return User.find().populate("groups");
-    },
     //Gets user by id
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate("groups");
@@ -51,29 +47,6 @@ const resolvers = {
   },
 
   Mutation: {
-
-    //adds a user to the database, used on signup.
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
-
-      const token = signToken(user);
-      return { token, user };
-    },
-    joinGroup: async (parent, { name }, context) => {
-      if (context.user) {
-        const group = await Group.create({
-          name,
-        });
-
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { groups: group._id } }
-        );
-
-        return group;
-      }
-      throw new AuthenticationError("You need to be logged in!");
-    },
     login: async (parent, { username, password }) => {
       const user = await User.findOne({ username });
 
@@ -90,6 +63,40 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+    //adds a user to the database, used on signup.
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
+
+      const token = signToken(user);
+      return { token, user };
+    },
+    joinGroup: async (parent, { name }, context) => {
+      if (group._id) {
+        const group = group._id;
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { groups: group._id } }
+        );
+
+        return group;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    createGroup: async (parent, { name }, context) => {
+      if (context.user) {
+        const group = await Group.create({
+          name,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { groups: group._id } }
+        );
+
+        return group;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
     leaveGroup: async (parent, { groupId }, context) => {
       if (context.user) {
         const group = await Group.findOneAndDelete({
@@ -102,6 +109,23 @@ const resolvers = {
         );
 
         return group;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    addFriend: async (parent, { userId, username }, context) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: userId },
+          {
+            $addToSet: {
+              friends: { username: context.user.username },
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
       }
       throw new AuthenticationError("You need to be logged in!");
     },

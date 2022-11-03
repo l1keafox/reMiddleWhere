@@ -23,7 +23,6 @@ const typeDefs = gql`
   }
 
   type Query {
-    users: [User]
     user(userId: ID!): User
     groups: [Group]
     group(groupId: ID!): Group
@@ -33,7 +32,9 @@ const typeDefs = gql`
     login(username: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     joinGroup(groupId: ID!): Group
+    createGroup(groupId: ID!): Group
     leaveGroup(groupId: ID!): Group
+    addFriend(userId: ID!): User
   }
 `;
 module.exports = typeDefs;
