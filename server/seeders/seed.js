@@ -6,9 +6,9 @@ const groupSeeds = require("./groupSeeds.json");
 db.once("open", async () => {
   try {
     await User.deleteMany({});
-    await User.create(userSeeds);
-
     await Group.deleteMany({});
+
+    await User.create(userSeeds);
     await Group.create(groupSeeds);
 
     let users = await User.find();
