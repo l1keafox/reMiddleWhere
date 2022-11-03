@@ -37,7 +37,7 @@ const Login = (props) => {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    // console.log(formState);
+    console.log(formState);
     try {
       const { data } = await login({
         variables: { ...formState },
@@ -125,6 +125,8 @@ const Login = (props) => {
      id="username"
      label="username"
      name="username"
+     value={formState.username}
+     onChange={handleChange}
      autoFocus
    />
    <TextField
@@ -135,15 +137,15 @@ const Login = (props) => {
      label="password"
      type="password"
      id="password"
+     value={formState.password}
+     onChange={handleChange}
+
    />
-   {/* <FormControlLabel
-     control={<Checkbox value="remember" color="primary" />}
-     label="Remember me"
-   /> */}
    <Button
      type="submit"
      fullWidth
      variant="contained"
+     onClick={handleFormSubmit}
      sx={{ mt: 3, mb: 2 }}
    >
      Sign In
