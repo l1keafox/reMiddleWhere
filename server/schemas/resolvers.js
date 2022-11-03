@@ -57,17 +57,17 @@ const resolvers = {
     //adds a user to the database, used on signup.
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
-      let channels = await Channel.find();
-      //this wont scale. Need to write search for global, or better yet need to hard code single global channel with fixed id
-      for (const channel of channels) {
-        if (channel.channelName == "Global") {
-          const task = await Channel.findOneAndUpdate(
-            { _id: channel._id },
-            { $addToSet: { participants: { _id: user._id } } },
-            { runValidators: true, new: true }
-          );
-        }
-      }
+      // let channels = await Channel.find();
+      // //this wont scale. Need to write search for global, or better yet need to hard code single global channel with fixed id
+      // for (const channel of channels) {
+      //   if (channel.channelName == "Global") {
+      //     const task = await Channel.findOneAndUpdate(
+      //       { _id: channel._id },
+      //       { $addToSet: { participants: { _id: user._id } } },
+      //       { runValidators: true, new: true }
+      //     );
+      //   }
+      // }
 
       const token = signToken(user);
       return { token, user };
