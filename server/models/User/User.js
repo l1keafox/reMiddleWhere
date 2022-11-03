@@ -29,6 +29,12 @@ const userSchema = new Schema(
         ref: "User",
       },
     ],
+    groups: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Group",
+      },
+    ],
 
     isAdmin: {
       type: Boolean,

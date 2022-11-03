@@ -16,10 +16,6 @@ const groupSchema = new Schema({
     required: false,
     minlength: 5,
   },
-  imageUrl: {
-    type: String,
-    required: false,
-  },
   users: [
     {
       type: Schema.Types.ObjectId,
