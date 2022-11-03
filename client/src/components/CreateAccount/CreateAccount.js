@@ -15,7 +15,7 @@ import Box from "@mui/material/Box";
 // import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-function CreateAccount() {
+function CreateAccount(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [reTypePassWord, setReTypePassword] = useState("");
@@ -53,6 +53,7 @@ function CreateAccount() {
       const { data } = await signUp({
         variables: { username, email, password },
       });
+      props.doClose();
       Auth.login(data.addUser.token);
       setLogin(true);
     } catch (e) {

@@ -48,7 +48,7 @@ function LandingPage() {
           aria-describedby="modal-modal-description"
         >
           <Box > 
-            <CreateAccount />
+            <CreateAccount doClose = {handleClose}/>
           </Box>
         </Modal>
       </div>
