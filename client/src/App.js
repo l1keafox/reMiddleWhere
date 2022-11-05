@@ -8,17 +8,24 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import React from "react";
 import ExistingUserProvider from "./utils/existingUserContext";
-import {useExistingUserContext} from "./utils/existingUserContext";
+import { useExistingUserContext } from "./utils/existingUserContext";
 import { useState, useEffect } from "react";
 import LandingPage from "./pages/Landing/LandingPage.js";
 import ProfilePage from "./pages/Profile/ProfilePage.js";
 import NavBar from "./components/NavBar/NavBar";
+import CreateGroup from "./components/CreateGroup/CreateGroup";
 import auth from "./utils/auth";
-
+import Modal from "@mui/material/Modal";
+import { ModalUnstyled } from "@mui/base";
+import { Box } from "@mui/material";
 
 const Pages = {
   landing: "landing",
   profile: "profile",
+};
+
+const Modals = {
+  create: "create",
 };
 
 const httpLink = createHttpLink({
@@ -42,8 +49,9 @@ const client = new ApolloClient({
 function App() {
   const [stage, setStage] = useState(Pages.landing);
   const [loading, setLoading] = useState(false);
-  const { existingUser } = useExistingUserContext();
-  console.log(existingUser);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   let displayContent;
 
   useEffect(() => {
@@ -63,7 +71,12 @@ function App() {
 
   function changeStage(nextStage) {
     console.log(nextStage);
-    if(nextStage === 'logout'){
+    if (nextStage === Modals.create) {
+      setOpen(true);
+      return;
+    }
+  
+    if (nextStage === "logout") {
       auth.logout();
       return;
     }
@@ -72,7 +85,7 @@ function App() {
     setTimeout(() => {
       setStage(nextStage);
       setLoading(true);
-    }, 1000);
+    }, 500);
   }
 
   switch (stage) {
@@ -87,9 +100,24 @@ function App() {
     <>
       <ApolloProvider client={client}>
         <ExistingUserProvider>
-          {auth.loggedIn()?<NavBar navLink={(e) => changeStage(e.target.getAttribute("data-nav"))}/>:<div></div>}
+          {auth.loggedIn() ? (
+            <NavBar
+              navLink={(e) => changeStage(e.target.getAttribute("data-nav"))}
+            />
+          ) : (
+            <div></div>
+          )}
           {displayContent ?? <LandingPage isShowing={loading} />}
-
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box>
+              <CreateGroup/>
+            </Box>
+          </Modal>
         </ExistingUserProvider>
       </ApolloProvider>
     </>
