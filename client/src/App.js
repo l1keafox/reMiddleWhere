@@ -77,7 +77,7 @@ function App() {
     if (nextStage === Modals.create) {
       console.log("in CREATE");
       setOpen(true);
-      changeModal( <CreateGroup /> );
+      changeModal( <CreateGroup doClose = {handleClose}/> );
       return;
     }
  
@@ -85,7 +85,7 @@ function App() {
     if(nextStage === Modals.join){
       console.log("in JOIN");
       setOpen(true);
-      changeModal(  <JoinGroup /> );
+      changeModal(  <JoinGroup doClose = {handleClose} /> );
       return;
     }
     if (nextStage === "logout") {

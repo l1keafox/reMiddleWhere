@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { CREATE_GROUP } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
-const CreateGroup = () => {
+const CreateGroup = (props) => {
   const [createGroup] = useMutation(CREATE_GROUP);
   const [groupName, setGroupName] = useState("");
   const handleFormSubmit = async (event) => {
@@ -14,11 +14,13 @@ const CreateGroup = () => {
     } catch (e) {
       console.error(e);
     }
+    props.doClose();
   };
 
   const handleInputChange = (e) => {
     const {target} = e;
     setGroupName(target.value);
+
   }
 
 
