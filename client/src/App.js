@@ -53,6 +53,7 @@ function App() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   let displayContent;
+  let modalContext;
 
   useEffect(() => {
     setLoading(true);
@@ -73,6 +74,7 @@ function App() {
     console.log(nextStage);
     if (nextStage === Modals.create) {
       setOpen(true);
+      modalContext = <CreateGroup/>;
       return;
     }
   
@@ -115,7 +117,7 @@ function App() {
             aria-describedby="modal-modal-description"
           >
             <Box>
-              <CreateGroup/>
+              {modalContext}
             </Box>
           </Modal>
         </ExistingUserProvider>
