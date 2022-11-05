@@ -31,3 +31,11 @@ export const LOGIN_USER = gql`
 	}
 `;
 
+
+export const CREATE_GROUP = gql`
+	mutation CreateGroup($name: ID!) {
+		createGroup(groupName: $groupName) {
+	  		_id
+		}
+  	}
+`;

@@ -14,6 +14,7 @@ import LandingPage from "./pages/Landing/LandingPage.js";
 import ProfilePage from "./pages/Profile/ProfilePage.js";
 import NavBar from "./components/NavBar/NavBar";
 import CreateGroup from "./components/CreateGroup/CreateGroup";
+import JoinGroup from "./components/JoinGroup/JoinGroup";
 import auth from "./utils/auth";
 import Modal from "@mui/material/Modal";
 import { ModalUnstyled } from "@mui/base";
@@ -26,6 +27,7 @@ const Pages = {
 
 const Modals = {
   create: "create",
+  join:"join"
 };
 
 const httpLink = createHttpLink({
@@ -52,8 +54,8 @@ function App() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [modalContent,changeModal] = useState(null);
   let displayContent;
-  let modalContext;
 
   useEffect(() => {
     setLoading(true);
@@ -73,11 +75,19 @@ function App() {
   function changeStage(nextStage) {
     console.log(nextStage);
     if (nextStage === Modals.create) {
+      console.log("in CREATE");
       setOpen(true);
-      modalContext = <CreateGroup/>;
+      changeModal( <CreateGroup /> );
       return;
     }
-  
+ 
+    
+    if(nextStage === Modals.join){
+      console.log("in JOIN");
+      setOpen(true);
+      changeModal(  <JoinGroup /> );
+      return;
+    }
     if (nextStage === "logout") {
       auth.logout();
       return;
@@ -117,7 +127,7 @@ function App() {
             aria-describedby="modal-modal-description"
           >
             <Box>
-              {modalContext}
+              {modalContent ?? <JoinGroup />}
             </Box>
           </Modal>
         </ExistingUserProvider>
