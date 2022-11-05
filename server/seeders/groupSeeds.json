@@ -4,6 +4,7 @@
     "description": "Pets doing pet things like getting pet",
     "longitude": -105.1,
     "latitude": 39.870972,
+    "password": "petspets"
   },
   {
     "name": "Foodies",
