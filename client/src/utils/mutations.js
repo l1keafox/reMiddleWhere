@@ -39,3 +39,7 @@ export const CREATE_GROUP = gql`
 		}
   	}
 `;
+
+// export const JOIN_GROUP = gql`
+
+// `;

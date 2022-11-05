@@ -3,9 +3,12 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { CREATE_GROUP } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
+
 const JoinGroup = (props) => {
   const [joinGroup] = useMutation(CREATE_GROUP);
   const [groupName, setGroupName] = useState("");
+  const [groupPassword, setGroupPassword] = useState("");
+  
   const handleFormSubmit = async (event) => {
     try {
       const { data } = await joinGroup({
@@ -19,8 +22,13 @@ const JoinGroup = (props) => {
 
   const handleInputChange = (e) => {
     const {target} = e;
-    setGroupName(target.value);
-
+    if(target.name === 'groupName'){
+      setGroupName(target.value);
+    }
+    if(target.name === "password"){
+      setGroupPassword(target.value);
+    }
+    
   }
 
 
@@ -28,15 +36,23 @@ const JoinGroup = (props) => {
     <div className="bg-white">
       <h1> Join Group</h1>
       <TextField
-        autoComplete="given-name"
-        name="userName"
+        name="groupName"
         required
         fullWidth
-        id="userName"
-        label="userName"
+        id="groupName"
+        label="groupName"
         value={groupName}
         onChange={handleInputChange}
-
+        autoFocus
+      />
+      <TextField
+        name="password"
+        required
+        fullWidth
+        id="password"
+        label="password"
+        value={groupPassword}
+        onChange={handleInputChange}
         autoFocus
       />
       <Button

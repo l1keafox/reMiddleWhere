@@ -28,12 +28,11 @@ const CreateGroup = (props) => {
     <div className="bg-white">
       <h1> Create Group</h1>
       <TextField
-        autoComplete="given-name"
-        name="userName"
+        name="groupName"
         required
         fullWidth
-        id="userName"
-        label="userName"
+        id="groupName"
+        label="groupName"
         value={groupName}
         onChange={handleInputChange}
 
