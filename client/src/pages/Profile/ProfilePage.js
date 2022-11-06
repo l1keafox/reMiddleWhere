@@ -5,18 +5,17 @@ import auth from "../../utils/auth";
 import { QUERY_ME } from "./../../utils/queries";
 import { useQuery } from "@apollo/client";
 import Paper from '@mui/material/Paper';
-
+import { Button } from "@mui/material";
 function ProfilePage(props) {
   const { existingUser } = useExistingUserContext();
   const { loading, data } = useQuery(QUERY_ME);
-  console.log(auth.getUser().data, data);
-  console.log(existingUser);
+  console.log( "PROFILE PAGE", auth.getUser().data, data,loading);
   
-  useEffect(() => {
-    if(data && data.me){
-      console.log(data.me);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if(data && data.me){
+  //     console.log(data.me);
+  //   }
+  // }, [data]);
   return (
     <div>
       {loading ? (
@@ -30,8 +29,9 @@ function ProfilePage(props) {
           <div className = "flex justify-center"> 
           {
             data.me.groups.map((group,index) => (
-              <Paper className = "w-1/4 p-3 m-3 hover:bg-slate-200" key ={index} > 
+              <Paper className = "w-1/4 p-3 m-3 hover:bg-slate-200"  > 
                 <h1> Group Name: {group.name} </h1>
+                <h1> Group id: {group._id} </h1>
                 <h1> Users : </h1>
                     {group.users.map((user,index)=>(
                       <h2> user </h2>
@@ -39,6 +39,7 @@ function ProfilePage(props) {
                     }
                 <h2> Lat :</h2>
                 <h2> Long :</h2>
+                <Button data-id ={group._id} onClick={props.mapSelect}> Click Here To Go To Map</Button>
               </Paper>
             )
             )

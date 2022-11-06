@@ -6,6 +6,7 @@ export const QUERY_ME = gql`
     me {
       groups {
         name
+        _id
         users {
           username
         }
@@ -15,4 +16,15 @@ export const QUERY_ME = gql`
       }
     }
   }
+`;
+
+export const QUERY_GROUP = gql`
+query Group($groupId: ID!) {
+  group(groupId: $groupId) {
+    name
+    users {
+      username
+    }
+  }
+}
 `;
