@@ -76,29 +76,28 @@ const resolvers = {
           // mmm what is group where did it come from? 
           // It should be the group you are joining. 
         const group = await Group.findOne({ name });
-        console.log(group);
-        //
-//        const group = group._id;
+        if(!group){
+          throw new AuthenticationError("No Group by that name!");    
+        }
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { groups: group._id } }
+        );
+        
+        const token = signToken(group);
+        return { token, group };
+//      }
+//      throw new AuthenticationError("You need to be logged in!");
+    },
+    createGroup: async (parent, { name }, context) => {
+      console.log("creating group by:", name, "By user: ", context.user);
+      if (context.user) {
+        const group = await Group.create({ name });
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { groups: group._id } }
         );
 
-        const token = signToken(group);
-        return { token, group };
-//      }
-      throw new AuthenticationError("You need to be logged in!");
-    },
-    createGroup: async (parent, { name }, context) => {
-      console.log("creating group by:", name, "By user: ", context.user);
-      if (context.user) {
-        console.log("crate?,", name);
-        const group = await Group.create({ name });
-        console.log(group, "GROUP INFO?");
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { groups: group._id } }
-        );
         const token = signToken(group);
         return { token, group };
       }
