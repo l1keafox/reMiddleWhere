@@ -9,13 +9,13 @@ import { Button } from "@mui/material";
 function ProfilePage(props) {
   const { existingUser } = useExistingUserContext();
   const { loading, data } = useQuery(QUERY_ME);
-  console.log(auth.getUser().data, data,loading);
+  console.log( "PROFILE PAGE", auth.getUser().data, data,loading);
   
-  useEffect(() => {
-    if(data && data.me){
-      console.log(data.me);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if(data && data.me){
+  //     console.log(data.me);
+  //   }
+  // }, [data]);
   return (
     <div>
       {loading ? (
