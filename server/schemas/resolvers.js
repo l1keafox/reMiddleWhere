@@ -71,10 +71,6 @@ const resolvers = {
       return { token, user };
     },
     joinGroup: async (parent, { name }, context) => {
-      // console.log(group, group._id);
-      // if (group._id) {
-          // mmm what is group where did it come from? 
-          // It should be the group you are joining. 
         const group = await Group.findOne({ name });
         if(!group){
           throw new AuthenticationError("No Group by that name!");    
@@ -86,8 +82,6 @@ const resolvers = {
         
         const token = signToken(group);
         return { token, group };
-//      }
-//      throw new AuthenticationError("You need to be logged in!");
     },
     createGroup: async (parent, { name }, context) => {
       console.log("creating group by:", name, "By user: ", context.user);
