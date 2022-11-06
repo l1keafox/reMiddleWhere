@@ -8,13 +8,26 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import React from "react";
 import ExistingUserProvider from "./utils/existingUserContext";
+import { useExistingUserContext } from "./utils/existingUserContext";
 import { useState, useEffect } from "react";
 import LandingPage from "./pages/Landing/LandingPage.js";
 import ProfilePage from "./pages/Profile/ProfilePage.js";
+import NavBar from "./components/NavBar/NavBar";
+import CreateGroup from "./components/CreateGroup/CreateGroup";
+import JoinGroup from "./components/JoinGroup/JoinGroup";
 import auth from "./utils/auth";
+import Modal from "@mui/material/Modal";
+import { ModalUnstyled } from "@mui/base";
+import { Box } from "@mui/material";
+
 const Pages = {
   landing: "landing",
   profile: "profile",
+};
+
+const Modals = {
+  create: "create",
+  join:"join"
 };
 
 const httpLink = createHttpLink({
@@ -38,6 +51,10 @@ const client = new ApolloClient({
 function App() {
   const [stage, setStage] = useState(Pages.landing);
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [modalContent,changeModal] = useState(null);
   let displayContent;
 
   useEffect(() => {
@@ -56,12 +73,31 @@ function App() {
   }, [auth.loggedIn()]);
 
   function changeStage(nextStage) {
+    console.log(nextStage);
+    if (nextStage === Modals.create) {
+      console.log("in CREATE");
+      setOpen(true);
+      changeModal( <CreateGroup doClose = {handleClose}/> );
+      return;
+    }
+ 
+    
+    if(nextStage === Modals.join){
+      console.log("in JOIN");
+      setOpen(true);
+      changeModal(  <JoinGroup doClose = {handleClose} /> );
+      return;
+    }
+    if (nextStage === "logout") {
+      auth.logout();
+      return;
+    }
     setLoading(false);
 
     setTimeout(() => {
       setStage(nextStage);
       setLoading(true);
-    }, 1000);
+    }, 500);
   }
 
   switch (stage) {
@@ -76,7 +112,24 @@ function App() {
     <>
       <ApolloProvider client={client}>
         <ExistingUserProvider>
+          {auth.loggedIn() ? (
+            <NavBar
+              navLink={(e) => changeStage(e.target.getAttribute("data-nav"))}
+            />
+          ) : (
+            <div></div>
+          )}
           {displayContent ?? <LandingPage isShowing={loading} />}
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box>
+              {modalContent ?? <JoinGroup />}
+            </Box>
+          </Modal>
         </ExistingUserProvider>
       </ApolloProvider>
     </>
