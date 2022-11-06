@@ -8,12 +8,12 @@ import Box from "@mui/material/Box";
 
 const CreateGroup = (props) => {
   const [createGroup] = useMutation(CREATE_GROUP);
-  const [groupName, setGroupName] = useState("");
+  const [name, setGroupName] = useState("");
   const [groupPassword, setGroupPassword] = useState("");
   const handleFormSubmit = async (event) => {
     try {
       const { data } = await createGroup({
-        variables: { groupName },
+        variables: { name },
       });
     } catch (e) {
       console.error(e);
@@ -47,9 +47,9 @@ const CreateGroup = (props) => {
             name="groupName"
             required
             fullWidth
-            id="groupName"
+            id="name"
             label="groupName"
-            value={groupName}
+            value={name}
             onChange={handleInputChange}
             autoFocus
           />

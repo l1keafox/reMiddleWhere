@@ -82,12 +82,12 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    createGroup: async (parent, { groupName }, context) => {
-      console.log("creating group by:",groupName, "By user: ", context.user);
+    createGroup: async (parent, { name }, context) => {
+      console.log("creating group by:",name, "By user: ", context.user);
       if (context.user) {
         console.log('crate?');
         const group = await Group.create({
-          groupName,
+          name,
         });
         console.log(group,"GROUP INFO?");
         await User.findOneAndUpdate(

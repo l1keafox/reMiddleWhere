@@ -33,11 +33,11 @@ export const LOGIN_USER = gql`
 
 
 export const CREATE_GROUP = gql`
-	mutation CreateGroup($name: ID!) {
-		createGroup(groupName: $groupName) {
-	  		_id
-		}
-  	}
+mutation Mutation($name: ID!) {
+	createGroup(name: $name) {
+	  _id
+	}
+  }
 `;
 
 // export const JOIN_GROUP = gql`
