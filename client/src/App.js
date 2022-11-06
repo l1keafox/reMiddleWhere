@@ -100,9 +100,13 @@ function App() {
     }, 500);
   }
 
+  function mapSelect(groupId){
+    console.log("map select",groupId);
+  }
+
   switch (stage) {
     case Pages.profile:
-      displayContent = <ProfilePage isShowing={loading} />;
+      displayContent = <ProfilePage isShowing={loading} mapSelect =  { (e) => mapSelect( e.target.getAttribute("data-id") ) } />;
       break;
     default:
       displayContent = <LandingPage isShowing={loading} />;

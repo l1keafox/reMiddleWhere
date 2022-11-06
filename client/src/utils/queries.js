@@ -6,6 +6,7 @@ export const QUERY_ME = gql`
     me {
       groups {
         name
+        _id
         users {
           username
         }
