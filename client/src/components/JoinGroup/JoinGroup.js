@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { CREATE_GROUP } from "../../utils/mutations";
+import { JOIN_GROUP } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 
 const JoinGroup = (props) => {
-  const [joinGroup] = useMutation(CREATE_GROUP);
-  const [groupName, setGroupName] = useState("");
+  const [joinGroup] = useMutation(JOIN_GROUP);
+  const [name, setGroupName] = useState("");
   const [groupPassword, setGroupPassword] = useState("");
 
   const handleFormSubmit = async (event) => {
     try {
+      console.log("handle,",name);
       const { data } = await joinGroup({
-        variables: { groupName },
+        variables: { name },
       });
     } catch (e) {
       console.error(e);
@@ -50,7 +51,7 @@ const JoinGroup = (props) => {
             fullWidth
             id="groupName"
             label="groupName"
-            value={groupName}
+            value={name}
             onChange={handleInputChange}
             autoFocus
           />

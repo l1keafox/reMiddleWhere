@@ -71,31 +71,36 @@ const resolvers = {
       return { token, user };
     },
     joinGroup: async (parent, { name }, context) => {
-      if (group._id) {
-        const group = group._id;
+      // console.log(group, group._id);
+      // if (group._id) {
+          // mmm what is group where did it come from? 
+          // It should be the group you are joining. 
+        const group = await Group.findOne({ name });
+        console.log(group);
+        //
+//        const group = group._id;
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { groups: group._id } }
         );
 
-        return group;
-      }
+        const token = signToken(group);
+        return { token, group };
+//      }
       throw new AuthenticationError("You need to be logged in!");
     },
     createGroup: async (parent, { name }, context) => {
-      console.log("creating group by:",name, "By user: ", context.user);
+      console.log("creating group by:", name, "By user: ", context.user);
       if (context.user) {
-        console.log('crate?');
-        const group = await Group.create({
-          name,
-        });
-        console.log(group,"GROUP INFO?");
+        console.log("crate?,", name);
+        const group = await Group.create({ name });
+        console.log(group, "GROUP INFO?");
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { groups: group._id } }
         );
-
-        return group;
+        const token = signToken(group);
+        return { token, group };
       }
       throw new AuthenticationError("You need to be logged in!");
     },

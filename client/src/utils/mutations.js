@@ -33,13 +33,18 @@ export const LOGIN_USER = gql`
 
 
 export const CREATE_GROUP = gql`
-mutation Mutation($name: ID!) {
+mutation Mutation($name: String!) {
 	createGroup(name: $name) {
+	  name
 	  _id
 	}
   }
 `;
 
-// export const JOIN_GROUP = gql`
-
-// `;
+export const JOIN_GROUP = gql`
+mutation JoinGroup($name: String!) {
+	joinGroup(name: $name) {
+	  name
+	}
+  }
+ `;
