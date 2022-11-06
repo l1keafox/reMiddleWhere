@@ -90,7 +90,7 @@ const resolvers = {
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { groups: group._id } }
+          { $addToSet: { groups: group.name } }
         );
 
         return group;
