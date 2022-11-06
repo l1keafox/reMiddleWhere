@@ -31,7 +31,7 @@ const typeDefs = gql`
   type Mutation {
     login(username: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    joinGroup(groupId: ID!): Group
+    joinGroup(name: String!): Group
     createGroup(name: String!): Group
     leaveGroup(groupId: ID!): Group
     addFriend(userId: ID!): User
