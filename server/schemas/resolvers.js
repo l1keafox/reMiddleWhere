@@ -75,7 +75,7 @@ const resolvers = {
       if (!group) {
         throw new AuthenticationError("No Group by that name!");
       }
-      await User.findOneAndUpdate(
+      const user = await User.findOneAndUpdate(
         { _id: context.user._id },
         { $addToSet: { groups: group._id } }
       );
@@ -85,13 +85,13 @@ const resolvers = {
       );
 
       const token = signToken(group);
-      return { token, group };
+      return { user, token, group };
     },
     createGroup: async (parent, { name }, context) => {
       console.log("creating group by:", name, "By user: ", context.user);
       if (context.user) {
         const group = await Group.create({ name });
-        await User.findOneAndUpdate(
+        const user = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { groups: group.name } }
         );
@@ -101,7 +101,7 @@ const resolvers = {
         );
 
         const token = signToken(group);
-        return { token, group };
+        return { user, token, group };
       }
       throw new AuthenticationError("You need to be logged in!");
     },
