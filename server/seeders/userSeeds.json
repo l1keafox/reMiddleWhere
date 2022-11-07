@@ -2,92 +2,109 @@
   {
     "username": "Dog",
     "email": "dog@email.com",
-    "longitude": -105.033678,
-    "latitude": 39.870972,
+    "location": {
+      "type": "Point",
+      "coordinates": [-105.033678, 39.870972]
+    },
     "password": "dogdog"
   },
   {
-    "username": "cat",
+    "username": "Cat",
     "email": "cat@email.com",
-    "longitude": -105.059101,
-    "latitude": 39,
+    "location": {
+      "type": "Point",
+      "coordinates": [-105.059101, 39]
+    },
     "password": "catcat"
-  },
-  {
-    "username": "test",
-    "email": "test@email.com",
-    "longitude": -107.059101,
-    "latitude": 39,
-    "password": "testtest"
   },
   {
     "username": "Hamster",
     "email": "hamster@email.com",
-    "longitude": -105.228129,
-    "latitude": 40.002068,
+    "location": {
+      "type": "Point",
+      "coordinates": [-105.228129, 40.002068]
+    },
     "password": "hamham"
   },
   {
     "username": "Chef",
     "email": "chef@email.com",
-    "longitude": -105.045856,
-    "latitude": 39.753628,
+    "location": {
+      "type": "Point",
+      "coordinates": [-105.045856, 39.753628]
+    },
     "password": "sirloin"
   },
   {
     "username": "Bartender",
     "email": "bartender@email.com",
-    "longitude": -105.030053,
-    "latitude": 39.828548,
+    "location": {
+      "type": "Point",
+      "coordinates": [-105.030053, 39.828548]
+    },
     "password": "maitai"
   },
   {
     "username": "DeliveryMan",
     "email": "deliveryman@email.com",
-    "longitude": -104.976972,
-    "latitude": 39.797961,
+    "location": {
+      "type": "Point",
+      "coordinates": [-104.976972, 39.797961]
+    },
     "password": "grubhub"
   },
   {
     "username": "Waiter",
     "email": "waiter@email.com",
-    "longitude": -104.977659,
-    "latitude": 39.744657,
+    "location": {
+      "type": "Point",
+      "coordinates": [-104.977659, 39.744657]
+    },
     "password": "appetizers"
   },
   {
     "username": "Swimmer",
     "email": "swimmer@email.com",
-    "longitude": -105.040361,
-    "latitude": 39.746131,
+    "location": {
+      "type": "Point",
+      "coordinates": [-105.040361, 39.746131]
+    },
     "password": "dolphin"
   },
   {
     "username": "Runner",
     "email": "runner@email.com",
-    "longitude": -104.924623,
-    "latitude": 39.705414,
+    "location": {
+      "type": "Point",
+      "coordinates": [-104.924623, 39.705414]
+    },
     "password": "fastfeet"
   },
   {
     "username": "Biker",
     "email": "biker@email.com",
-    "longitude": -104.976155,
-    "latitude": 39.675825,
+    "location": {
+      "type": "Point",
+      "coordinates": [-104.976155, 39.675825]
+    },
     "password": "tourdefrance"
   },
   {
     "username": "Snowboarder",
     "email": "snowboarder@email.com",
-    "longitude": -104.8992,
-    "latitude": 39.72971,
+    "location": {
+      "type": "Point",
+      "coordinates": [-104.8992, 39.72971]
+    },
     "password": "shredder"
   },
   {
     "username": "Gymnast",
     "email": "gymnast@email.com",
-    "longitude": -105.036619,
-    "latitude": 39.69749,
+    "location": {
+      "type": "Point",
+      "coordinates": [-105.036619, 39.69749]
+    },
     "password": "flippydoodah"
   }
 ]

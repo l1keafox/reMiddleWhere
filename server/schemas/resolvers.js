@@ -71,17 +71,21 @@ const resolvers = {
       return { token, user };
     },
     joinGroup: async (parent, { name }, context) => {
-        const group = await Group.findOne({ name });
-        if(!group){
-          throw new AuthenticationError("No Group by that name!");    
-        }
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { groups: group._id } }
-        );
-        
-        const token = signToken(group);
-        return { token, group };
+      const group = await Group.findOne({ name });
+      if (!group) {
+        throw new AuthenticationError("No Group by that name!");
+      }
+      await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $addToSet: { groups: group._id } }
+      );
+      await Group.findOneAndUpdate(
+        { _id: context.group._id },
+        { $addToSet: { groups: group._id } }
+      );
+
+      const token = signToken(group);
+      return { token, group };
     },
     createGroup: async (parent, { name }, context) => {
       console.log("creating group by:", name, "By user: ", context.user);
@@ -90,6 +94,10 @@ const resolvers = {
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { groups: group.name } }
+        );
+        await Group.findOneAndUpdate(
+          { _id: context.group._id },
+          { $addToSet: { groups: group._id } }
         );
 
         const token = signToken(group);
