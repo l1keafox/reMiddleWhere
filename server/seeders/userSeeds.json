@@ -106,5 +106,14 @@
       "coordinates": [-105.036619, 39.69749]
     },
     "password": "flippydoodah"
+  },
+  {
+    "username": "test",
+    "email": "test@email.com",
+    "location": {
+      "type": "Point",
+      "coordinates": [-107.059101, 39]
+    },
+    "password": "testtest"
   }
 ]
