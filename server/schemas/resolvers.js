@@ -137,6 +137,32 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    addUserLocationToGroup: async (parent, { userId, groupId }, context) => {
+      if (context.user) {
+        const user = User.findOneAndUpdate(
+          { _id: userId },
+          {
+            $addToSet: {
+              location: context.user.location,
+            },
+          }
+        );
+        const group = Group.findOneAndUpdate(
+          { _id: groupId },
+          {
+            $addToSet: {
+              location: context.user.location,
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+        return { user, group };
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
   },
 };
 module.exports = resolvers;
