@@ -5,7 +5,7 @@ const groupSchema = new Schema({
   name: {
     type: String,
     required: true,
-    unique:true,
+    unique: true,
     trim: true,
   },
   // description: {
@@ -18,6 +18,17 @@ const groupSchema = new Schema({
   //   required: false,
   //   minlength: 5,
   // },
+  location: {
+    type: {
+      type: String,
+      enum: ["Point"], // 'location.type' must be 'Point'
+      required: true,
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+    },
+  },
   users: [
     {
       type: Schema.Types.ObjectId,
