@@ -81,7 +81,7 @@ const resolvers = {
       );
       await Group.findOneAndUpdate(
         { _id: context.group._id },
-        { $addToSet: { groups: group._id } }
+        { $addToSet: { user: user._id } }
       );
 
       const token = signToken(group);
@@ -97,7 +97,7 @@ const resolvers = {
         );
         await Group.findOneAndUpdate(
           { _id: context.group._id },
-          { $addToSet: { groups: group._id } }
+          { $addToSet: { user: user._id } }
         );
 
         const token = signToken(group);
