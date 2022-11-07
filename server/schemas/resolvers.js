@@ -75,33 +75,33 @@ const resolvers = {
       if (!group) {
         throw new AuthenticationError("No Group by that name!");
       }
-      await User.findOneAndUpdate(
+      const user = await User.findOneAndUpdate(
         { _id: context.user._id },
         { $addToSet: { groups: group._id } }
       );
       await Group.findOneAndUpdate(
-        { _id: context.group._id },
-        { $addToSet: { user: user._id } }
+        { _id: group._id },
+        { $addToSet: { users: user._id, location: user.location } }
       );
 
       const token = signToken(group);
-      return { token, group };
+      return { user, token, group };
     },
     createGroup: async (parent, { name }, context) => {
       console.log("creating group by:", name, "By user: ", context.user);
       if (context.user) {
         const group = await Group.create({ name });
-        await User.findOneAndUpdate(
+        const user = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { groups: group.name } }
         );
         await Group.findOneAndUpdate(
-          { _id: context.group._id },
-          { $addToSet: { user: user._id } }
+          { _id: group._id },
+          { $addToSet: { users: user._id, location: user.location } }
         );
 
         const token = signToken(group);
-        return { token, group };
+        return { user, token, group };
       }
       throw new AuthenticationError("You need to be logged in!");
     },
