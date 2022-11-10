@@ -112,7 +112,7 @@ function App() {
       displayContent = <MapsPage groupId={mapGroupId} />;
       break;
     case Pages.landing:
-      displayContent = <LandingPage isShowing={loading}/>;
+      displayContent = <LandingPage isShowing={loading} changeStage={changeStage}/>;
       break;
     default:
       // displayContent = <LandingPage isShowing={loading} />;

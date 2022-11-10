@@ -17,7 +17,7 @@ function ProfilePage(props) {
     startPolling(500);
   }, []);
   useEffect(() => () => stopPolling(), []);
-
+  
   return (
     <div>
       {loading ? (
@@ -29,7 +29,7 @@ function ProfilePage(props) {
           <h1> my id: {auth.getUser().data._id}</h1>
           <h1> my email: {auth.getUser().data.email}</h1>
           <div className="flex justify-center">
-            {data.me.groups.map((group, index) => (
+            {data.me ? data.me.groups.map((group, index) => (
               <Paper className="w-1/4 p-3 m-3 hover:bg-slate-200" key={index}>
                 <h1> Group Name: {group.name} </h1>
                 <h1> Group id: {group._id} </h1>
@@ -44,7 +44,7 @@ function ProfilePage(props) {
                   Click Here To Go To Map
                 </Button>
               </Paper>
-            ))}
+            )):<div></div>}
           </div>
         </div>
       )}

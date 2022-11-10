@@ -19,9 +19,11 @@ function LandingPage(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   
-  // useEffect(() => {
-  //   props.changeStage("profile");
-  // }, [existingUser]);
+  useEffect(() => {
+    if(existingUser){
+        props.changeStage("profile");
+    }
+  }, [existingUser]);
 
   return (
     <div className="flex flex-col h-screen justify-between">
