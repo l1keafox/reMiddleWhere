@@ -26,7 +26,6 @@ const groupSchema = new Schema({
     },
     coordinates: {
       type: [Number],
-      
     },
   },
   users: [

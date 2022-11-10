@@ -17,7 +17,7 @@ const MapsPage = function (props) {
   return (loading? <div> Loading </div> :
     <div>
       MapsPage
-      <h2> GROUP NAME: {data.group.name}</h2>
+      <h2> GROUP NAME: {data.group ? data.group.name : "balh"}</h2>
       {data.group.users.map( (e) => (
         <div> {e.name} </div>
       ) )}
