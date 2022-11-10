@@ -13,11 +13,17 @@ import auth from "../../utils/auth";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 
-function LandingPage() {
+function LandingPage(props) {
   const { existingUser } = useExistingUserContext();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  
+  useEffect(() => {
+    console.log('New login?');
+    props.changeStage("profile");
+  }, [existingUser]);
+
   return (
     <div className="flex flex-col h-screen justify-between">
       <div></div>

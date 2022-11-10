@@ -52,6 +52,7 @@ const client = new ApolloClient({
 });
 
 function App() {
+
   const [stage, setStage] = useState(Pages.landing);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = React.useState(false);
@@ -59,6 +60,7 @@ function App() {
   const handleClose = () => setOpen(false);
   const [modalContent, changeModal] = useState(null);
   const [mapGroupId, setGroupId] = useState(null);
+  
   let displayContent;
 
   useEffect(() => {
@@ -74,7 +76,7 @@ function App() {
     } else {
       changeStage(Pages.landing);
     }
-  }, [auth.loggedIn()]);
+  }, []);
 
   function changeStage(nextStage) {
     console.log("Change stage",nextStage);
@@ -122,7 +124,7 @@ function App() {
       displayContent = <MapsPage groupId={mapGroupId} />;
       break;
     default:
-      displayContent = <LandingPage isShowing={loading} />;
+      displayContent = <LandingPage isShowing={loading} changeStage = {changeStage}/>;
       break;
   }
   return (
@@ -132,11 +134,12 @@ function App() {
           {auth.loggedIn() ? (
             <NavBar
               navLink={(e) => changeStage(e.target.getAttribute("data-nav"))}
+              
             />
           ) : (
             <div></div>
           )}
-          {displayContent ?? <LandingPage isShowing={loading} />}
+          {displayContent ?? <LandingPage isShowing={loading} changeStage = {changeStage} />}
           <Modal
             open={open}
             onClose={handleClose}
