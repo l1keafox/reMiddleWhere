@@ -8,16 +8,16 @@ import Paper from '@mui/material/Paper';
 import { Button } from "@mui/material";
 function ProfilePage(props) {
   const { existingUser } = useExistingUserContext();
-  const { loading, data,startPolling } = useQuery(QUERY_ME,{
+  const { loading, data,startPolling,stopPolling } = useQuery(QUERY_ME,{
     pollInterval: 500
   });
   console.log( "PROFILE PAGE", auth.getUser().data, data,loading);
   
   useEffect(() => {
-    startPolling();
+    startPolling(500);
     console.log('start polling?');
   }, []);
-  
+  useEffect( () => () => stopPolling(), [] );
   useEffect(() => {
     if(data)
     console.log('data change',data.me.groups.length );
