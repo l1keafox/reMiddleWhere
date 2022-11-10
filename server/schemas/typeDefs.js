@@ -35,7 +35,7 @@ const typeDefs = gql`
     createGroup(name: String!): Group
     leaveGroup(groupId: ID!): Group
     addFriend(userId: ID!): User
-    addUserLocationToGroup(userId: ID!, groupId: ID!, location: Point!)
+    addUserLocationToGroup(userId: ID!, groupId: ID!, latitude: Int!, longitude:Int! ):Group
   }
 `;
 module.exports = typeDefs;
