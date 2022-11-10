@@ -20,6 +20,8 @@ const CreateGroup = (props) => {
       const { data } = await createGroup({
         variables: { name },
       });
+      console.log(data);
+
     } catch (e) {
       console.error(e);
     }

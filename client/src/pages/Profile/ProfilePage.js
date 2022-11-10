@@ -8,14 +8,20 @@ import Paper from '@mui/material/Paper';
 import { Button } from "@mui/material";
 function ProfilePage(props) {
   const { existingUser } = useExistingUserContext();
-  const { loading, data } = useQuery(QUERY_ME);
+  const { loading, data,startPolling } = useQuery(QUERY_ME,{
+    pollInterval: 500
+  });
   console.log( "PROFILE PAGE", auth.getUser().data, data,loading);
   
-  // useEffect(() => {
-  //   if(data && data.me){
-  //     console.log(data.me);
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    startPolling();
+    console.log('start polling?');
+  }, []);
+  
+  useEffect(() => {
+    console.log('data change');
+  }, [data]);
+  
   return (
     <div>
       {loading ? (
@@ -29,7 +35,7 @@ function ProfilePage(props) {
           <div className = "flex justify-center"> 
           {
             data.me.groups.map((group,index) => (
-              <Paper className = "w-1/4 p-3 m-3 hover:bg-slate-200"  > 
+              <Paper className = "w-1/4 p-3 m-3 hover:bg-slate-200" key={index}  > 
                 <h1> Group Name: {group.name} </h1>
                 <h1> Group id: {group._id} </h1>
                 <h1> Users : </h1>

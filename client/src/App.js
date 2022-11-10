@@ -8,7 +8,6 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import React from "react";
 import ExistingUserProvider from "./utils/existingUserContext";
-import { useExistingUserContext } from "./utils/existingUserContext";
 import { useState, useEffect } from "react";
 import LandingPage from "./pages/Landing/LandingPage.js";
 import ProfilePage from "./pages/Profile/ProfilePage.js";
@@ -18,7 +17,6 @@ import CreateGroup from "./components/CreateGroup/CreateGroup";
 import JoinGroup from "./components/JoinGroup/JoinGroup";
 import auth from "./utils/auth";
 import Modal from "@mui/material/Modal";
-import { ModalUnstyled } from "@mui/base";
 import { Box } from "@mui/material";
 
 const Pages = {
@@ -55,26 +53,21 @@ function App() {
 
   const [stage, setStage] = useState(Pages.landing);
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [modalContent, changeModal] = useState(null);
   const [mapGroupId, setGroupId] = useState(null);
-  
   let displayContent;
 
   useEffect(() => {
+    console.log('two mounts?');
     setLoading(true);
     if (auth.loggedIn()) {
       setStage(Pages.profile);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (auth.loggedIn()) {
-      changeStage(Pages.profile);
     } else {
-      changeStage(Pages.landing);
+      // console.log('here?');
+      // changeStage(Pages.landing);
     }
   }, []);
 
@@ -105,28 +98,32 @@ function App() {
     }, 500);
   }
 
-  function mapSelect(groupId) {
-    console.log("map select", groupId);
-    setGroupId(groupId);
-    changeStage(Pages.map);
-  }
+  // function mapSelect(groupId) {
+  //   setGroupId(groupId);
+  //   changeStage(Pages.map);
+  // }
 
   switch (stage) {
     case Pages.profile:
       displayContent = (
         <ProfilePage
           isShowing={loading}
-          mapSelect={(e) => mapSelect(e.target.getAttribute("data-id"))}
+          // mapSelect={(e) => mapSelect(e.target.getAttribute("data-id"))}
         />
       );
       break;
     case Pages.map:
       displayContent = <MapsPage groupId={mapGroupId} />;
       break;
+    case Pages.landing:
+      displayContent = <LandingPage isShowing={loading}/>;
+      break;
     default:
-      displayContent = <LandingPage isShowing={loading} changeStage = {changeStage}/>;
+      // displayContent = <LandingPage isShowing={loading} />;
       break;
   }
+  console.log('here?4',auth.loggedIn(),stage);
+
   return (
     <>
       <ApolloProvider client={client}>
@@ -134,12 +131,11 @@ function App() {
           {auth.loggedIn() ? (
             <NavBar
               navLink={(e) => changeStage(e.target.getAttribute("data-nav"))}
-              
             />
           ) : (
             <div></div>
           )}
-          {displayContent ?? <LandingPage isShowing={loading} changeStage = {changeStage} />}
+          {displayContent ?? <LandingPage isShowing={loading} />}
           <Modal
             open={open}
             onClose={handleClose}
