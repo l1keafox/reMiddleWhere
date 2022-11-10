@@ -19,7 +19,8 @@ function ProfilePage(props) {
   }, []);
   
   useEffect(() => {
-    console.log('data change');
+    if(data)
+    console.log('data change',data.me.groups.length );
   }, [data]);
   
   return (
@@ -39,8 +40,8 @@ function ProfilePage(props) {
                 <h1> Group Name: {group.name} </h1>
                 <h1> Group id: {group._id} </h1>
                 <h1> Users : </h1>
-                    {group.users.map((user,index)=>(
-                      <h2> user </h2>
+                    {group.users.map((user,index2)=>(
+                      <h2 key={index2} > user </h2>
                     ))
                     }
                 <h2> Lat :</h2>

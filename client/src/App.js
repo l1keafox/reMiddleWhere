@@ -61,13 +61,9 @@ function App() {
   let displayContent;
 
   useEffect(() => {
-    console.log('two mounts?');
     setLoading(true);
     if (auth.loggedIn()) {
       setStage(Pages.profile);
-    } else {
-      // console.log('here?');
-      // changeStage(Pages.landing);
     }
   }, []);
 
@@ -98,17 +94,17 @@ function App() {
     }, 500);
   }
 
-  // function mapSelect(groupId) {
-  //   setGroupId(groupId);
-  //   changeStage(Pages.map);
-  // }
+  function mapSelect(groupId) {
+    setGroupId(groupId);
+    changeStage(Pages.map);
+  }
 
   switch (stage) {
     case Pages.profile:
       displayContent = (
         <ProfilePage
           isShowing={loading}
-          // mapSelect={(e) => mapSelect(e.target.getAttribute("data-id"))}
+          mapSelect={(e) => mapSelect(e.target.getAttribute("data-id"))}
         />
       );
       break;
@@ -122,7 +118,6 @@ function App() {
       // displayContent = <LandingPage isShowing={loading} />;
       break;
   }
-  console.log('here?4',auth.loggedIn(),stage);
 
   return (
     <>
