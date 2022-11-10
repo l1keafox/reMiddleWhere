@@ -20,7 +20,6 @@ function LandingPage(props) {
   const handleClose = () => setOpen(false);
   
   useEffect(() => {
-    console.log('New login?');
     props.changeStage("profile");
   }, [existingUser]);
 

@@ -14,9 +14,14 @@ const JoinGroup = (props) => {
   const handleFormSubmit = async (event) => {
     try {
       console.log("handle,",name);
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position.coords);
+       });
+     
       const { data } = await joinGroup({
         variables: { name },
       });
+
     } catch (e) {
       console.error(e);
     }

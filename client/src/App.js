@@ -79,7 +79,7 @@ function App() {
   }, []);
 
   function changeStage(nextStage) {
-    console.log("Change stage",nextStage);
+    console.log(" APP://Change stage",nextStage);
     if (nextStage === Modals.create) {
       console.log("in CREATE");
       setOpen(true);

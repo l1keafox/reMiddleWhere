@@ -22,11 +22,11 @@ const groupSchema = new Schema({
     type: {
       type: String,
       enum: ["Point"], // 'location.type' must be 'Point'
-      required: true,
+      
     },
     coordinates: {
       type: [Number],
-      required: true,
+      
     },
   },
   users: [
