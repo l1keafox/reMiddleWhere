@@ -13,9 +13,6 @@ const CreateGroup = (props) => {
   const handleFormSubmit = async (event) => {
     try {
 
-      navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position.coords);
-       });
 
       const { data } = await createGroup({
         variables: { name },

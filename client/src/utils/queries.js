@@ -21,7 +21,6 @@ export const QUERY_ME = gql`
 export const QUERY_GROUP = gql`
 query Query($groupId: ID!) {
   group(groupId: $groupId) {
-    location
     name
     users {
       username
