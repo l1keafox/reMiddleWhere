@@ -3,7 +3,7 @@ const { User, Group } = require("./../models");
 
 const typeDefs = gql`
   scalar Date
-  scalar JSON
+  scalar JSONObject
   type User {
     _id: ID
     username: String
@@ -17,7 +17,7 @@ const typeDefs = gql`
     _id: ID
     name: String
     users: [User]
-    location: [JSON]
+    location: [JSONObject]
   }
 
   type Auth {

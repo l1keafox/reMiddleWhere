@@ -7,7 +7,7 @@ const MapsPage = function (props) {
   const { loading, data } = useQuery(QUERY_GROUP, {
     variables: { groupId },
   });
-  console.log("MAP?",data);
+  console.log("MAP?",data,groupId);
   useEffect(() => {
     if (data && data.me) {
       console.log(data, "Map pages");
@@ -17,10 +17,10 @@ const MapsPage = function (props) {
   return (loading? <div> Loading </div> :
     <div>
       MapsPage
-      <h2> GROUP NAME: {data.group ? data.group.name : "balh"}</h2>
-      {data.group.users.map( (e) => (
+      <h2> GROUP NAME: {data && data.group ? data.group.name : "balh"}</h2>
+      {/* {data.group.users.map( (e) => (
         <div> {e.name} </div>
-      ) )}
+      ) )} */}
     </div>
   );
 };

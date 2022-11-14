@@ -60,7 +60,7 @@ const JoinGroup = (props) => {
             onChange={handleInputChange}
             autoFocus
           />
-          <TextField
+          {/* <TextField
             name="password"
             required
             fullWidth
@@ -69,7 +69,7 @@ const JoinGroup = (props) => {
             value={groupPassword}
             onChange={handleInputChange}
             autoFocus
-          />
+          /> */}
           <Button
             type="submit"
             fullWidth

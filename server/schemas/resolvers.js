@@ -2,7 +2,7 @@ const { AuthenticationError } = require("apollo-server-express");
 const { User, Group } = require("../models");
 const { GraphQLScalarType, Kind } = require("graphql");
 const { signToken } = require("../utils/auth");
-const GraphQLJSONObject  = require('graphql-type-json');
+const {GraphQLJSONObject}  = require('graphql-type-json');
 //this is a custom decoding strategy for dealing with dates.
 const dateScalar = new GraphQLScalarType({
   name: "Date",
@@ -26,7 +26,7 @@ const dateScalar = new GraphQLScalarType({
 const resolvers = {
   //specifies that when "Date" is the datatype dateScalar should be used to resolve it.
   Date: dateScalar,
-  JSON: GraphQLJSONObject,
+  JSONObject: GraphQLJSONObject,
   Query: {
     //Gets user by id
     user: async (parent, { username }) => {
