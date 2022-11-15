@@ -8,7 +8,7 @@ export const useExistingUserContext = () => useContext(ExistingUserContext);
 // creating the provider for this context
 export default function ExistingUserProvider(props) {
   // state variable - does the user have an existing account?
-  const [existingUser, setExistingUser] = useState(true);
+  const [existingUser, setExistingUser] = useState(false);
   const [loggedIn,setLoggedIn] = useState(false);
   // const [userSettings, setUserSetting] = useState({});
 

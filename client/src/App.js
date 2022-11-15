@@ -68,11 +68,11 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    if (auth.loggedIn()) {
-      changeStage(Pages.profile);
-    }
-  }, [auth.loggedIn()]);
+  // useEffect(() => {
+  //   if (auth.loggedIn()) {
+  //     changeStage(Pages.profile);
+  //   }
+  // }, [auth.loggedIn()]);
 
   function changeStage(nextStage) {
     console.log("Change stage",nextStage);
@@ -120,7 +120,7 @@ function App() {
       displayContent = <MapsPage groupId={mapGroupId} />;
       break;
     default:
-      displayContent = <LandingPage isShowing={loading} />;
+      displayContent = <LandingPage isShowing={loading} changeStage={changeStage} />;
       break;
   }
   return (

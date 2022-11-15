@@ -13,11 +13,19 @@ import auth from "../../utils/auth";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 
-function LandingPage() {
+function LandingPage(props) {
   const { existingUser } = useExistingUserContext();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  useEffect(() => {
+    console.log(existingUser ,"Existing?",auth.loggedIn());
+    if(existingUser)
+    props.changeStage("profile");
+    // now we send back to app.js that we need to switch.
+  }, [existingUser]);
+
+
   return (
     <div className="flex flex-col h-screen justify-between">
       <div></div>
