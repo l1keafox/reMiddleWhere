@@ -11,20 +11,21 @@
     "install": "cd server && npm i && cd ../client && npm i",
     "client": "cd client && npm start",
     "develop": "concurrently \"cd server && npm run develop\" \"cd client && npm start\"",
+    "dev": "concurrently \"cd server && npm run develop\" \"cd client && npm start\"",
     "seed": "cd server && npm run seed",
     "install-client": "cd client && npm install",
     "heroku-postbuild": "npm run install-client && npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/l1keafox/copyStack.git"
+    "url": "git+https://github.com/l1keafox/MiddleWhere.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/l1keafox/copyStack/issues"
+    "url": "https://github.com/l1keafox/MiddleWhere/issues"
   },
-  "homepage": "https://github.com/l1keafox/copyStack#readme",
+  "homepage": "https://github.com/l1keafox/MiddleWhere#readme",
   "dependencies": {
     "apollo-server-express": "^3.10.3",
     "concurrently": "^7.4.0",
