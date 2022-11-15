@@ -2,6 +2,7 @@ const { AuthenticationError } = require("apollo-server-express");
 const { User, Group } = require("../models");
 const { GraphQLScalarType, Kind } = require("graphql");
 const { signToken } = require("../utils/auth");
+const {GraphQLJSONObject}  = require('graphql-type-json');
 //this is a custom decoding strategy for dealing with dates.
 const dateScalar = new GraphQLScalarType({
   name: "Date",
@@ -25,6 +26,7 @@ const dateScalar = new GraphQLScalarType({
 const resolvers = {
   //specifies that when "Date" is the datatype dateScalar should be used to resolve it.
   Date: dateScalar,
+  JSONObject: GraphQLJSONObject,
   Query: {
     //Gets user by id
     user: async (parent, { username }) => {
@@ -34,7 +36,9 @@ const resolvers = {
       return Group.find();
     },
     group: async (parent, { groupId }) => {
-      return Group.findById({ _id: groupId });
+      let retn = await Group.findById({ _id: groupId }).populate("users");
+      console.log(retn);
+      return retn;
     },
 
     //returns the current user id, must be logged in for it to work.
@@ -81,7 +85,7 @@ const resolvers = {
       );
       await Group.findOneAndUpdate(
         { _id: group._id },
-        { $addToSet: { users: user._id, location: user.location } }
+        { $addToSet: { users: user._id } }
       );
 
       const token = signToken(group);
@@ -90,14 +94,19 @@ const resolvers = {
     createGroup: async (parent, { name }, context) => {
       console.log("creating group by:", name, "By user: ", context.user);
       if (context.user) {
+        console.log('creating group');
         const group = await Group.create({ name });
+
+        console.log('Adding group to user ID',group.name );
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { groups: group.name } }
+          { $addToSet: { groups: group._id } }
         );
+        console.log('Adding User to Group ID');
+
         await Group.findOneAndUpdate(
           { _id: group._id },
-          { $addToSet: { users: user._id, location: user.location } }
+          { $addToSet: { users: user._id } }
         );
 
         const token = signToken(group);

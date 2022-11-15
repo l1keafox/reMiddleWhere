@@ -12,9 +12,13 @@ const CreateGroup = (props) => {
   const [groupPassword, setGroupPassword] = useState("");
   const handleFormSubmit = async (event) => {
     try {
+
+
       const { data } = await createGroup({
         variables: { name },
       });
+      console.log(data);
+
     } catch (e) {
       console.error(e);
     }
@@ -53,7 +57,7 @@ const CreateGroup = (props) => {
             onChange={handleInputChange}
             autoFocus
           />
-          <TextField
+          {/* <TextField
             name="password"
             required
             fullWidth
@@ -62,7 +66,7 @@ const CreateGroup = (props) => {
             value={groupPassword}
             onChange={handleInputChange}
             autoFocus
-          />
+          /> */}
           <Button
             type="submit"
             fullWidth
