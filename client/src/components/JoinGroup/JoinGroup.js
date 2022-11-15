@@ -13,7 +13,6 @@ const JoinGroup = (props) => {
 
   const handleFormSubmit = async (event) => {
     try {
-      console.log("handle,",name);
       const { data } = await joinGroup({
         variables: { name },
       });

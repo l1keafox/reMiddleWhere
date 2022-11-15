@@ -19,10 +19,8 @@ function LandingPage(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   useEffect(() => {
-    console.log(existingUser ,"Existing?",auth.loggedIn());
     if(existingUser)
     props.changeStage("profile");
-    // now we send back to app.js that we need to switch.
   }, [existingUser]);
 
 

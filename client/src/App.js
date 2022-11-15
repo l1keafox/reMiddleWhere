@@ -77,14 +77,12 @@ function App() {
   function changeStage(nextStage) {
     console.log("Change stage",nextStage);
     if (nextStage === Modals.create) {
-      console.log("in CREATE");
       setOpen(true);
       changeModal(<CreateGroup doClose={handleClose} />);
       return;
     }
 
     if (nextStage === Modals.join) {
-      console.log("in JOIN");
       setOpen(true);
       changeModal(<JoinGroup doClose={handleClose} />);
       return;
