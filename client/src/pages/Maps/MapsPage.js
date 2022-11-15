@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMutation } from "react";
 import { QUERY_GROUP } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
+import { ADD_LOCATION_TO_GROUP } from "../../utils/mutations";
+import auth from "../../utils/auth";
 
 const MapsPage = function (props) {
-<<<<<<< Updated upstream
-=======
   const [addLocation,{error}] = useMutation(ADD_LOCATION_TO_GROUP);
 
->>>>>>> Stashed changes
   let groupId = props.groupId;
   const { loading, data } = useQuery(QUERY_GROUP, {
     variables: { groupId },

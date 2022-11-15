@@ -71,8 +71,6 @@ function App() {
   useEffect(() => {
     if (auth.loggedIn()) {
       changeStage(Pages.profile);
-    } else {
-      changeStage(Pages.landing);
     }
   }, [auth.loggedIn()]);
 
