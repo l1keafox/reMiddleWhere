@@ -11,7 +11,9 @@ const MapsPage = function (props) {
   const { loading, data } = useQuery(QUERY_GROUP, {
     variables: { groupId },
   });
-  console.log("MAP?",data);
+
+  console.log("MAP?",data,groupId);
+
   useEffect(() => {
     if (data && data.me) {
       console.log(data, "Map pages");

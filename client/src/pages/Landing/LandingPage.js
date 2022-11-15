@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-// stylesheet
-import { useQuery } from "@apollo/client";
 
 // components
 import Login from "../../components/Login/Login.js";
@@ -15,14 +13,15 @@ import Modal from "@mui/material/Modal";
 
 function LandingPage(props) {
   const { existingUser } = useExistingUserContext();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  
   useEffect(() => {
-    if(existingUser)
-    props.changeStage("profile");
+    if(existingUser){
+        props.changeStage("profile");
+    }
   }, [existingUser]);
-
 
   return (
     <div className="flex flex-col h-screen justify-between">
@@ -53,7 +52,7 @@ function LandingPage(props) {
           aria-describedby="modal-modal-description"
         >
           <Box > 
-            <CreateAccount doClose = {handleClose}/>
+            <CreateAccount doClose = {handleClose} />
           </Box>
         </Modal>
       </div>

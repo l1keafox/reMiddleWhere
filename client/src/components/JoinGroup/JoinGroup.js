@@ -16,6 +16,7 @@ const JoinGroup = (props) => {
       const { data } = await joinGroup({
         variables: { name },
       });
+
     } catch (e) {
       console.error(e);
     }

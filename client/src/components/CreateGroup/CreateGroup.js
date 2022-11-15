@@ -12,9 +12,13 @@ const CreateGroup = (props) => {
   const [groupPassword, setGroupPassword] = useState("");
   const handleFormSubmit = async (event) => {
     try {
+
+
       const { data } = await createGroup({
         variables: { name },
       });
+      console.log(data);
+
     } catch (e) {
       console.error(e);
     }

@@ -8,7 +8,6 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import React from "react";
 import ExistingUserProvider from "./utils/existingUserContext";
-import { useExistingUserContext } from "./utils/existingUserContext";
 import { useState, useEffect } from "react";
 import LandingPage from "./pages/Landing/LandingPage.js";
 import ProfilePage from "./pages/Profile/ProfilePage.js";
@@ -18,7 +17,6 @@ import CreateGroup from "./components/CreateGroup/CreateGroup";
 import JoinGroup from "./components/JoinGroup/JoinGroup";
 import auth from "./utils/auth";
 import Modal from "@mui/material/Modal";
-import { ModalUnstyled } from "@mui/base";
 import { Box } from "@mui/material";
 
 const Pages = {
@@ -52,9 +50,10 @@ const client = new ApolloClient({
 });
 
 function App() {
+
   const [stage, setStage] = useState(Pages.landing);
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [modalContent, changeModal] = useState(null);
@@ -68,14 +67,8 @@ function App() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (auth.loggedIn()) {
-  //     changeStage(Pages.profile);
-  //   }
-  // }, [auth.loggedIn()]);
-
   function changeStage(nextStage) {
-    console.log("Change stage",nextStage);
+    console.log(" APP://Change stage",nextStage);
     if (nextStage === Modals.create) {
       setOpen(true);
       changeModal(<CreateGroup doClose={handleClose} />);
@@ -100,7 +93,6 @@ function App() {
   }
 
   function mapSelect(groupId) {
-    console.log("map select", groupId);
     setGroupId(groupId);
     changeStage(Pages.map);
   }
@@ -117,10 +109,14 @@ function App() {
     case Pages.map:
       displayContent = <MapsPage groupId={mapGroupId} />;
       break;
+    case Pages.landing:
+      displayContent = <LandingPage isShowing={loading} changeStage={changeStage}/>;
+      break;
     default:
       displayContent = <LandingPage isShowing={loading} changeStage={changeStage} />;
       break;
   }
+
   return (
     <>
       <ApolloProvider client={client}>

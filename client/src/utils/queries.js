@@ -19,12 +19,13 @@ export const QUERY_ME = gql`
 `;
 
 export const QUERY_GROUP = gql`
-query Group($groupId: ID!) {
+query Query($groupId: ID!) {
   group(groupId: $groupId) {
     name
     users {
       username
     }
+    _id
   }
 }
 `;

@@ -59,3 +59,4 @@ mutation JoinGroup($name: String!) {
 	  }
 	}
   } `
+

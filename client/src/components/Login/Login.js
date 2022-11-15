@@ -27,7 +27,6 @@ const Login = (props) => {
       [name]: value,
     });
   };
-
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -128,9 +127,9 @@ const Login = (props) => {
               fullWidth
               name="quick Join"
               label="groupID"
-              type="password"
-              id="password"
-              autoComplete="current-password"
+              type="groupName"
+              id="groupName"
+              autoComplete="current-groupName"
             />
             <Button
               type="submit"
