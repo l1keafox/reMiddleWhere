@@ -27,8 +27,8 @@ function LandingPage(props) {
     <div className="flex flex-col h-screen justify-between">
       <div></div>
       <div className="flex container">
-        <div className="bg-slate-200 w-1/2">
-          <h1 className="text-7xl  font-mono"> Middle Where</h1>
+        <div className="bg-slate-200 w-1/2 p-3">
+          <h1 className="text-7xl  font-mono text-center"> Middle Where</h1>
           <br />
           <p className="font-serif">
             Middle-Where is a web-based application designed to bring friends
@@ -41,8 +41,8 @@ function LandingPage(props) {
             members.
           </p>
         </div>
-        <div className="bg-grey-100 w-1/2">
-          {auth.loggedIn() ? <div /> : <Login signUp={handleOpen} />}
+        <div className="bg-slate-200 w-1/2">
+          {auth.loggedIn() ? <div /> : <Login signUp={handleOpen}/>}
         </div>
         
         <Modal

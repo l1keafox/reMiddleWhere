@@ -70,14 +70,12 @@ function App() {
   function changeStage(nextStage) {
     console.log(" APP://Change stage",nextStage);
     if (nextStage === Modals.create) {
-      console.log("in CREATE");
       setOpen(true);
       changeModal(<CreateGroup doClose={handleClose} />);
       return;
     }
 
     if (nextStage === Modals.join) {
-      console.log("in JOIN");
       setOpen(true);
       changeModal(<JoinGroup doClose={handleClose} />);
       return;
@@ -115,7 +113,7 @@ function App() {
       displayContent = <LandingPage isShowing={loading} changeStage={changeStage}/>;
       break;
     default:
-      // displayContent = <LandingPage isShowing={loading} />;
+      displayContent = <LandingPage isShowing={loading} changeStage={changeStage} />;
       break;
   }
 

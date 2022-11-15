@@ -1,12 +1,11 @@
-import React, { PureComponent, useEffect } from "react";
+import React, { useEffect, useMutation } from "react";
 import { QUERY_GROUP } from "../../utils/queries";
-import { useQuery,useMutation } from "@apollo/client";
-import Button from "@mui/material/Button";
+import { useQuery } from "@apollo/client";
+// import { ADD_LOCATION_TO_GROUP } from "../../utils/mutations";
 import auth from "../../utils/auth";
-import { ADD_LOCATION_TO_GROUP } from "../../utils/mutations";
 
 const MapsPage = function (props) {
-  const [addLocation] = useMutation(ADD_LOCATION_TO_GROUP);
+  // const [addLocation,{error}] = useMutation(ADD_LOCATION_TO_GROUP);
 
   let groupId = props.groupId;
   const { loading, data } = useQuery(QUERY_GROUP, {
@@ -21,32 +20,31 @@ const MapsPage = function (props) {
     }
   }, [data]);
 
-  function upDatePos(){
-    console.log("doing update");
-    navigator.geolocation.getCurrentPosition( async (position) => {
-//mutation AddUserLocationToGroup($userId: ID!, $groupId: ID!, $latitude: Int!, $longitude: Int!) 
-// So we need 4 times, userID, groupID, lat, and long, here we get lat/long
+//   function upDatePos(){
+//     console.log("doing update");
+//     navigator.geolocation.getCurrentPosition( async (position) => {
+// //mutation AddUserLocationToGroup($userId: ID!, $groupId: ID!, $latitude: Int!, $longitude: Int!) 
+// // So we need 4 times, userID, groupID, lat, and long, here we get lat/long
+//       const userId = auth.getUser().data._id;
+//       const latitude = position.coords.latitude;
+//       const longitude =  position.coords.longitude;
+//       console.log(userId,groupId,latitude,longitude);
+//       const { data } = await addLocation({
+//         variables: { userId , groupId,latitude, longitude },
+//       });
+//       console.log(error);
+//       console.log(data);
+//      });
 
-      console.log(position.coords.latitude);
-      console.log(position.coords.longitude);
-      console.log(groupId);
-      console.log( auth.getUser().data._id );
-      const { data } = await addLocation({
-        variables: { "userId":auth.getUser().data._id , groupId, "latitude":position.coords.latitude, "longitude":position.coords.longitude },
-      });
-
-     });
-
-  }
+//   }
 
   return (loading? <div> Loading </div> :
     <div>
       MapsPage
-      <h2> GROUP NAME: {data && data.group ? data.group.name : "balh"}</h2>
-      {/* {data.group.users.map( (e) => (
-        <div> {e.name} </div>
-      ) )} */}
-      <Button onClick={upDatePos} > Update Location </Button>
+      <h2> GROUP NAME: {data.group.name}</h2>
+      {data.group.users.map( (e,index) => (
+        <div key= {index}> {e.name} </div>
+      ) )}
     </div>
   );
 };

@@ -28,7 +28,6 @@ function CreateAccount(props) {
     const { target } = e;
     const inputType = target.name;
     const inputValue = target.value;
-    console.log(target, inputType);
     if (inputType === "userName") {
       setUsername(inputValue);
     } else if (inputType === "passWord") {
