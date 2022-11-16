@@ -7,12 +7,16 @@
 
 //to access the updated center, do a db query when needed -- NOT in this file
 
-const getCenterPoint = async () => {
+const getCenterPoint = async (userLocations) => {
+
+//userLocations - array of objects -->  e.g. [{location:{type: "Point", coordinates: [-105.033678, 39.870972]}, locationName: "Home", userId: ObjectId(''), groupId:[ObjectId(''), ObjectId('')]}]
+
+  //the only locations that would be passed are ones that belong to the specific group
 
   //copied calculation code from previous project -- 
   
     //getting all latitudes as array -- returns as array of strings
-    const allLatitudes = .map((data) => data.latitude); //will need to map through the passed lat data param
+    const allLatitudes = userLocations.map((data) => data.); //will need to map through the passed lat data param
 
     //getting all longitudes as array -- returns as array of strings
     const allLongitudes = .map((data) => data.longitude); //will need to map through the passed long data param
