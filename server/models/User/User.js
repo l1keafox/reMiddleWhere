@@ -1,6 +1,8 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
+const locationSchema = require("./Location");
+
 const userSchema = new Schema(
   {
     username: {
@@ -43,18 +45,20 @@ const userSchema = new Schema(
 
     //Reference:  https://www.mongodb.com/docs/manual/reference/geojson/
 
-    location: {
-      type: {
-        type: String,
-        enum: ["Point"], // 'location.type' must be 'Point'
-        required: true,
-      },
-      coordinates: {
-        type: [Number],
-        required: true,
-      },
-    },
+    //COMMENTED OLD LOCATION OBJECT OUT IN CASE WE NEED TO CHANGE IT BACK
+    // location: {
+    //   type: {
+    //     type: String,
+    //     enum: ["Point"], // 'location.type' must be 'Point'
+    //     required: true,
+    //   },
+    //   coordinates: {
+    //     type: [Number],
+    //     required: true,
+    //   },
+    // },
 
+    location: [locationSchema],
     isAdmin: {
       type: Boolean,
       required: true,
