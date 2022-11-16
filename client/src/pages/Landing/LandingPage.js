@@ -28,7 +28,7 @@ function LandingPage(props) {
     <div id="landingBg">
     <div  className="flex flex-col h-screen justify-center" >
       <div className="flex container">
-        <div className="bg-slate-200 w-1/2 p-3">
+        <div className="bg-slate-200 w-1/2 p-3 h-[38rem] ">
           <h1 className="text-7xl  font-marker text-center"> Middle<span className="text-green-700">Where</span></h1>
           <br />
           <p className="font-noto text-yellow-800 text-2xl p-3 text-justify">

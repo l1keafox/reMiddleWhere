@@ -51,7 +51,7 @@ const Login = (props) => {
   };
 
   return (
-    <div className="loginCard">
+    <div className="loginCard font-noto">
       {data ? (
         <p>
           {/* Success! You may now head <Link to="/">back to the homepage.</Link> */}
@@ -66,12 +66,12 @@ const Login = (props) => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          </Avatar> */}
             {/* <LockOutlinedIcon /> */}
-          </Avatar>
-          <Typography component="h1" variant="h5">
+          <h1 className="font-noto text-4xl">
             Sign in
-          </Typography>
+          </h1>
           <Box
             component="form"
             noValidate
@@ -117,7 +117,7 @@ const Login = (props) => {
               </Grid>
               <Grid item>
                 <a href="#" variant="body2" onClick={props.signUp}>
-                  {"Don't have an account? Sign Up"}
+                  Don't have an account? <span className="text-blue-700"> Sign Up </span>
                 </a>
               </Grid>
             </Grid>
