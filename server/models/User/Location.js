@@ -37,6 +37,14 @@ const locationSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
+  //adding groupId to allow users to use the location in more than one group
+  //will be helpful if we want the user to see which groups the location is being used
+  groupId: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Group",
+    },
+  ],
 });
 
 module.exports = locationSchema;

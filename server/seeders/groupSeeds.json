@@ -7,7 +7,8 @@
       "coordinates": [-105.1, 39.870972]
     },
     "password": "petspets",
-    "users": []
+    "users": [],
+    "userLocations":[]
   },
   {
     "name": "Foodies",
@@ -17,7 +18,8 @@
       "coordinates": [-105.1, 39.870972]
     },
     "password": "foodies",
-    "users": []
+    "users": [],
+    "userLocations":[]
   },
   {
     "name": "Athletes",
@@ -27,6 +29,7 @@
       "coordinates": [-105.1, 39.870972]
     },
     "password": "athletes",
-    "users": []
+    "users": [],
+    "userLocations":[]
   }
 ]

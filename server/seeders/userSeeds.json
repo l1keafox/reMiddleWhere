@@ -9,7 +9,8 @@
           "coordinates": [-105.033678, 39.870972]
         },
         "locationName": "Home",
-        "userId": null
+        "userId": null,
+        "groupId": []
       }
     ],
     "password": "dogdog"
@@ -24,7 +25,8 @@
           "coordinates": [-105.059101, 39]
         },
         "locationName": "Work",
-        "userId": null
+        "userId": null,
+        "groupId": []
       }
     ],
     "password": "catcat"
@@ -39,7 +41,8 @@
           "coordinates": [-105.228129, 40.002068]
         },
         "locationName": "Home",
-        "userId": null
+        "userId": null,
+        "groupId": []
       }
     ],
     "password": "hamham"
@@ -54,7 +57,8 @@
           "coordinates": [-105.045856, 39.753628]
         },
         "locationName": "School",
-        "userId": null
+        "userId": null,
+        "groupId": []
       }
     ],
     "password": "sirloin"
@@ -69,7 +73,8 @@
           "coordinates": [-105.030053, 39.828548]
         },
         "locationName": "Home",
-        "userId": null
+        "userId": null,
+        "groupId": []
       }
     ],
     "password": "maitai"
@@ -84,7 +89,8 @@
           "coordinates": [-104.976972, 39.797961]
         },
         "locationName": "Friend's House",
-        "userId": null
+        "userId": null,
+        "groupId": []
       }
     ],
     "password": "grubhub"
@@ -99,7 +105,8 @@
           "coordinates": [-104.977659, 39.744657]
         },
         "locationName": "Apartment",
-        "userId": null
+        "userId": null,
+        "groupId": []
       }
     ],
     "password": "appetizers"
@@ -114,7 +121,8 @@
           "coordinates": [-105.040361, 39.746131]
         },
         "locationName": "Work",
-        "userId": null
+        "userId": null,
+        "groupId": []
       }
     ],
     "password": "dolphin"
@@ -129,7 +137,8 @@
           "coordinates": [-104.924623, 39.705414]
         },
         "locationName": "Home",
-        "userId": null
+        "userId": null,
+        "groupId": []
       }
     ],
     "password": "fastfeet"
@@ -144,7 +153,8 @@
           "coordinates": [-104.976155, 39.675825]
         },
         "locationName": "Home",
-        "userId": null
+        "userId": null,
+        "groupId": []
       }
     ],
     "password": "tourdefrance"
@@ -159,7 +169,8 @@
           "coordinates": [-104.8992, 39.72971]
         },
         "locationName": "Work",
-        "userId": null
+        "userId": null,
+        "groupId": []
       }
     ],
     "password": "shredder"
@@ -174,7 +185,8 @@
           "coordinates": [-105.036619, 39.69749]
         },
         "locationName": "Work",
-        "userId": null
+        "userId": null,
+        "groupId": []
       }
     ],
     "password": "flippydoodah"
@@ -189,7 +201,8 @@
           "coordinates": [-107.059101, 39]
         },
         "locationName": "School",
-        "userId": null
+        "userId": null,
+        "groupId": []
       }
     ],
     "password": "testtest"
