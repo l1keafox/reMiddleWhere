@@ -10,7 +10,6 @@ import { useExistingUserContext } from "../../utils/existingUserContext";
 import auth from "../../utils/auth";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import map from "./Berlin.png"
 
 function LandingPage(props) {
   const { existingUser } = useExistingUserContext();
