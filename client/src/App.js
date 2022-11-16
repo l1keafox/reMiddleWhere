@@ -50,7 +50,6 @@ const client = new ApolloClient({
 });
 
 function App() {
-
   const [stage, setStage] = useState(Pages.landing);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -68,7 +67,7 @@ function App() {
   }, []);
 
   function changeStage(nextStage) {
-    console.log(" APP://Change stage",nextStage);
+    console.log(" APP://Change stage", nextStage);
     if (nextStage === Modals.create) {
       setOpen(true);
       changeModal(<CreateGroup doClose={handleClose} />);
@@ -110,16 +109,19 @@ function App() {
       displayContent = <MapsPage groupId={mapGroupId} />;
       break;
     case Pages.landing:
-      displayContent = <LandingPage isShowing={loading} changeStage={changeStage}/>;
+      displayContent = (
+        <LandingPage isShowing={loading} changeStage={changeStage} />
+      );
       break;
     default:
-      displayContent = <LandingPage isShowing={loading} changeStage={changeStage} />;
+      displayContent = (
+        <LandingPage isShowing={loading} changeStage={changeStage} />
+      );
       break;
   }
 
   return (
     <>
-    
       <ApolloProvider client={client}>
         <ExistingUserProvider>
           {auth.loggedIn() ? (
@@ -140,7 +142,6 @@ function App() {
           </Modal>
         </ExistingUserProvider>
       </ApolloProvider>
-      
     </>
   );
 }

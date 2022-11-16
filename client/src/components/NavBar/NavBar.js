@@ -4,10 +4,10 @@ export default function Navbar({navLink}) {
 
   return (
     <>
-      <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-slate-300 mb-3">
+      <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-slate-300 dark:bg-slate-700 mb-3">
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
-                <h1 className='font-mono text-4xl '><span className="text-green-700">Middle</span>Where</h1>
+                <h1 className='font-marker text-4xl '><span className="text-green-700">Middle</span>Where</h1>
             <button
               className="text-black cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block md:hidden outline-none focus:outline-none"
               type="button"
