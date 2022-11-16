@@ -22,7 +22,7 @@ function ProfilePage(props) {
   useEffect(() => () => stopPolling(), []);
   
   return (
-    <div>
+    <div className="bg-green-300 dark:bg-green-800 h-screen">
       {loading ? (
         <div />
       ) : (

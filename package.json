@@ -18,14 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/l1keafox/copyStack.git"
+    "url": "git+https://github.com/l1keafox/MiddleWhere.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/l1keafox/copyStack/issues"
+    "url": "https://github.com/l1keafox/MiddleWhere/issues"
   },
-  "homepage": "https://github.com/l1keafox/copyStack#readme",
+  "homepage": "https://github.com/l1keafox/MiddleWhere#readme",
   "dependencies": {
     "apollo-server-express": "^3.10.3",
     "concurrently": "^7.4.0",
