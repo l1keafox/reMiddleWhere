@@ -10,6 +10,7 @@ import { useExistingUserContext } from "../../utils/existingUserContext";
 import auth from "../../utils/auth";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import map from "./Berlin.png"
 
 function LandingPage(props) {
   const { existingUser } = useExistingUserContext();
@@ -24,13 +25,13 @@ function LandingPage(props) {
   }, [existingUser]);
 
   return (
-    <div className="flex flex-col h-screen justify-between">
-      <div></div>
+    <div id="landingBg">
+    <div  className="flex flex-col h-screen justify-center" >
       <div className="flex container">
         <div className="bg-slate-200 w-1/2 p-3">
-          <h1 className="text-7xl  font-mono text-center"> Middle Where</h1>
+          <h1 className="text-7xl  font-marker text-center"> Middle<span className="text-green-700">Where</span></h1>
           <br />
-          <p className="font-serif">
+          <p className="font-noto text-yellow-800 text-2xl p-3 text-justify">
             Middle-Where is a web-based application designed to bring friends
             together using a calculated, centralized geolocation. The motivation
             behind this project is to streamline the process of deciding the
@@ -56,7 +57,7 @@ function LandingPage(props) {
           </Box>
         </Modal>
       </div>
-      <div></div>
+      </div>
     </div>
   );
 }

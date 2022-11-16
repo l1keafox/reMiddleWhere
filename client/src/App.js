@@ -119,6 +119,7 @@ function App() {
 
   return (
     <>
+    
       <ApolloProvider client={client}>
         <ExistingUserProvider>
           {auth.loggedIn() ? (
@@ -139,6 +140,7 @@ function App() {
           </Modal>
         </ExistingUserProvider>
       </ApolloProvider>
+      
     </>
   );
 }
