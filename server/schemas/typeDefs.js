@@ -10,6 +10,7 @@ const typeDefs = gql`
     email: String
     friends: [User]
     groups: [Group]
+    location: [location]
   }
 
 
@@ -18,6 +19,7 @@ const typeDefs = gql`
     name: String
     users: [User]
     location: [JSONObject]
+    userLocations: [User.location]
   }
 
   type Auth {
@@ -30,7 +32,9 @@ const typeDefs = gql`
     groups: [Group]
     group(groupId: ID!): Group
     me: User
+    allGroupUserLocations(groupId: ID!): Group
   }
+
   type Mutation {
     login(username: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
