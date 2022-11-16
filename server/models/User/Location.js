@@ -6,7 +6,7 @@
 
 //will be referenced in the User model as an array of locations
 
-const Schema = require("mongoose");
+const { Schema } = require("mongoose");
 
 //!!! NOTE: from MongoDB documentation for GeoJSON (https://www.mongodb.com/docs/manual/reference/geojson/#point) !!!!
 
@@ -16,9 +16,17 @@ const Schema = require("mongoose");
 
 // Valid latitude values are between -90 and 90, both inclusive.
 const locationSchema = new Schema({
+  //reference: https://mongoosejs.com/docs/geojson.html
   location: {
-    type: "Point",
-    coordinates: [Number], //will be single set of coords - [long, lat]
+    type: {
+      type: String, // Don't do `{ location: { type: String } }`
+      enum: ["Point"], // 'location.type' must be 'Point'
+      required: true,
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+    },
   },
   locationName: {
     type: String,
