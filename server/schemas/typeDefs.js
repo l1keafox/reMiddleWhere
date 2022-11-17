@@ -13,6 +13,14 @@ const typeDefs = gql`
     locations: [Location]
   }
 
+  type Location {
+    _id: ID
+    latitude: Float!
+    longitude: Float!
+    locationName: String!
+    userId: [User]
+    groupId: [Group]
+  }
 
   type Group {
     _id: ID
@@ -43,8 +51,17 @@ const typeDefs = gql`
     createGroup(name: String!): Group
     leaveGroup(groupId: ID!): Group
     addFriend(userId: ID!): User
-    addUserLocationToGroup(userId: ID!, groupId: ID!, latitude: Int!, longitude:Int! ):Group
-    updateCenterPoint(groupId: ID!): Group
+    addUserLocationToGroup(
+      userId: ID!
+      groupId: ID!
+      latitude: Int!
+      longitude: Int!
+    ): Group
+    updateCenterPoint(
+      groupId: ID!
+      centerLatitude: Float!
+      centerLongitude: Float!
+    ): Group
   }
 `;
 module.exports = typeDefs;
