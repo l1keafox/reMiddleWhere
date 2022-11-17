@@ -9,7 +9,8 @@ module.exports = {
       "noto":['Noto Serif Oriya']
     },
 
-    extend: {},
+    extend: {
+    },
   },
   plugins: [],
 }
