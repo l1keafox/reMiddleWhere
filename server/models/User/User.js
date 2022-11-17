@@ -45,7 +45,6 @@ const userSchema = new Schema(
 
     //Reference:  https://www.mongodb.com/docs/manual/reference/geojson/
 
-    //COMMENTED OLD LOCATION OBJECT OUT IN CASE WE NEED TO CHANGE IT BACK
     // location: {
     //   type: {
     //     type: String,
