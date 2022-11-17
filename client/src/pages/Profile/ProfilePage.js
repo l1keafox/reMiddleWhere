@@ -34,9 +34,9 @@ function ProfilePage(props) {
           </div>
         </div>
           <InfoCard />
-          <div className="flex justify-center border-2 border-yellow-900">
+          <div className="flex justify-center border-2 border-yellow-900 flex-wrap bg-yellow-900 opacity-95 mx-20 mt-3">
             {data && data.me ? data.me.groups.map((group, index) => (
-              <Paper className="w-1/4 p-3 m-3 hover:bg-slate-200" key={index}>
+              <Paper className="h-80 aspect-[5/7] p-3 m-3 hover:bg-slate-200" id="groupCard" key={index}>
                 <h1> Group Name: {group.name} </h1>
                 <h1> Group id: {group._id} </h1>
                 <h1> Users : </h1>
@@ -45,8 +45,7 @@ function ProfilePage(props) {
                 ))}
                 <h2> Lat :</h2>
                 <h2> Long :</h2>
-                <Button data-id={group._id} onClick={props.mapSelect}>
-                  {" "}
+                <Button data-id={group._id} onClick={props.mapSelect} className="justify-end">
                   Click Here To Go To Map
                 </Button>
               </Paper>
