@@ -54,6 +54,7 @@ function CreateAccount(props) {
       });
       props.doClose();
       Auth.login(data.addUser.token);
+      toggleExistingUser(true);
       setLogin(true);
     } catch (e) {
       console.error(e);
@@ -67,7 +68,7 @@ function CreateAccount(props) {
 
   return (
     <div>
-      <Container component="main" maxWidth="xs" className="bg-slate-100">
+      <Container component="main" maxWidth="xs" className="bg-slate-100 font-noto">
         <CssBaseline />
         <Box
           sx={{
@@ -77,12 +78,9 @@ function CreateAccount(props) {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            {/* <LockOutlinedIcon /> */}
-          </Avatar>
-          <Typography component="h1" variant="h5">
+          <h1 className="font-noto pt-4 font-bold text-3xl">
             Sign up
-          </Typography>
+          </h1>
           <Box
             component="form"
             noValidate
@@ -139,9 +137,9 @@ function CreateAccount(props) {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                {/* <Link href="#" variant="body2">
                   Already have an account? Sign in
-                </Link>
+                </Link> */}
               </Grid>
             </Grid>
           </Box>

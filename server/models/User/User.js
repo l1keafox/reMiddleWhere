@@ -43,17 +43,17 @@ const userSchema = new Schema(
 
     //Reference:  https://www.mongodb.com/docs/manual/reference/geojson/
 
-    location: {
-      type: {
-        type: String,
-        enum: ["Point"], // 'location.type' must be 'Point'
-        required: true,
-      },
-      coordinates: {
-        type: [Number],
-        required: true,
-      },
-    },
+    // location: {
+    //   type: {
+    //     type: String,
+    //     enum: ["Point"], // 'location.type' must be 'Point'
+    //     required: true,
+    //   },
+    //   coordinates: {
+    //     type: [Number],
+    //     required: true,
+    //   },
+    // },
 
     isAdmin: {
       type: Boolean,
