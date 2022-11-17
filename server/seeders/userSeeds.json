@@ -2,209 +2,66 @@
   {
     "username": "Dog",
     "email": "dog@email.com",
-    "location": [
-      {
-        "location": {
-          "type": "Point",
-          "coordinates": [-105.033678, 39.870972]
-        },
-        "locationName": "Home",
-        "userId": null,
-        "groupId": []
-      }
-    ],
     "password": "dogdog"
   },
   {
     "username": "Cat",
     "email": "cat@email.com",
-    "location": [
-      {
-        "location": {
-          "type": "Point",
-          "coordinates": [-105.059101, 39]
-        },
-        "locationName": "Work",
-        "userId": null,
-        "groupId": []
-      }
-    ],
     "password": "catcat"
   },
   {
     "username": "Hamster",
     "email": "hamster@email.com",
-    "location": [
-      {
-        "location": {
-          "type": "Point",
-          "coordinates": [-105.228129, 40.002068]
-        },
-        "locationName": "Home",
-        "userId": null,
-        "groupId": []
-      }
-    ],
     "password": "hamham"
   },
   {
     "username": "Chef",
     "email": "chef@email.com",
-    "location": [
-      {
-        "location": {
-          "type": "Point",
-          "coordinates": [-105.045856, 39.753628]
-        },
-        "locationName": "School",
-        "userId": null,
-        "groupId": []
-      }
-    ],
     "password": "sirloin"
   },
   {
     "username": "Bartender",
     "email": "bartender@email.com",
-    "location": [
-      {
-        "location": {
-          "type": "Point",
-          "coordinates": [-105.030053, 39.828548]
-        },
-        "locationName": "Home",
-        "userId": null,
-        "groupId": []
-      }
-    ],
     "password": "maitai"
   },
   {
     "username": "DeliveryMan",
     "email": "deliveryman@email.com",
-    "location": [
-      {
-        "location": {
-          "type": "Point",
-          "coordinates": [-104.976972, 39.797961]
-        },
-        "locationName": "Friend's House",
-        "userId": null,
-        "groupId": []
-      }
-    ],
     "password": "grubhub"
   },
   {
     "username": "Waiter",
     "email": "waiter@email.com",
-    "location": [
-      {
-        "location": {
-          "type": "Point",
-          "coordinates": [-104.977659, 39.744657]
-        },
-        "locationName": "Apartment",
-        "userId": null,
-        "groupId": []
-      }
-    ],
     "password": "appetizers"
   },
   {
     "username": "Swimmer",
     "email": "swimmer@email.com",
-    "location": [
-      {
-        "location": {
-          "type": "Point",
-          "coordinates": [-105.040361, 39.746131]
-        },
-        "locationName": "Work",
-        "userId": null,
-        "groupId": []
-      }
-    ],
     "password": "dolphin"
   },
   {
     "username": "Runner",
     "email": "runner@email.com",
-    "location": [
-      {
-        "location": {
-          "type": "Point",
-          "coordinates": [-104.924623, 39.705414]
-        },
-        "locationName": "Home",
-        "userId": null,
-        "groupId": []
-      }
-    ],
     "password": "fastfeet"
   },
   {
     "username": "Biker",
     "email": "biker@email.com",
-    "location": [
-      {
-        "location": {
-          "type": "Point",
-          "coordinates": [-104.976155, 39.675825]
-        },
-        "locationName": "Home",
-        "userId": null,
-        "groupId": []
-      }
-    ],
     "password": "tourdefrance"
   },
   {
     "username": "Snowboarder",
     "email": "snowboarder@email.com",
-    "location": [
-      {
-        "location": {
-          "type": "Point",
-          "coordinates": [-104.8992, 39.72971]
-        },
-        "locationName": "Work",
-        "userId": null,
-        "groupId": []
-      }
-    ],
     "password": "shredder"
   },
   {
     "username": "Gymnast",
     "email": "gymnast@email.com",
-    "location": [
-      {
-        "location": {
-          "type": "Point",
-          "coordinates": [-105.036619, 39.69749]
-        },
-        "locationName": "Work",
-        "userId": null,
-        "groupId": []
-      }
-    ],
     "password": "flippydoodah"
   },
   {
     "username": "test",
     "email": "test@email.com",
-    "location": [
-      {
-        "location": {
-          "type": "Point",
-          "coordinates": [-107.059101, 39]
-        },
-        "locationName": "School",
-        "userId": null,
-        "groupId": []
-      }
-    ],
     "password": "testtest"
   }
 ]

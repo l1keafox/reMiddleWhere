@@ -22,6 +22,7 @@ const locationSchema = new Schema({
   userId: {
     type: Schema.Types.ObjectId,
     ref: "User",
+    required: true
   },
   //adding groupId to allow users to use the location in more than one group
   //will be helpful if we want the user to see which groups the location is being used
