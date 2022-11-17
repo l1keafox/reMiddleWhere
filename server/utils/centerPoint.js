@@ -15,12 +15,12 @@ const getCenterPoint = async (userLocations) => {
   //copied calculation code from previous project -- modified calculations as needed based on data
 
   //getting all longs & lats
-  const allLongitudes = userLocations.map((data) => data.longitude);
+  const allLongs = userLocations.map((data) => data.longitude);
 
-  const allLatitudes = allCoords.map((data) => data.latitude);
+  const allLats = allCoords.map((data) => data.latitude);
 
   //calling function to do the calculation
-  return getAverageCoords(allLongitudes, allLatitudes);
+  return getAverageCoords(allLongs, allLats);
 };
 
 //using user long & lat data to calculate their avg coordinates
@@ -33,8 +33,8 @@ function getAverageCoords(allLatitudes, allLongitudes) {
   const centerLat = sumLat / allLats.length;
   const centerLong = sumLong / allLongs.length;
 
-  //the coords that will be saved to the db
-  return {centerLat, centerLong}
+  //the coords that will be saved to the db --> add mutation to update db using returned values where getCenterPoint is called
+  return { centerLat, centerLong };
 }
 
 module.exports = getCenterPoint;
