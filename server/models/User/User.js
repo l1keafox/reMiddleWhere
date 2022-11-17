@@ -1,8 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const locationSchema = require("./Location");
-
 const userSchema = new Schema(
   {
     username: {
@@ -57,7 +55,12 @@ const userSchema = new Schema(
     //   },
     // },
 
-    location: [locationSchema],
+    locations: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Location"
+      }
+    ],
     isAdmin: {
       type: Boolean,
       required: true,

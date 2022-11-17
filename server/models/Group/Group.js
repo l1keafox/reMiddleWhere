@@ -18,14 +18,11 @@ const groupSchema = new Schema({
   //   required: false,
   //   minlength: 5,
   // },
-  location: {
-    type: {
-      type: String,
-      enum: ["Point"], // 'location.type' must be 'Point'
-    },
-    coordinates: {
-      type: [Number],
-    },
+  centerLatitude: {
+    type: Number,
+  },
+  centerLongitude: {
+    type: Number,
   },
   users: [
     {
@@ -37,7 +34,7 @@ const groupSchema = new Schema({
   userLocations: [
     {
       type: Schema.Types.ObjectId,
-      ref: "User.location",
+      ref: "Location",
     },
   ],
 });
