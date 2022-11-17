@@ -129,6 +129,7 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
     leaveGroup: async (parent, { groupId }, context) => {
+      console.log("LEAVE GROUP?? WORKING?",context.user);
       if (context.user) {
         const group = await Group.findOneAndDelete({
           _id: groupId,

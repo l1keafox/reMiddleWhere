@@ -106,7 +106,7 @@ function App() {
       );
       break;
     case Pages.map:
-      displayContent = <MapsPage groupId={mapGroupId} />;
+      displayContent = <MapsPage groupId={mapGroupId} changeStage={changeStage} />;
       break;
     case Pages.landing:
       displayContent = (

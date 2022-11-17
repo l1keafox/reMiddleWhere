@@ -57,3 +57,14 @@ mutation JoinGroup($name: String!) {
   }
   `;
 
+
+  export const LEAVE_GROUP = gql`
+  mutation Mutation($groupId: ID!) {
+	leaveGroup(groupId: $groupId) {
+	  name
+	  users {
+		username
+	  }
+	}
+  } 
+  `;

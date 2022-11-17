@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { QUERY_GROUP } from "../../utils/queries";
 import { useQuery,useMutation } from "@apollo/client";
-import { ADD_LOCATION_TO_GROUP } from "../../utils/mutations";
+import { ADD_LOCATION_TO_GROUP , LEAVE_GROUP} from "../../utils/mutations";
 import auth from "../../utils/auth";
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 
@@ -9,6 +9,7 @@ import { GoogleMap, LoadScript } from '@react-google-maps/api';
 const MapsPage = function (props) {
   // console.log(ADD_LOCATION_TO_GROUP);
   const [addUserLocationToGroup,{error}] = useMutation(ADD_LOCATION_TO_GROUP);
+  const [leaveGroup,{leaveError}] = useMutation(LEAVE_GROUP);
 	
 
   const [center, setCenter] = useState({});
@@ -56,7 +57,18 @@ const MapsPage = function (props) {
       console.log(error );
       console.log(data ,"DATA?");
      });
-  }  
+  };
+
+  async function leaveGroupClick(){
+    // leaveGroup(need groupId);
+      console.log(groupId, "is group ID");
+      const {data } = await leaveGroup({
+        variables: {groupId},
+      });
+      // We should also go back to profile page from here.
+      props.changeStage("profile");
+      console.log(data);
+  };
 //console.log(process.env.REACT_APP_GMAPS_API, "AIzaSyDOxXYVOWPzgQcdB8Zc8KTR-P92C8A-K2Y" , process.env.REACT_APP_GMAPS_API === "AIzaSyDOxXYVOWPzgQcdB8Zc8KTR-P92C8A-K2Y");
 
   return (loading? <div> Loading </div> :
@@ -81,6 +93,7 @@ const MapsPage = function (props) {
       
       </LoadScript>
       <button className="bg-green-300" onClick={upDatePos}> Load User Data </button>
+      <button className="bg-red-300" onClick={leaveGroupClick}> Leave Group </button>
       </div>
       : <div/>}
     </div>
