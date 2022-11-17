@@ -11,6 +11,15 @@ body{
   }
 }
 
+@keyframes background-zoom{
+  from,to{
+    background-size: 125%;
+  }
+  50%{
+    background-size: 100%;
+  }
+}
+
 
 #landingBg{
   background-image: url("./pages/Landing/Berlin.png");
@@ -21,4 +30,39 @@ body{
   animation: background-pan 50s linear infinite;
   position: absolute;
   background-size: 150%;
+}
+
+#profileBg{
+  background-image: url("./pages/Profile/638c4d7244a4e55b68cb9829f6c0ab0c633d57ca.jpg");
+  height: 100vh;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  position: absolute;
+  animation: background-zoom 150s linear infinite;
+  z-index: -1;
+}
+
+#profileBgWrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+
+#groupCards{
+  background-color: rgb(240, 240,240);
+  transition: all .2s ease-in-out;
+}
+
+#groupCards:hover{
+  transform: scale(1.05);
+}
+
+#cardButton{
+  background-color: rgb(200, 200,200);
+}
+#cardButton:hover{
+  background-color: rgb(150, 150,150);
 }

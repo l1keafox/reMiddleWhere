@@ -69,7 +69,7 @@ const Login = (props) => {
           {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           </Avatar> */}
             {/* <LockOutlinedIcon /> */}
-          <h1 className="font-noto text-4xl">
+          <h1 className="font-noto text-4xl cursor-default select-none">
             Sign in
           </h1>
           <Box
