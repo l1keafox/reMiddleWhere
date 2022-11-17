@@ -18,53 +18,41 @@ db.once("open", async () => {
     // let groups = await Group.find();
     // let location = await Location.find();
 
-    console.log(users);
-    console.log(groups);
-    console.log("HEREEEEEEEEEE", location);
+    // console.log(users);
+    // console.log(groups);
+    // console.log(location);
+
+    //assigning userId to location & location to user --> will be in user & location order
+    for (i = 0; i < location.length; i++) {
+      users[i].locations = location[i];
+      location[i].userId = users[i]._id;
+    }
 
     //assigning seed data
     for (newUser of users) {
-      //adding users to group
+      //adding users & locations to group
       let tempGroup = groups[Math.floor(Math.random() * groups.length)];
+
+      //allows the id's to be matching between user and group
       tempGroup.users.push(newUser._id);
+      tempGroup.userLocations.push(newUser.locations);
       await tempGroup.save();
 
       //adding group to users
       const tempUser = users[Math.floor(Math.random() * users.length)];
       newUser.groups = tempGroup._id;
       await newUser.save();
-
-      //getting random location
-      const tempLocation =
-        location[Math.floor(Math.random() * location.length)];
-
-      //assigning userId to location & location to user --> will be in user & location order
-      for (i = 0; i < location.length; i++) {
-        users[i].locations.push(location[i]);
-        location[i].userId = users[i]._id;
-      }
-
-      console.log(location.length, users.length);
-      //assigning group to location & location to group --> will be in user & location order
-
-      // //adding user to location
-      // const tempLocation =
-      //   location[Math.floor(Math.random() * location.length)];
-      // tempLocation.userId = newUser._id;
-      // await tempLocation.save();
-
-      // //adding location to user
-      // newUser.locations = tempLocation._id;
-      // await newUser.save();
-
-      // //adding user locations to group
-      // tempGroup.userLocations.push(tempLocation._id);
-      // await tempGroup.save();
-
-      // //adding group to user locations
-      // tempLocation.groupId.push(tempGroup._id);
-      // await tempLocation.save();
     }
+
+    for (i = 0; i < location.length; i++) {
+      //assigning the groupId to match the group that the user belongs to (since seeded data has each user with only one location)
+      location[i].groupId = users[i].groups;
+    }
+
+    //ISSUE: seed data showing up correctly in console, but not in mongoDB Compass --> issue is with location, groupId shows empty array and userId shows null
+    //console.log(users);
+    // console.log(groups);
+    //console.log(location);
 
     console.log("Data seeded! 🌱");
     process.exit(0);
