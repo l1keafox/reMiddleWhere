@@ -1,5 +1,5 @@
 const { gql } = require("apollo-server-express");
-const { User, Group } = require("./../models");
+const { User, Group, Location } = require("./../models");
 
 const typeDefs = gql`
   scalar Date
@@ -10,7 +10,7 @@ const typeDefs = gql`
     email: String
     friends: [User]
     groups: [Group]
-    location: [location]
+    locations: [Location]
   }
 
 
@@ -18,8 +18,9 @@ const typeDefs = gql`
     _id: ID
     name: String
     users: [User]
-    location: [JSONObject]
-    userLocations: [User.location]
+    centerLatitude: Float
+    centerLongitude: Float
+    userLocations: [Location]
   }
 
   type Auth {
