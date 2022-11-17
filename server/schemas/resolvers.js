@@ -57,13 +57,11 @@ const resolvers = {
       //returning just the user locations array
       const userLocations = groupData.userLocations;
 
-      return userLocations;
+      return {userLocations, groupId};
     },
   },
 
   //NEXT: add mutation to update / add user location in the group -- will need to update groupId location array in User model, and update the locationId in userLocations in the group model
-
-  //NEXT: add mutation to update/create center location for the group -- will be used in the calculation file to update the center location in db
 
   Mutation: {
     login: async (parent, { username, password }) => {
@@ -187,6 +185,8 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    //NEXT: add mutation to update/create center location for the group -- will be used in the calculation file to update the center location in db
+    updateCenterPoint: 
   },
 };
 module.exports = resolvers;

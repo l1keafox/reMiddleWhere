@@ -43,6 +43,7 @@ const typeDefs = gql`
     leaveGroup(groupId: ID!): Group
     addFriend(userId: ID!): User
     addUserLocationToGroup(userId: ID!, groupId: ID!, latitude: Int!, longitude:Int! ):Group
+    updateCenterPoint(groupId: ID!): Group
   }
 `;
 module.exports = typeDefs;
