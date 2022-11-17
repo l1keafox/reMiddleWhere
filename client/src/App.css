@@ -11,6 +11,15 @@ body{
   }
 }
 
+@keyframes background-zoom{
+  from,to{
+    scale:1;
+  }
+  50%{
+    scale:2;
+  }
+}
+
 
 #landingBg{
   background-image: url("./pages/Landing/Berlin.png");
@@ -21,4 +30,22 @@ body{
   animation: background-pan 50s linear infinite;
   position: absolute;
   background-size: 150%;
+}
+
+#profileBg{
+  background-image: url("./pages/Profile/638c4d7244a4e55b68cb9829f6c0ab0c633d57ca.jpg");
+  height: 100vh;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  position: absolute;
+  animation: background-zoom 350s linear infinite;
+  z-index: -1;
+}
+
+#profileBgWrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }

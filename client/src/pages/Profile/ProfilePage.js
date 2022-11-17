@@ -6,6 +6,8 @@ import { QUERY_ME } from "./../../utils/queries";
 import { useQuery } from "@apollo/client";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
+import InfoCard from "./InfoCard";
+
 function ProfilePage(props) {
   const { existingUser } = useExistingUserContext();
   const { loading, data, startPolling, stopPolling } = useQuery(QUERY_ME, {
@@ -22,16 +24,17 @@ function ProfilePage(props) {
   useEffect(() => () => stopPolling(), []);
   
   return (
-    <div className="bg-green-300 dark:bg-green-800 h-screen">
+    <div>
       {loading ? (
         <div />
       ) : (
         <div>
-          <h1>Profiles Page</h1>
-          <h1> WHO AM I: {auth.getUser().data.username}</h1>
-          <h1> my id: {auth.getUser().data._id}</h1>
-          <h1> my email: {auth.getUser().data.email}</h1>
-          <div className="flex justify-center">
+        <div id="profileBgWrap"> 
+          <div id="profileBg" >
+          </div>
+        </div>
+          <InfoCard />
+          <div className="flex justify-center border-2 border-yellow-900">
             {data && data.me ? data.me.groups.map((group, index) => (
               <Paper className="w-1/4 p-3 m-3 hover:bg-slate-200" key={index}>
                 <h1> Group Name: {group.name} </h1>
