@@ -46,7 +46,9 @@ const CreateGroup = (props) => {
             alignItems: "center",
           }}
         >
-          <h1> Create Group</h1>
+          <h1 className="font-noto p-3 font-bold text-3xl"> Create Group</h1>
+          <p className="font-noto pb-3"> Please enter group name below to create group.</p>
+
           <TextField
             name="groupName"
             required
@@ -74,7 +76,17 @@ const CreateGroup = (props) => {
             onClick={handleFormSubmit}
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            Create Group
+          </Button>
+          <Button
+            // type="submit"
+            fullWidth
+            variant="contained"
+            color="error"
+            onClick={props.doClose}
+            sx={{ mb: 2 }}
+          >
+            Cancel
           </Button>
         </Box>
       </Container>

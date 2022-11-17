@@ -44,7 +44,8 @@ const JoinGroup = (props) => {
             alignItems: "center",
           }}
         >
-          <h1> Join Group</h1>
+          <h1 className="font-noto p-3 font-bold text-3xl"> Join Group</h1>
+          <p className="font-noto pb-3"> Please enter group name below to join group.</p>
           <TextField
             name="groupName"
             required
@@ -72,8 +73,19 @@ const JoinGroup = (props) => {
             onClick={handleFormSubmit}
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            Join Group
           </Button>
+          <Button
+            // type="submit"
+            fullWidth
+            variant="contained"
+            color="error"
+            onClick={props.doClose}
+            sx={{ mb: 2 }}
+          >
+            Cancel
+          </Button>
+
         </Box>
       </Container>
     </div>
