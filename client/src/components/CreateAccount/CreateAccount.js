@@ -135,6 +135,17 @@ function CreateAccount(props) {
             >
               Sign Up
             </Button>
+            <Button
+            // type="submit"
+            fullWidth
+            variant="contained"
+            color="error"
+            onClick={props.doClose}
+            sx={{ mb: 2 }}
+          >
+            Cancel
+          </Button>
+
             <Grid container justifyContent="flex-end">
               <Grid item>
                 {/* <Link href="#" variant="body2">
