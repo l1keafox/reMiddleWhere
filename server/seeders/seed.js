@@ -22,10 +22,9 @@ db.once("open", async () => {
     // console.log(groups);
     // console.log(location);
 
-    //assigning userId to location & location to user --> will be in user & location order
+    //assigning location to user --> will be in user & location order
     for (i = 0; i < location.length; i++) {
       users[i].locations = location[i];
-      location[i].userId = users[i]._id;
     }
 
     //assigning seed data
@@ -43,16 +42,9 @@ db.once("open", async () => {
       newUser.groups = tempGroup._id;
       await newUser.save();
     }
-
-    for (i = 0; i < location.length; i++) {
-      //assigning the groupId to match the group that the user belongs to (since seeded data has each user with only one location)
-      location[i].groupId = users[i].groups;
-    }
-
-    //ISSUE: seed data showing up correctly in console, but not in mongoDB Compass --> issue is with location, groupId shows empty array and userId shows null
     //console.log(users);
     // console.log(groups);
-    //console.log(location);
+    // console.log(location);
 
     console.log("Data seeded! 🌱");
     process.exit(0);

@@ -1,93 +1,54 @@
 [
   {
     "latitude": 39.870972,
-    "longitude": -105.033678,
-    "locationName": "Home",
-    "userId": null,
-    "groupId": []
+    "longitude": -105.033678
   },
   {
     "latitude": 39,
-    "longitude": -105.059101,
-    "locationName": "Work",
-    "userId": null,
-    "groupId": []
+    "longitude": -105.059101
   },
   {
     "latitude": 40.002068,
-    "longitude": -105.228129,
-    "locationName": "Home",
-    "userId": null,
-    "groupId": []
+    "longitude": -105.228129
   },
   {
     "latitude": 39.753628,
-    "longitude": -105.045856,
-    "locationName": "School",
-    "userId": null,
-    "groupId": []
+    "longitude": -105.045856
   },
   {
     "latitude": 39.828548,
-    "longitude": -105.030053,
-    "locationName": "Home",
-    "userId": null,
-    "groupId": []
+    "longitude": -105.030053
   },
   {
     "latitude": 39.797961,
-    "longitude": -104.976972,
-    "locationName": "Mom's House",
-    "userId": null,
-    "groupId": []
+    "longitude": -104.976972
   },
   {
     "latitude": 39.744657,
-    "longitude": -104.977659,
-    "locationName": "Dad's House",
-    "userId": null,
-    "groupId": []
+    "longitude": -104.977659
   },
   {
     "latitude": 39.746131,
-    "longitude": -105.040361,
-    "locationName": "Work",
-    "userId": null,
-    "groupId": []
+    "longitude": -105.040361
   },
   {
     "latitude": 39.705414,
-    "longitude": -104.924623,
-    "locationName": "Apartment",
-    "userId": null,
-    "groupId": []
+    "longitude": -104.924623
   },
   {
     "latitude": 39.675825,
-    "longitude": -10.976155,
-    "locationName": "Home",
-    "userId": null,
-    "groupId": []
+    "longitude": -10.976155
   },
   {
     "latitude": 39.72971,
-    "longitude": -104.8992,
-    "locationName": "Work",
-    "userId": null,
-    "groupId": []
+    "longitude": -104.8992
   },
   {
     "latitude": 39.69749,
-    "longitude": -105.036619,
-    "locationName": "Work",
-    "userId": null,
-    "groupId": []
+    "longitude": -105.036619
   },
   {
     "latitude": 39,
-    "longitude": -107.059101,
-    "locationName": "School",
-    "userId": null,
-    "groupId": []
+    "longitude": -107.059101
   }
 ]
