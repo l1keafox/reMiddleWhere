@@ -57,7 +57,7 @@ const resolvers = {
       //returning just the user locations array
       const userLocations = groupData.userLocations;
 
-      return {userLocations, groupId};
+      return { userLocations, groupId };
     },
   },
 
@@ -185,8 +185,29 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    //NEXT: add mutation to update/create center location for the group -- will be used in the calculation file to update the center location in db
-    updateCenterPoint: 
+    //updating the center location for a group
+    updateCenterPoint: async (
+      parent,
+      { groupId, centerLatitude, centerLongitude }
+    ) => {
+      //deleting the existing center location
+      const group = await Group.findOneAndUpdate(
+        {
+          _id: groupId,
+        },
+        {
+          $set: {
+            centerLatitude: centerLatitude,
+            centerLongitude: centerLongitude,
+          },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+      return group;
+    },
   },
 };
 module.exports = resolvers;
