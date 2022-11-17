@@ -2,118 +2,66 @@
   {
     "username": "Dog",
     "email": "dog@email.com",
-    "location": {
-      "type": "Point",
-      "coordinates": [-105.033678, 39.870972]
-    },
     "password": "dogdog"
   },
   {
     "username": "Cat",
     "email": "cat@email.com",
-    "location": {
-      "type": "Point",
-      "coordinates": [-105.059101, 39]
-    },
     "password": "catcat"
   },
   {
     "username": "Hamster",
     "email": "hamster@email.com",
-    "location": {
-      "type": "Point",
-      "coordinates": [-105.228129, 40.002068]
-    },
     "password": "hamham"
   },
   {
     "username": "Chef",
     "email": "chef@email.com",
-    "location": {
-      "type": "Point",
-      "coordinates": [-105.045856, 39.753628]
-    },
     "password": "sirloin"
   },
   {
     "username": "Bartender",
     "email": "bartender@email.com",
-    "location": {
-      "type": "Point",
-      "coordinates": [-105.030053, 39.828548]
-    },
     "password": "maitai"
   },
   {
     "username": "DeliveryMan",
     "email": "deliveryman@email.com",
-    "location": {
-      "type": "Point",
-      "coordinates": [-104.976972, 39.797961]
-    },
     "password": "grubhub"
   },
   {
     "username": "Waiter",
     "email": "waiter@email.com",
-    "location": {
-      "type": "Point",
-      "coordinates": [-104.977659, 39.744657]
-    },
     "password": "appetizers"
   },
   {
     "username": "Swimmer",
     "email": "swimmer@email.com",
-    "location": {
-      "type": "Point",
-      "coordinates": [-105.040361, 39.746131]
-    },
     "password": "dolphin"
   },
   {
     "username": "Runner",
     "email": "runner@email.com",
-    "location": {
-      "type": "Point",
-      "coordinates": [-104.924623, 39.705414]
-    },
     "password": "fastfeet"
   },
   {
     "username": "Biker",
     "email": "biker@email.com",
-    "location": {
-      "type": "Point",
-      "coordinates": [-104.976155, 39.675825]
-    },
     "password": "tourdefrance"
   },
   {
     "username": "Snowboarder",
     "email": "snowboarder@email.com",
-    "location": {
-      "type": "Point",
-      "coordinates": [-104.8992, 39.72971]
-    },
     "password": "shredder"
   },
   {
     "username": "Gymnast",
     "email": "gymnast@email.com",
-    "location": {
-      "type": "Point",
-      "coordinates": [-105.036619, 39.69749]
-    },
     "password": "flippydoodah"
   },
   {
     "username": "test",
     "email": "test@email.com",
-    "location": {
-      "type": "Point",
-      "coordinates": [-107.059101, 39]
-    },
     "password": "testtest"
   }
 ]

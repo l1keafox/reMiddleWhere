@@ -2,7 +2,7 @@ const { AuthenticationError } = require("apollo-server-express");
 const { User, Group } = require("../models");
 const { GraphQLScalarType, Kind } = require("graphql");
 const { signToken } = require("../utils/auth");
-const {GraphQLJSONObject}  = require('graphql-type-json');
+const { GraphQLJSONObject } = require("graphql-type-json");
 //this is a custom decoding strategy for dealing with dates.
 const dateScalar = new GraphQLScalarType({
   name: "Date",
@@ -48,7 +48,20 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    //query specifically to return all the user locations in a group to be used in calculations
+    allGroupUserLocations: async (parent, { groupId }) => {
+      //retrieving all of the group's data
+      const groupData = await Group.findById({ _id: groupId }).populate(
+        "userLocations"
+      );
+      //returning just the user locations array
+      const userLocations = groupData.userLocations;
+
+      return { userLocations, groupId };
+    },
   },
+
+  //NEXT: add mutation to update / add user location in the group -- will need to update groupId location array in User model, and update the locationId in userLocations in the group model
 
   Mutation: {
     login: async (parent, { username, password }) => {
@@ -94,15 +107,15 @@ const resolvers = {
     createGroup: async (parent, { name }, context) => {
       console.log("creating group by:", name, "By user: ", context.user);
       if (context.user) {
-        console.log('creating group');
+        console.log("creating group");
         const group = await Group.create({ name });
 
-        console.log('Adding group to user ID',group.name );
+        console.log("Adding group to user ID", group.name);
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { groups: group._id } }
         );
-        console.log('Adding User to Group ID');
+        console.log("Adding User to Group ID");
 
         await Group.findOneAndUpdate(
           { _id: group._id },
@@ -171,6 +184,29 @@ const resolvers = {
         return { user, group };
       }
       throw new AuthenticationError("You need to be logged in!");
+    },
+    //updating the center location for a group
+    updateCenterPoint: async (
+      parent,
+      { groupId, centerLatitude, centerLongitude }
+    ) => {
+      //deleting the existing center location
+      const group = await Group.findOneAndUpdate(
+        {
+          _id: groupId,
+        },
+        {
+          $set: {
+            centerLatitude: centerLatitude,
+            centerLongitude: centerLongitude,
+          },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+      return group;
     },
   },
 };

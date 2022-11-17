@@ -55,6 +55,12 @@ const userSchema = new Schema(
     //   },
     // },
 
+    locations: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Location"
+      }
+    ],
     isAdmin: {
       type: Boolean,
       required: true,

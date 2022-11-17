@@ -1,5 +1,5 @@
 const { gql } = require("apollo-server-express");
-const { User, Group } = require("./../models");
+const { User, Group, Location } = require("./../models");
 
 const typeDefs = gql`
   scalar Date
@@ -10,14 +10,25 @@ const typeDefs = gql`
     email: String
     friends: [User]
     groups: [Group]
+    locations: [Location]
   }
 
+  type Location {
+    _id: ID
+    latitude: Float!
+    longitude: Float!
+    locationName: String!
+    userId: [User]
+    groupId: [Group]
+  }
 
   type Group {
     _id: ID
     name: String
     users: [User]
-    location: [JSONObject]
+    centerLatitude: Float
+    centerLongitude: Float
+    userLocations: [Location]
   }
 
   type Auth {
@@ -30,7 +41,9 @@ const typeDefs = gql`
     groups: [Group]
     group(groupId: ID!): Group
     me: User
+    allGroupUserLocations(groupId: ID!): Group
   }
+
   type Mutation {
     login(username: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
@@ -38,7 +51,17 @@ const typeDefs = gql`
     createGroup(name: String!): Group
     leaveGroup(groupId: ID!): Group
     addFriend(userId: ID!): User
-    addUserLocationToGroup(userId: ID!, groupId: ID!, latitude: Int!, longitude:Int! ):Group
+    addUserLocationToGroup(
+      userId: ID!
+      groupId: ID!
+      latitude: Int!
+      longitude: Int!
+    ): Group
+    updateCenterPoint(
+      groupId: ID!
+      centerLatitude: Float!
+      centerLongitude: Float!
+    ): Group
   }
 `;
 module.exports = typeDefs;
