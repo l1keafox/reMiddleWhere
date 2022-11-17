@@ -13,10 +13,10 @@ body{
 
 @keyframes background-zoom{
   from,to{
-    scale:1;
+    background-size: 125%;
   }
   50%{
-    scale:2;
+    background-size: 100%;
   }
 }
 
@@ -39,7 +39,7 @@ body{
   top: 0px;
   left: 0px;
   position: absolute;
-  animation: background-zoom 350s linear infinite;
+  animation: background-zoom 150s linear infinite;
   z-index: -1;
 }
 
@@ -50,3 +50,19 @@ body{
   overflow: hidden;
 }
 
+
+#groupCards{
+  background-color: rgb(240, 240,240);
+  transition: all .2s ease-in-out;
+}
+
+#groupCards:hover{
+  transform: scale(1.05);
+}
+
+#cardButton{
+  background-color: rgb(200, 200,200);
+}
+#cardButton:hover{
+  background-color: rgb(150, 150,150);
+}
