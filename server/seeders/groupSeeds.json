@@ -20,8 +20,8 @@
   {
     "name": "Athletes",
     "description": "Finding the best place to watch the big game",
-    "centerLatitude": -39.870972,
-    "centerLongitude": 105.1,
+    "centerLatitude": 40.683123,
+    "centerLongitude":  -73.973721,
     "password": "athletes",
     "users": [],
     "userLocations": []
