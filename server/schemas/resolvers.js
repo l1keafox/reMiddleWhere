@@ -161,7 +161,8 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    addUserLocationToGroup: async (parent, { userId, groupId }, context) => {
+    addUserLocationToGroup: async (parent, { userId, groupId, latitude,longitude}, context) => {
+      console.log("DOES IT EVEN COME HERE FOR ERROR? 400?",context.user);
       if (context.user) {
         const user = User.findOneAndUpdate(
           { _id: userId },

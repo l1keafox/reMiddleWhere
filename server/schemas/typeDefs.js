@@ -51,8 +51,8 @@ const typeDefs = gql`
     addUserLocationToGroup(
       userId: ID!
       groupId: ID!
-      latitude: Int!
-      longitude: Int!
+      latitude: Float!
+      longitude: Float!
     ): Group
     updateCenterPoint(
       groupId: ID!
