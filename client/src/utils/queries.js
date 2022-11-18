@@ -2,30 +2,36 @@ import { gql } from "@apollo/client";
 
 
 export const QUERY_ME = gql`
-  query Me {
-    me {
-      groups {
-        name
-        _id
-        users {
-          username
-        }
-      }
-      friends {
+query Me {
+  me {
+    username
+    email
+    groups {
+      centerLatitude
+      centerLongitude
+      name
+      _id
+      users {
         username
       }
     }
   }
-`;
+}`;
 
 export const QUERY_GROUP = gql`
-query Query($groupId: ID!) {
+query Group($groupId: ID!) {
   group(groupId: $groupId) {
+    _id
     name
     users {
       username
     }
-    _id
+    centerLatitude
+    centerLongitude
+    userLocations {
+      latitude
+      longitude
+    }
   }
 }
 `;

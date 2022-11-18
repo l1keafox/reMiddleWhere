@@ -29,6 +29,7 @@
   "dependencies": {
     "apollo-server-express": "^3.10.3",
     "concurrently": "^7.4.0",
+    "dotenv": "^16.0.3",
     "jsonwebtoken": "^8.5.1"
   }
 }

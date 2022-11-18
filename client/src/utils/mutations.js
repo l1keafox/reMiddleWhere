@@ -50,13 +50,22 @@ mutation JoinGroup($name: String!) {
  `;
 
  export const ADD_LOCATION_TO_GROUP = gql`
- mutation Mutation($userId: ID!, $groupId: ID!, $latitude: Int!, $longitude: Int!) {
+ mutation Mutation($userId: ID!, $groupId: ID!, $latitude: Float!, $longitude: Float!) {
 	addUserLocationToGroup(userId: $userId, groupId: $groupId, latitude: $latitude, longitude: $longitude) {
-	  _id
+	  name
+	  centerLongitude
+	  centerLatitude
+	}
+  }  `;
+
+
+  export const LEAVE_GROUP = gql`
+  mutation Mutation($groupId: ID!) {
+	leaveGroup(groupId: $groupId) {
 	  name
 	  users {
 		username
 	  }
 	}
-  } `
-
+  } 
+  `;
