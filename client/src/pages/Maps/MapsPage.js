@@ -28,18 +28,15 @@ const MapsPage = function (props) {
   //   lat: -3.745,
   //   lng: -38.523
   // };
-  console.log("MAP?",data,groupId);
-
+  console.log("MAP PAGE DATA:::",data,groupId);
   useEffect(() => {
     if (data) {
-      console.log(data, "Map pages");
       setCenter({
         ...center,
         "lat": data.group.centerLatitude,
         "lng": data.group.centerLongitude
         });
-        console.log(center,"CTR?");
-    }
+      }
   }, [data]);
 
   function upDatePos(){
@@ -55,7 +52,6 @@ const MapsPage = function (props) {
         variables: { userId , groupId,latitude, longitude },
       });
       console.log(error );
-      console.log(data ,"DATA?");
      });
   };
 
@@ -67,7 +63,6 @@ const MapsPage = function (props) {
       });
       // We should also go back to profile page from here.
       props.changeStage("profile");
-      console.log(data);
   };
 //console.log(process.env.REACT_APP_GMAPS_API, "AIzaSyDOxXYVOWPzgQcdB8Zc8KTR-P92C8A-K2Y" , process.env.REACT_APP_GMAPS_API === "AIzaSyDOxXYVOWPzgQcdB8Zc8KTR-P92C8A-K2Y");
 
@@ -76,8 +71,8 @@ const MapsPage = function (props) {
       MapsPage
       <h2> GROUP NAME: {data.group.name}</h2>
       {data.group.users.map( (e,index) => (
-        <div key= {index}> {e.name} </div>
-      ) )}
+        <div key= {index}> {e.username} </div>
+      ) ) }
       {center? 
       <div> 
       <LoadScript
@@ -94,6 +89,15 @@ const MapsPage = function (props) {
       </LoadScript>
       <button className="bg-green-300" onClick={upDatePos}> Load User Data </button>
       <button className="bg-red-300" onClick={leaveGroupClick}> Leave Group </button>
+      <ol>
+        {
+
+        }
+        <li>
+
+        </li>
+      </ol>
+
       </div>
       : <div/>}
     </div>
