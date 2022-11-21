@@ -64,6 +64,7 @@ const typeDefs = gql`
       centerLongitude: Float!
     ): Group
     updateLocation(
+      userId: ID!
       latitude: Float!
       longitude: Float!
       locationName: String

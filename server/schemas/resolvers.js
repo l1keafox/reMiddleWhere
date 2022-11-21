@@ -218,26 +218,33 @@ const resolvers = {
       context
     ) => {
       if (context.user) {
-        const user = User.findOneAndUpdate({ _id: userId });
-      }
-      const location = await Location.findOneAndUpdate(
-        {
-          locationName: locationName,
-        },
-        {
-          $set: {
-            latitude: latitude,
-            longitude: longitude,
+        const user = User.findOneAndUpdate(
+          { _id: userId },
+          {
+            $addToSet: {
+              location: context.user.location,
+            },
+          }
+        );
+        const location = await Location.findOneAndUpdate(
+          {
             locationName: locationName,
-            parentId: parentId,
           },
-        },
-        {
-          new: true,
-          runValidators: true,
-        }
-      );
-      return { user, location };
+          {
+            $set: {
+              latitude: latitude,
+              longitude: longitude,
+              locationName: locationName,
+              parentId: parentId,
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+        return { user, location };
+      }
     },
   },
 };
