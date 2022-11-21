@@ -63,6 +63,12 @@ const typeDefs = gql`
       centerLatitude: Float!
       centerLongitude: Float!
     ): Group
+    updateLocation(
+      latitude: Float!
+      longitude: Float!
+      locationName: String
+      parentId: ID
+    ): Group
   }
 `;
 module.exports = typeDefs;

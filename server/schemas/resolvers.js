@@ -214,8 +214,12 @@ const resolvers = {
     },
     updateLocation: async (
       parent,
-      { latitude, longitude, locationName, parentId }
+      { latitude, longitude, locationName, parentId },
+      context
     ) => {
+      if (context.user) {
+        const user = User.findOneAndUpdate({ _id: userId });
+      }
       const location = await Location.findOneAndUpdate(
         {
           locationName: locationName,
@@ -233,7 +237,7 @@ const resolvers = {
           runValidators: true,
         }
       );
-      return location;
+      return { user, location };
     },
   },
 };
