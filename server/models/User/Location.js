@@ -11,22 +11,26 @@ const locationSchema = new Schema({
     type: Number,
     required: true,
   },
-//   locationName: {
-//     type: String,
-//     trim: true,
-//     required: true,
-//   },
-//   userId: {
-//     type: Schema.Types.ObjectId,
-//     ref: "User",
-//     //required: true
-//   },
-//   groupId: [
-//     {
-//       type: Schema.Types.ObjectId,
-//       ref: "Group",
-//     },
-//   ],
+  locationName: {
+    type: String,
+    trim: true,
+    required: false,
+  },
+  parentId: {
+    type: Schema.Types.ObjectId,
+    required: false,
+  },
+  //   userId: {
+  //     type: Schema.Types.ObjectId,
+  //     ref: "User",
+  //     //required: true
+  //   },
+  //   groupId: [
+  //     {
+  //       type: Schema.Types.ObjectId,
+  //       ref: "Group",
+  //     },
+  //   ],
 });
 
 const Location = model("Location", locationSchema);

@@ -212,6 +212,29 @@ const resolvers = {
       );
       return group;
     },
+    updateLocation: async (
+      parent,
+      { latitude, longitude, locationName, parentId }
+    ) => {
+      const location = await Location.findOneAndUpdate(
+        {
+          locationName: locationName,
+        },
+        {
+          $set: {
+            latitude: latitude,
+            longitude: longitude,
+            locationName: locationName,
+            parentId: parentId,
+          },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+      return location;
+    },
   },
 };
 module.exports = resolvers;

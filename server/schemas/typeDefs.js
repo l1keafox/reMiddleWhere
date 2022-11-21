@@ -17,6 +17,8 @@ const typeDefs = gql`
     _id: ID
     latitude: Float!
     longitude: Float!
+    locationName: String
+    parentId: ID
   }
 
   type Group {
@@ -53,6 +55,8 @@ const typeDefs = gql`
       groupId: ID!
       latitude: Float!
       longitude: Float!
+      locationName: String
+      parentId: ID
     ): Group
     updateCenterPoint(
       groupId: ID!
