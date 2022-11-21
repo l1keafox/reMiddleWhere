@@ -36,14 +36,18 @@ const resolvers = {
       return Group.find();
     },
     group: async (parent, { groupId }) => {
-      let retn = await Group.findById({ _id: groupId }).populate("users").populate("userLocations");
+      let retn = await Group.findById({ _id: groupId })
+        .populate("users")
+        .populate("userLocations");
       return retn;
     },
 
     //returns the current user id, must be logged in for it to work.
     me: async (parent, args, context) => {
       if (context.user) {
-        const user = await User.findOne({ _id: context.user._id }).populate("groups");
+        const user = await User.findOne({ _id: context.user._id }).populate(
+          "groups"
+        );
         return user;
       }
       throw new AuthenticationError("You need to be logged in!");
@@ -79,7 +83,6 @@ const resolvers = {
       console.log(user, "token?");
       const token = signToken(user);
       return { token, user };
-      
     },
     //adds a user to the database, used on signup.
     addUser: async (parent, { username, email, password }) => {
@@ -129,18 +132,12 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
     leaveGroup: async (parent, { groupId }, context) => {
-      console.log("LEAVE GROUP?? WORKING?",context.user);
+      console.log("LEAVE GROUP?? WORKING?", context.user);
       if (context.user) {
-        const group = await Group.findOneAndDelete({
-          _id: groupId,
-        });
-
-        await User.findOneAndUpdate(
+        return User.findOneAndUpdate(
           { _id: context.user._id },
           { $pull: { groups: group._id } }
         );
-
-        return group;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -161,8 +158,12 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    addUserLocationToGroup: async (parent, { userId, groupId, latitude,longitude}, context) => {
-      console.log("DOES IT EVEN COME HERE FOR ERROR? 400?",context.user);
+    addUserLocationToGroup: async (
+      parent,
+      { userId, groupId, latitude, longitude },
+      context
+    ) => {
+      console.log("DOES IT EVEN COME HERE FOR ERROR? 400?", context.user);
       if (context.user) {
         const user = User.findOneAndUpdate(
           { _id: userId },
