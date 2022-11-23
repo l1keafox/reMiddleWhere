@@ -40,10 +40,7 @@ function ProfilePage(props) {
                 <div> 
                 <h1 className="text-xl text-center bg-slate-200"> {group.name} </h1>
                 <h1> {group._id} </h1>
-                <h1> Users : </h1>
-                {group.users.map((user, index2) => (
-                  <h2 key={index2} className="text-center"> user:{user.username} </h2>
-                ))}
+                <h1> # of Users : {group.users.length}</h1>
                 <h2> Lat : {group.centerLatitude}</h2>
                 <h2> Long : {group.centerLongitude}</h2>
                   </div>
