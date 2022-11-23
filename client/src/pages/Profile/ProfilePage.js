@@ -10,10 +10,18 @@ import InfoCard from "./InfoCard";
 
 function ProfilePage(props) {
   const { existingUser } = useExistingUserContext();
-  const { loading, data, startPolling, stopPolling } = useQuery(QUERY_ME, {
-    pollInterval: 500,
-  });
-  console.log("PROFILE PAGE", auth.getUser().data, data, loading);
+
+  //getting decoded data from JWT to pass to me query - this will show maps with seeded data so you don't have to create or join a group to see the map button
+  const decodedToken = auth.getUser(); //{data:...{_id:...}}
+
+  //added variables (userId) to be passed to the query to return needed user data
+  const { loading, data, startPolling, stopPolling } = useQuery(QUERY_ME,
+    { variables: { userId: decodedToken.data._id } },
+    {
+      pollInterval: 500,
+    });
+    
+  // console.log("PROFILE PAGE", auth.getUser().data, data, loading);
 
   useEffect(() => {
     startPolling(500);
