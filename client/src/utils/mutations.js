@@ -45,6 +45,7 @@ export const JOIN_GROUP = gql`
 mutation JoinGroup($name: String!) {
 	joinGroup(name: $name) {
 	  name
+	  _id
 	}
   }
  `;

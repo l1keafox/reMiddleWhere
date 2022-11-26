@@ -16,7 +16,7 @@ const JoinGroup = (props) => {
       const { data } = await joinGroup({
         variables: { name },
       });
-
+      props.mapSelect(data.joinGroup._id)
     } catch (e) {
       console.error(e);
     }
