@@ -3,7 +3,7 @@ import { QUERY_GROUP } from "../../utils/queries";
 import { useQuery, useMutation } from "@apollo/client";
 import { ADD_LOCATION_TO_GROUP, LEAVE_GROUP } from "../../utils/mutations";
 import auth from "../../utils/auth";
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 const MapsPage = function (props) {
   // console.log(ADD_LOCATION_TO_GROUP);
@@ -14,6 +14,8 @@ const MapsPage = function (props) {
 
   const [center, setCenter] = useState({});
   const google = window.google;
+  const image =
+  "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";  
   let groupId = props.groupId;
   const { loading, data } = useQuery(QUERY_GROUP, {
     variables: { groupId },
@@ -108,6 +110,7 @@ const MapsPage = function (props) {
               zoom={10}
             >
               {/* Child components, such as markers, info windows, etc. */}
+              <Marker position={center}  icon={image}/>
             </GoogleMap>
           </LoadScript>
           </div> 
