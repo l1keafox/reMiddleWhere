@@ -40,7 +40,7 @@ const MapsPage = function (props) {
       });
     }
   }, [data]);
-
+  
   function upDatePos() {
     console.log("doing update");
     navigator.geolocation.getCurrentPosition(async (position) => {
@@ -76,8 +76,9 @@ const MapsPage = function (props) {
       {center ? (
         <div className="flex  justify-center">
 
-          <div className="border-2 border-blue-500 flex flex-col p-3 w-1/5"> 
-            <h2 className="font-bold text-3xl"> User:  </h2>
+          <div className="border-2 border-blue-500 bg-stone-200 flex flex-col p-3 w-1/5"> 
+          <hr/>
+            <h2 className="font-bold text-3xl"> User: {auth.getUser().data.username}  </h2>
             <hr/>
             <br/>
             <h3> LATITUDE : </h3>
@@ -93,7 +94,7 @@ const MapsPage = function (props) {
             </div> 
             <br/>
             <hr/>
-            <h2 className="font-bold text-3xl">Group Members</h2> 
+            <h2 className="font-bold text-3xl"> { data.group.name } Members</h2> 
             <hr/>
 
             {data.group.users.map((e, index) => (
@@ -108,9 +109,14 @@ const MapsPage = function (props) {
               mapContainerStyle={containerStyle}
               center={center}
               zoom={10}
+              id="centerMap"
             >
               {/* Child components, such as markers, info windows, etc. */}
               <Marker position={center}  icon={image}/>
+              {data.group.userLocations.map((e, index) => (
+                <Marker position={{lat: e.latitude,lng: e.longitude}}/>
+              ))}
+
             </GoogleMap>
           </LoadScript>
           </div> 
