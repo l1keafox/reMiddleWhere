@@ -85,10 +85,10 @@ const MapsPage = function (props) {
             <h3> LONGITUDE : </h3>
             <br/>
             <div className="flex justify-evenly"> 
-            <button className="bg-green-300" onClick={upDatePos}>
+            <button className="bg-green-300 p-2 border-2 border-green-700 hover:bg-green-700" onClick={upDatePos}>
               Load User Data
             </button>
-            <button className="bg-red-300" onClick={leaveGroupClick}>
+            <button className="bg-red-300  p-2 border-2 border-red-700 hover:bg-red-700" onClick={leaveGroupClick}>
               Leave Group
             </button>
             </div> 
@@ -112,7 +112,7 @@ const MapsPage = function (props) {
               id="centerMap"
             >
               {/* Child components, such as markers, info windows, etc. */}
-              
+
               <Marker position={center}  icon={image} title="Center Point"/>
               {data.group.userLocations.map((e, index) => (
                 <Marker position={{lat: e.latitude,lng: e.longitude}} key={index} title={"one"+index}/>
