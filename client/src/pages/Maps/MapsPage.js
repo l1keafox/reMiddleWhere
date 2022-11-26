@@ -112,6 +112,7 @@ const MapsPage = function (props) {
               id="centerMap"
             >
               {/* Child components, such as markers, info windows, etc. */}
+              
               <Marker position={center}  icon={image} title="Center Point"/>
               {data.group.userLocations.map((e, index) => (
                 <Marker position={{lat: e.latitude,lng: e.longitude}} key={index} title={"one"+index}/>
