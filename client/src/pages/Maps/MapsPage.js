@@ -70,20 +70,37 @@ const MapsPage = function (props) {
     <div> Loading </div>
   ) : (
     <div className = "container">
-      <h1 className ="text-4xl flex text-center justify-center"> {data.group.name}</h1>
+      <h1 className ="text-4xl flex text-center justify-center pb-3 font-bold"> {data.group.name}</h1>
       {center ? (
         <div className="flex  justify-center">
 
-          <div className="border-2 border-blue-500"> 
-          <button className="bg-green-300" onClick={upDatePos}>
-            Load User Data
-          </button>
-          <button className="bg-red-300" onClick={leaveGroupClick}>
-            Leave Group
-          </button>
+          <div className="border-2 border-blue-500 flex flex-col p-3 w-1/5"> 
+            <h2 className="font-bold text-3xl"> User:  </h2>
+            <hr/>
+            <br/>
+            <h3> LATITUDE : </h3>
+            <h3> LONGITUDE : </h3>
+            <br/>
+            <div className="flex justify-evenly"> 
+            <button className="bg-green-300" onClick={upDatePos}>
+              Load User Data
+            </button>
+            <button className="bg-red-300" onClick={leaveGroupClick}>
+              Leave Group
+            </button>
+            </div> 
+            <br/>
+            <hr/>
+            <h2 className="font-bold text-3xl">Group Members</h2> 
+            <hr/>
+
+            {data.group.users.map((e, index) => (
+            <div key={index}> {e.username} </div>
+            ))}
+
           </div>
 
-          <div className="border-2 border-blue-500"> 
+          <div className="w-1/3 flex items-center justify-center"> 
           <LoadScript googleMapsApiKey={process.env.REACT_APP_GMAPS_API}>
             <GoogleMap
               mapContainerStyle={containerStyle}
@@ -95,10 +112,8 @@ const MapsPage = function (props) {
           </LoadScript>
           </div> 
 
-          <div className="border-2 border-blue-500"> 
-          {data.group.users.map((e, index) => (
-          <div key={index}> {e.username} </div>
-          ))}
+          <div className="border-2 border-blue-500 p-3  w-1/5"> 
+              <h1>Chat Window</h1> 
           </div> 
         </div>
       ) : (
