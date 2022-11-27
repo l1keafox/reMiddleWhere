@@ -63,8 +63,10 @@ function App() {
     setLoading(true);
     if (auth.loggedIn()) {
       setStage(Pages.profile);
+    } else {
+      console.log('Token invald?');
     }
-  }, []);
+  }, []); 
 
   function changeStage(nextStage) {
     console.log(" APP://Change stage", nextStage);
