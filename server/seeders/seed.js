@@ -18,31 +18,31 @@ db.once("open", async () => {
     // let groups = await Group.find();
     // let location = await Location.find();
 
-    // console.log(users);
-    // console.log(groups);
-    // console.log(location);
-
-    //assigning location to user --> will be in user & location order
+    //assigning location to user & user to location --> will be in user & location order
     for (i = 0; i < location.length; i++) {
+      location[i].userId = users[i]._id;
+      //NEED to use .save() method to get the userId to be shown/saved in location document
+      location[i].save();
       users[i].locations = location[i];
     }
 
     //assigning seed data
     for (newUser of users) {
-      //adding users & locations to group
+      //getting random group for assigning
       let tempGroup = groups[Math.floor(Math.random() * groups.length)];
 
-      //allows the id's to be matching between user and group
+      //allows the location & user id's to be matching between user and group
       tempGroup.users.push(newUser._id);
       tempGroup.userLocations.push(newUser.locations);
       await tempGroup.save();
 
+      // const tempUser = users[Math.floor(Math.random() * users.length)];
+      
       //adding group to users
-      const tempUser = users[Math.floor(Math.random() * users.length)];
       newUser.groups = tempGroup._id;
       await newUser.save();
     }
-    //console.log(users);
+    // console.log(users);
     // console.log(groups);
     // console.log(location);
 

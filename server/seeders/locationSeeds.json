@@ -1,54 +1,67 @@
 [
   {
     "latitude": 39.870972,
-    "longitude": -105.033678
+    "longitude": -105.033678,
+    "userId": null
   },
   {
     "latitude": 39,
-    "longitude": -105.059101
+    "longitude": -105.059101,
+    "userId": null
   },
   {
     "latitude": 40.002068,
-    "longitude": -105.228129
+    "longitude": -105.228129,
+    "userId": null
   },
   {
     "latitude": 39.753628,
-    "longitude": -105.045856
+    "longitude": -105.045856,
+    "userId": null
   },
   {
     "latitude": 39.828548,
-    "longitude": -105.030053
+    "longitude": -105.030053,
+    "userId": null
   },
   {
     "latitude": 39.797961,
-    "longitude": -104.976972
+    "longitude": -104.976972,
+    "userId": null
   },
   {
     "latitude": 39.744657,
-    "longitude": -104.977659
+    "longitude": -104.977659,
+    "userId": null
   },
   {
     "latitude": 39.746131,
-    "longitude": -105.040361
+    "longitude": -105.040361,
+    "userId": null
   },
   {
     "latitude": 39.705414,
-    "longitude": -104.924623
+    "longitude": -104.924623,
+    "userId": null
   },
   {
     "latitude": 39.675825,
-    "longitude": -10.976155
+    "longitude": -10.976155,
+    "userId": null
   },
   {
     "latitude": 39.72971,
-    "longitude": -104.8992
+    "longitude": -104.8992,
+    "userId": null
   },
   {
     "latitude": 39.69749,
-    "longitude": -105.036619
+    "longitude": -105.036619,
+    "userId": null
   },
   {
     "latitude": 39,
-    "longitude": -107.059101
+    "longitude": -107.059101,
+    "userId": null
   }
 ]
