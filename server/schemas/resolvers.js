@@ -109,8 +109,9 @@ const resolvers = {
         { $addToSet: { users: user._id } }
       );
 
-      const token = signToken(group);
-      return { user, token, group };
+      // const token = signToken(group);
+      // return { user, token, group };
+      return group;
     },
     createGroup: async (parent, { name }, context) => {
       console.log("creating group by:", name, "By user: ", context.user);
@@ -130,8 +131,9 @@ const resolvers = {
           { $addToSet: { users: user._id } }
         );
 
-        const token = signToken(group);
-        return { user, token, group };
+        // const token = signToken(group);
+        // return { user, token, group };
+        return group;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
