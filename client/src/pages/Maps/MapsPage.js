@@ -38,6 +38,7 @@ const MapsPage = function (props) {
         lat: data.group.centerLatitude,
         lng: data.group.centerLongitude,
       });
+      console.log("CENTER LOCATION IS:",center);
     }
   }, [data]);
   
@@ -105,6 +106,7 @@ const MapsPage = function (props) {
 
           <div className=" sm:w-1/3 flex items-center justify-center"> 
           <LoadScript googleMapsApiKey={process.env.REACT_APP_GMAPS_API}>
+            {center.lat ? 
             <GoogleMap
               mapContainerStyle={containerStyle}
               center={center}
@@ -118,7 +120,8 @@ const MapsPage = function (props) {
                 <Marker position={{lat: e.latitude,lng: e.longitude}} key={index} title={"one"+index}/>
               ))}
 
-            </GoogleMap>
+            </GoogleMap> 
+            : <div className="text-3xl font-bold"> NEEDS CENTER LOCATION </div> }
           </LoadScript>
           </div> 
 
