@@ -2,66 +2,66 @@
   {
     "latitude": 39.870972,
     "longitude": -105.033678,
-    "userId": null
+    "locationName": "Dog"
   },
   {
     "latitude": 39,
     "longitude": -105.059101,
-    "userId": null
+    "locationName": "Cat"
   },
   {
     "latitude": 40.002068,
     "longitude": -105.228129,
-    "userId": null
+    "locationName": "Hamster"
   },
   {
     "latitude": 39.753628,
     "longitude": -105.045856,
-    "userId": null
+    "locationName": "Chef"
   },
   {
     "latitude": 39.828548,
     "longitude": -105.030053,
-    "userId": null
+    "locationName": "Bartender"
   },
   {
     "latitude": 39.797961,
     "longitude": -104.976972,
-    "userId": null
+    "locationName": "DeliveryMan"
   },
   {
     "latitude": 39.744657,
     "longitude": -104.977659,
-    "userId": null
+    "locationName": "Waiter"
   },
   {
     "latitude": 39.746131,
     "longitude": -105.040361,
-    "userId": null
+    "locationName": "Swimmer"
   },
   {
     "latitude": 39.705414,
     "longitude": -104.924623,
-    "userId": null
+    "locationName": "Runner"
   },
   {
     "latitude": 39.675825,
     "longitude": -10.976155,
-    "userId": null
+    "locationName": "Biker"
   },
   {
     "latitude": 39.72971,
     "longitude": -104.8992,
-    "userId": null
+    "locationName": "Snowboarder"
   },
   {
     "latitude": 39.69749,
     "longitude": -105.036619,
-    "userId": null
+    "locationName": "Gymnast"
   },
   {
     "latitude": 39,
     "longitude": -107.059101,
-    "userId": null
+    "locationName": "test"
   }
 ]
