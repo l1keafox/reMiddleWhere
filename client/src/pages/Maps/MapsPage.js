@@ -117,7 +117,7 @@ const MapsPage = function (props) {
 
               <Marker position={center}  icon={image} title="Center Point"/>
               {data.group.userLocations.map((e, index) => (
-                <Marker position={{lat: e.latitude,lng: e.longitude}} key={index} title={"one"+index}/>
+                <Marker position={{lat: e.latitude,lng: e.longitude}} key={index} title={e.locationName}/>
               ))}
 
             </GoogleMap> 

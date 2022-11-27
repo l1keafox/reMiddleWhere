@@ -31,6 +31,7 @@ query Group($groupId: ID!) {
     userLocations {
       latitude
       longitude
+      locationName
     }
   }
 }
