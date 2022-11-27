@@ -99,7 +99,7 @@ const MapsPage = function (props) {
             <hr/>
 
             {data.group.users.map((e, index) => (
-            <div key={index}>{index}:{e.username} </div>
+            <div key={index}>{e.username[0]+e.username[1]}:  {e.username} </div>
             ))}
 
           </div>
@@ -117,7 +117,7 @@ const MapsPage = function (props) {
 
               <Marker position={center}  icon={image} title="Center Point"/>
               {data.group.userLocations.map((e, index) => (
-                <Marker position={{lat: e.latitude,lng: e.longitude}} key={index} title={e.locationName} label={""+index}/>
+                <Marker position={{lat: e.latitude,lng: e.longitude}} key={index} title={e.locationName} label={ e.locationName[0]+e.locationName[1]}/>
               ))}
 
             </GoogleMap> 
