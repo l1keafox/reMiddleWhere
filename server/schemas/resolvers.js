@@ -166,26 +166,34 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    addUserLocationToGroup: async (parent, { groupId }, context) => {
-      console.log("Add User Location To Group: ", context.user);
+    addUserLocationToGroup: async (parent, { groupId, userId, latitude, longitude }, context) => {
+      console.log("Add User Location To Group: ", context.user, groupId, userId, latitude, longitude);
       if (context.user) {
-        let group = Group.findById(
-          { _id: groupId }.populate("userLocations"),
-          console.log(group.userLocations),
-          {
-            $addToSet: {
-              location: context.user.location,
-            },
-          },
-          {
-            new: true,
-            runValidators: true,
+        let group = await Group.findById(
+          { _id: groupId },
+        ).populate("userLocations");
+        
+        let foundUser = false;
+        for(let user of group.userLocations){
+          if (user.locationName === context.user.username){
+            user.latitude = latitude;
+            user.longitude = longitude; 
+            foundUser = true;
+            user.save();
+            break;
           }
-        );
-        return group;
+        }
+        
+        if(!foundUser){
+          // this where we add a location too the userLocation.
+          group.userLocations.push( locationObject(lat/long/locationName) )
+          group.userLocations.save();
+        }
+        return group; 
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+
     //updating the center location for a group
     updateCenterPoint: async (
       parent,
