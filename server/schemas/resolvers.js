@@ -42,16 +42,12 @@ const resolvers = {
       return retn;
     },
 
-   
-
     //returns the current user id, must be logged in for it to work.
     //userId is passed from JWT - look at ProfilePage.js
-    me: async (parent, {userId}, context) => {
+    me: async (parent, { userId }, context) => {
       //userId will return if user is logged in
       if (userId) {
-        const user = await User.findOne({ _id: userId}).populate(
-          "groups"
-        );
+        const user = await User.findOne({ _id: userId }).populate("groups");
         return user;
       }
       throw new AuthenticationError("You need to be logged in!");
@@ -170,23 +166,12 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    addUserLocationToGroup: async (
-      parent,
-      { userId, groupId, latitude, longitude },
-      context
-    ) => {
-      console.log("DOES IT EVEN COME HERE FOR ERROR? 400?", context.user);
+    addUserLocationToGroup: async (parent, { groupId }, context) => {
+      console.log("Add User Location To Group: ", context.user);
       if (context.user) {
-        const user = User.findOneAndUpdate(
-          { _id: userId },
-          {
-            $addToSet: {
-              location: context.user.location,
-            },
-          }
-        );
-        const group = Group.findOneAndUpdate(
-          { _id: groupId },
+        let group = Group.findById(
+          { _id: groupId }.populate("userLocations"),
+          console.log(group.userLocations),
           {
             $addToSet: {
               location: context.user.location,
@@ -197,7 +182,7 @@ const resolvers = {
             runValidators: true,
           }
         );
-        return { user, group };
+        return group;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
