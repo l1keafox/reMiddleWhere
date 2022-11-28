@@ -171,10 +171,20 @@ const resolvers = {
       { groupId, userId, latitude, longitude },
       context
     ) => {
-      console.log("Add User Location To Group: ", context.user);
+      console.log(
+        "Add User Location To Group: ",
+        context.user,
+        groupId,
+        userId,
+        latitude,
+        longitude
+      );
       if (context.user) {
-        let group = Group.findById({ _id: groupId }).populate("userLocations");
+        let group = await Group.findById({ _id: groupId }).populate(
+          "userLocations"
+        );
         console.log(group.userLocations, "Group?");
+
         let foundUser = false;
         for (let user of group.userLocations) {
           console.log(user.locationName, context.user.username);
