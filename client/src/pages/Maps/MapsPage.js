@@ -11,7 +11,7 @@ const MapsPage = function (props) {
     ADD_LOCATION_TO_GROUP
   );
   const [leaveGroup, { leaveError }] = useMutation(LEAVE_GROUP);
-
+  const [myPos,setMyPos]  = useState({});
   const [center, setCenter] = useState({});
   const google = window.google;
   const image =
@@ -38,7 +38,18 @@ const MapsPage = function (props) {
         lat: data.group.centerLatitude,
         lng: data.group.centerLongitude,
       });
-      console.log("CENTER LOCATION IS:",center);
+      console.log("CENTER LOCATION IS:",center,data.group.centerLatitude);
+
+      for(let location of data.group.userLocations){
+        if(location.locationName === auth.getUser().data.username){
+          setMyPos({
+            ...myPos,
+            latitude: location.latitude,
+            longitude: location.longitude,
+          });
+          console.log("Found my self:",myPos,location.latitude);
+        }
+      }
     }
   }, [data]);
   
@@ -81,9 +92,11 @@ const MapsPage = function (props) {
           <hr/>
             <h2 className="font-bold text-3xl"> User: {auth.getUser().data.username}  </h2>
             <hr/>
-            <br/>
-            <h3> LATITUDE : </h3>
-            <h3> LONGITUDE : </h3>
+            <h2>In {data.group.name} my location is:</h2> 
+
+            <h3> LATITUDE : {myPos.latitude}</h3>
+
+            <h3> LONGITUDE : {myPos.longitude}</h3>
             <br/>
             <div className="flex justify-evenly"> 
             <button className="bg-green-300 p-2 border-2 border-green-700 hover:bg-green-700" onClick={upDatePos}>
@@ -99,7 +112,7 @@ const MapsPage = function (props) {
             <hr/>
 
             {data.group.users.map((e, index) => (
-            <div key={index}> {e.username} </div>
+            <div key={index}>{e.username[0]+e.username[1]}:  {e.username} </div>
             ))}
 
           </div>
@@ -117,7 +130,7 @@ const MapsPage = function (props) {
 
               <Marker position={center}  icon={image} title="Center Point"/>
               {data.group.userLocations.map((e, index) => (
-                <Marker position={{lat: e.latitude,lng: e.longitude}} key={index} title={"one"+index}/>
+                <Marker position={{lat: e.latitude,lng: e.longitude}} key={index} title={e.locationName} label={ e.locationName[0]+e.locationName[1]}/>
               ))}
 
             </GoogleMap> 

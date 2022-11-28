@@ -17,6 +17,7 @@ const typeDefs = gql`
     _id: ID
     latitude: Float!
     longitude: Float!
+    locationName: String
   }
 
   type Group {
