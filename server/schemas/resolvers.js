@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Group } = require("../models");
+const { User, Group, Location } = require("../models");
 const { GraphQLScalarType, Kind } = require("graphql");
 const { signToken } = require("../utils/auth");
 const { GraphQLJSONObject } = require("graphql-type-json");
@@ -166,34 +166,43 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    addUserLocationToGroup: async (parent, { groupId, userId, latitude, longitude }, context) => {
-      console.log("Add User Location To Group: ", context.user, groupId, userId, latitude, longitude);
+    addUserLocationToGroup: async (
+      parent,
+      { groupId, userId, latitude, longitude },
+      context
+    ) => {
+      console.log("Add User Location To Group: ", context.user);
       if (context.user) {
-        let group = await Group.findById(
-          { _id: groupId },
-        ).populate("userLocations");
-        
+        let group = Group.findById({ _id: groupId }).populate("userLocations");
+        console.log(group.userLocations, "Group?");
         let foundUser = false;
-        for(let user of group.userLocations){
-          if (user.locationName === context.user.username){
+        for (let user of group.userLocations) {
+          console.log(user.locationName, context.user.username);
+          if (user.locationName === context.user.username) {
             user.latitude = latitude;
-            user.longitude = longitude; 
+            user.longitude = longitude;
             foundUser = true;
+            console.log(user, "FOUND");
             user.save();
             break;
           }
         }
-        
-        if(!foundUser){
-          // this where we add a location too the userLocation.
-          group.userLocations.push( locationObject(lat/long/locationName) )
+
+        if (!foundUser) {
+          const loc = await Location.create({
+            latitude,
+            longitude,
+            locationName,
+            userId,
+          });
+          group.userLocations.push(loc);
           group.userLocations.save();
         }
-        return group; 
+
+        return group;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-
     //updating the center location for a group
     updateCenterPoint: async (
       parent,
