@@ -134,7 +134,7 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
     leaveGroup: async (parent, { userId, groupId }, context) => {
-      console.log("LEAVE GROUP?? WORKING?", context.user);
+      console.log("Leave Group - context.user info:", context.user);
       if (context.user) {
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
@@ -146,7 +146,7 @@ const resolvers = {
         { _id: group._id },
         { $pull: { users: userId } }
       );
-      return { user, group };
+      return group;
     },
     addFriend: async (parent, { userId, username }, context) => {
       if (context.user) {
