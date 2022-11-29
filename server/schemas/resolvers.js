@@ -208,6 +208,7 @@ const resolvers = {
           group.userLocations.push(loc);
           group.userLocations.save();
         }
+        //
 
         return group;
       }
