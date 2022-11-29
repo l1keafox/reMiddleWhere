@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Group } = require("../models");
+const { User, Group, Location } = require("../models");
 const { GraphQLScalarType, Kind } = require("graphql");
 const { signToken } = require("../utils/auth");
 const { GraphQLJSONObject } = require("graphql-type-json");
@@ -42,16 +42,12 @@ const resolvers = {
       return retn;
     },
 
-   
-
     //returns the current user id, must be logged in for it to work.
     //userId is passed from JWT - look at ProfilePage.js
-    me: async (parent, {userId}, context) => {
+    me: async (parent, { userId }, context) => {
       //userId will return if user is logged in
       if (userId) {
-        const user = await User.findOne({ _id: userId}).populate(
-          "groups"
-        );
+        const user = await User.findOne({ _id: userId }).populate("groups");
         return user;
       }
       throw new AuthenticationError("You need to be logged in!");
@@ -172,32 +168,48 @@ const resolvers = {
     },
     addUserLocationToGroup: async (
       parent,
-      { userId, groupId, latitude, longitude },
+      { groupId, userId, latitude, longitude },
       context
     ) => {
-      console.log("DOES IT EVEN COME HERE FOR ERROR? 400?", context.user);
+      console.log(
+        "Add User Location To Group: ",
+        context.user,
+        groupId,
+        userId,
+        latitude,
+        longitude
+      );
       if (context.user) {
-        const user = User.findOneAndUpdate(
-          { _id: userId },
-          {
-            $addToSet: {
-              location: context.user.location,
-            },
-          }
+        let group = await Group.findById({ _id: groupId }).populate(
+          "userLocations"
         );
-        const group = Group.findOneAndUpdate(
-          { _id: groupId },
-          {
-            $addToSet: {
-              location: context.user.location,
-            },
-          },
-          {
-            new: true,
-            runValidators: true,
+        console.log(group.userLocations, "Group?");
+
+        let foundUser = false;
+        for (let user of group.userLocations) {
+          console.log(user.locationName, context.user.username);
+          if (user.locationName === context.user.username) {
+            user.latitude = latitude;
+            user.longitude = longitude;
+            foundUser = true;
+            console.log(user, "FOUND");
+            user.save();
+            break;
           }
-        );
-        return { user, group };
+        }
+
+        if (!foundUser) {
+          const loc = await Location.create({
+            latitude,
+            longitude,
+            locationName,
+            userId,
+          });
+          group.userLocations.push(loc);
+          group.userLocations.save();
+        }
+
+        return group;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
