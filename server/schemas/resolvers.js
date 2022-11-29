@@ -173,7 +173,7 @@ const resolvers = {
     ) => {
       console.log(
         "Add User Location To Group: ",
-        context.user,
+        context.user.username,
         groupId,
         userId,
         latitude,
@@ -183,16 +183,14 @@ const resolvers = {
         let group = await Group.findById({ _id: groupId }).populate(
           "userLocations"
         );
-        console.log(group.userLocations, "Group?");
 
         let foundUser = false;
         for (let user of group.userLocations) {
-          console.log(user.locationName, context.user.username);
           if (user.locationName === context.user.username) {
             user.latitude = latitude;
             user.longitude = longitude;
             foundUser = true;
-            console.log(user, "FOUND");
+            console.log(user, "FOUND, updating user");
             user.save();
             break;
           }
@@ -206,6 +204,7 @@ const resolvers = {
             userId,
           });
           group.userLocations.push(loc);
+          console.log(user, "NOT FOUND adding too userLocation");
           group.save();
         }
 
