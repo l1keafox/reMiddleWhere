@@ -1,54 +1,67 @@
 [
   {
     "latitude": 39.870972,
-    "longitude": -105.033678
+    "longitude": -105.033678,
+    "locationName": "Dog"
   },
   {
     "latitude": 39,
-    "longitude": -105.059101
+    "longitude": -105.059101,
+    "locationName": "Cat"
   },
   {
     "latitude": 40.002068,
-    "longitude": -105.228129
+    "longitude": -105.228129,
+    "locationName": "Hamster"
   },
   {
     "latitude": 39.753628,
-    "longitude": -105.045856
+    "longitude": -105.045856,
+    "locationName": "Chef"
   },
   {
     "latitude": 39.828548,
-    "longitude": -105.030053
+    "longitude": -105.030053,
+    "locationName": "Bartender"
   },
   {
     "latitude": 39.797961,
-    "longitude": -104.976972
+    "longitude": -104.976972,
+    "locationName": "DeliveryMan"
   },
   {
     "latitude": 39.744657,
-    "longitude": -104.977659
+    "longitude": -104.977659,
+    "locationName": "Waiter"
   },
   {
     "latitude": 39.746131,
-    "longitude": -105.040361
+    "longitude": -105.040361,
+    "locationName": "Swimmer"
   },
   {
     "latitude": 39.705414,
-    "longitude": -104.924623
+    "longitude": -104.924623,
+    "locationName": "Runner"
   },
   {
     "latitude": 39.675825,
-    "longitude": -10.976155
+    "longitude": -10.976155,
+    "locationName": "Biker"
   },
   {
     "latitude": 39.72971,
-    "longitude": -104.8992
+    "longitude": -104.8992,
+    "locationName": "Snowboarder"
   },
   {
     "latitude": 39.69749,
-    "longitude": -105.036619
+    "longitude": -105.036619,
+    "locationName": "Gymnast"
   },
   {
     "latitude": 39,
-    "longitude": -107.059101
+    "longitude": -107.059101,
+    "locationName": "test"
   }
 ]

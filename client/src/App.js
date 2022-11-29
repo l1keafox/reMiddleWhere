@@ -63,20 +63,22 @@ function App() {
     setLoading(true);
     if (auth.loggedIn()) {
       setStage(Pages.profile);
+    } else {
+      console.log('Token invald?');
     }
-  }, []);
+  }, []); 
 
   function changeStage(nextStage) {
     console.log(" APP://Change stage", nextStage);
     if (nextStage === Modals.create) {
       setOpen(true);
-      changeModal(<CreateGroup doClose={handleClose} />);
+      changeModal(<CreateGroup doClose={handleClose} mapSelect={mapSelect}/>);
       return;
     }
 
     if (nextStage === Modals.join) {
       setOpen(true);
-      changeModal(<JoinGroup doClose={handleClose} />);
+      changeModal(<JoinGroup doClose={handleClose}  mapSelect={mapSelect}/>);
       return;
     }
     if (nextStage === "logout") {

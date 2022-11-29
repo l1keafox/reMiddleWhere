@@ -2,8 +2,8 @@ import { gql } from "@apollo/client";
 
 
 export const QUERY_ME = gql`
-query Me {
-  me {
+query Me($userId: ID!) {
+  me(userId: $userId) {
     username
     email
     groups {
@@ -31,6 +31,7 @@ query Group($groupId: ID!) {
     userLocations {
       latitude
       longitude
+      locationName
     }
   }
 }

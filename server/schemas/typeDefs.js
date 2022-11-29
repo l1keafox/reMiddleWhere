@@ -17,6 +17,7 @@ const typeDefs = gql`
     _id: ID
     latitude: Float!
     longitude: Float!
+    locationName: String
   }
 
   type Group {
@@ -37,7 +38,7 @@ const typeDefs = gql`
     user(userId: ID!): User
     groups: [Group]
     group(groupId: ID!): Group
-    me: User
+    me(userId: ID!): User
     allGroupUserLocations(groupId: ID!): Group
   }
 

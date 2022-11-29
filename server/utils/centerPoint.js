@@ -8,19 +8,19 @@
 //to access the updated center, do a db query when needed -- NOT in this file
 
 const getCenterPoint = async (userLocations) => {
-  //userLocations - array of objects -->  e.g. [{ latitude: 39.870972, longitude: -105.033678,  locationName: "Home", userId: ObjectId(''), groupId:[ObjectId(''), ObjectId('')]}]
+  // console.log('Doing center point:',userLocations);
+  let totalLongs = 0;
+  let totalLats = 0;
 
-  //the only locations that would be passed are ones that belong to the specific group
+  userLocations.map((data) => {
+    totalLongs+=data.longitude;
+    totalLats+=data.latitude;
+  });
 
-  //copied calculation code from previous project -- modified calculations as needed based on data
-
-  //getting all longs & lats
-  const allLongs = userLocations.map((data) => data.longitude);
-
-  const allLats = allCoords.map((data) => data.latitude);
-
+  //the coords that will be saved to the db --> add mutation to update db using returned values where getCenterPoint is called
+  return { latitude:totalLats / userLocations.length, longitude:totalLongs / userLocations.length };
   //calling function to do the calculation
-  return getAverageCoords(allLongs, allLats);
+  // 
 };
 
 //using user long & lat data to calculate their avg coordinates

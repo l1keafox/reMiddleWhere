@@ -10,10 +10,18 @@ import InfoCard from "./InfoCard";
 
 function ProfilePage(props) {
   const { existingUser } = useExistingUserContext();
-  const { loading, data, startPolling, stopPolling } = useQuery(QUERY_ME, {
-    pollInterval: 500,
-  });
-  console.log("PROFILE PAGE", auth.getUser().data, data, loading);
+
+  //getting decoded data from JWT to pass to me query - this will show maps with seeded data so you don't have to create or join a group to see the map button
+  const decodedToken = auth.getUser(); //{data:...{_id:...}}
+
+  //added variables (userId) to be passed to the query to return needed user data
+  const { loading, data, startPolling, stopPolling } = useQuery(QUERY_ME,
+    { variables: { userId: decodedToken.data._id } },
+    {
+      pollInterval: 500,
+    });
+    
+  // console.log("PROFILE PAGE", auth.getUser().data, data, loading);
 
   useEffect(() => {
     startPolling(500);
@@ -40,10 +48,7 @@ function ProfilePage(props) {
                 <div> 
                 <h1 className="text-xl text-center bg-slate-200"> {group.name} </h1>
                 <h1> {group._id} </h1>
-                <h1> Users : </h1>
-                {group.users.map((user, index2) => (
-                  <h2 key={index2} className="text-center"> user:{user.username} </h2>
-                ))}
+                <h1> # of Users : {group.users.length}</h1>
                 <h2> Lat : {group.centerLatitude}</h2>
                 <h2> Long : {group.centerLongitude}</h2>
                   </div>

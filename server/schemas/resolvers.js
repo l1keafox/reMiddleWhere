@@ -1,8 +1,9 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Group } = require("../models");
+const { User, Group, Location } = require("../models");
 const { GraphQLScalarType, Kind } = require("graphql");
 const { signToken } = require("../utils/auth");
 const { GraphQLJSONObject } = require("graphql-type-json");
+const getCenterPoint = require('./../utils/centerPoint')
 //this is a custom decoding strategy for dealing with dates.
 const dateScalar = new GraphQLScalarType({
   name: "Date",
@@ -36,14 +37,18 @@ const resolvers = {
       return Group.find();
     },
     group: async (parent, { groupId }) => {
-      let retn = await Group.findById({ _id: groupId }).populate("users").populate("userLocations");
+      let retn = await Group.findById({ _id: groupId })
+        .populate("users")
+        .populate("userLocations");
       return retn;
     },
 
     //returns the current user id, must be logged in for it to work.
-    me: async (parent, args, context) => {
-      if (context.user) {
-        const user = await User.findOne({ _id: context.user._id }).populate("groups");
+    //userId is passed from JWT - look at ProfilePage.js
+    me: async (parent, { userId }, context) => {
+      //userId will return if user is logged in
+      if (userId) {
+        const user = await User.findOne({ _id: userId }).populate("groups");
         return user;
       }
       throw new AuthenticationError("You need to be logged in!");
@@ -79,7 +84,6 @@ const resolvers = {
       console.log(user, "token?");
       const token = signToken(user);
       return { token, user };
-      
     },
     //adds a user to the database, used on signup.
     addUser: async (parent, { username, email, password }) => {
@@ -102,8 +106,9 @@ const resolvers = {
         { $addToSet: { users: user._id } }
       );
 
-      const token = signToken(group);
-      return { user, token, group };
+      // const token = signToken(group);
+      // return { user, token, group };
+      return group;
     },
     createGroup: async (parent, { name }, context) => {
       console.log("creating group by:", name, "By user: ", context.user);
@@ -123,13 +128,14 @@ const resolvers = {
           { $addToSet: { users: user._id } }
         );
 
-        const token = signToken(group);
-        return { user, token, group };
+        // const token = signToken(group);
+        // return { user, token, group };
+        return group;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
     leaveGroup: async (parent, { groupId }, context) => {
-      console.log("LEAVE GROUP?? WORKING?",context.user);
+      console.log("LEAVE GROUP?? WORKING?", context.user);
       if (context.user) {
         const group = await Group.findOneAndDelete({
           _id: groupId,
@@ -161,30 +167,53 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    addUserLocationToGroup: async (parent, { userId, groupId, latitude,longitude}, context) => {
-      console.log("DOES IT EVEN COME HERE FOR ERROR? 400?",context.user);
+    addUserLocationToGroup: async (
+      parent,
+      { groupId, userId, latitude, longitude },
+      context
+    ) => {
+      console.log(
+        "User Location To Group: ",
+        context.user.username,
+        groupId,
+        userId,
+        latitude,
+        longitude
+      );
       if (context.user) {
-        const user = User.findOneAndUpdate(
-          { _id: userId },
-          {
-            $addToSet: {
-              location: context.user.location,
-            },
-          }
+        let group = await Group.findById({ _id: groupId }).populate(
+          "userLocations"
         );
-        const group = Group.findOneAndUpdate(
-          { _id: groupId },
-          {
-            $addToSet: {
-              location: context.user.location,
-            },
-          },
-          {
-            new: true,
-            runValidators: true,
+
+        let foundUser = false;
+        for (let user of group.userLocations) {
+          if (user.locationName === context.user.username) {
+            user.latitude = latitude;
+            user.longitude = longitude;
+            foundUser = true;
+            console.log('  ->',user.locationName, "FOUND, updating user");
+            await user.save();
+            break;
           }
-        );
-        return { user, group };
+        }
+
+        if (!foundUser) {
+          const loc = await Location.create({
+            latitude,
+            longitude,
+            locationName:context.user.username,
+            userId,
+          });
+          console.log(loc);
+          group.userLocations.push(loc);
+          console.log('  ->',"NOT FOUND adding too userLocation");   
+        }
+        let newCenter = await getCenterPoint(group.userLocations);
+        console.log("  -> New Center:", newCenter);
+        group.centerLatitude = newCenter.latitude;
+        group.centerLongitude = newCenter.longitude;
+        group.save();
+        return group;
       }
       throw new AuthenticationError("You need to be logged in!");
     },

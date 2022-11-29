@@ -5,7 +5,7 @@
 
   A web app that will find a center point to meet for a group of users.
 
-  Using the MERN stack
+  Using the MERN + socket.io stoack.
   
   
   ## Table of Contents 
@@ -22,7 +22,9 @@
   
   ## Installation 
    1. Download repo 
- 2. Run "node index.js"
+   2. Npm Install at root
+   3. Npm run seed to seed data for testing.
+
   
   
   ## Contributing 
