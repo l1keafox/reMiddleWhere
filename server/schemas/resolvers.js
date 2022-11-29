@@ -136,17 +136,17 @@ const resolvers = {
     leaveGroup: async (parent, { userId, groupId }, context) => {
       console.log("Leave Group - context.user info:", context.user);
       if (context.user) {
+        const group = await Group.findOne({ _id: groupId }).populate("users");
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { groups: groupId } }
+          { $pull: { groups: group._id } }
         );
-        return user;
+        await Group.findOneAndUpdate(
+          { _id: group._id },
+          { $pull: { users: user._id } }
+        );
+        return { user, group };
       }
-      const group = await Group.findOneAndUpdate(
-        { _id: group._id },
-        { $pull: { users: userId } }
-      );
-      return group;
     },
     addFriend: async (parent, { userId, username }, context) => {
       if (context.user) {
