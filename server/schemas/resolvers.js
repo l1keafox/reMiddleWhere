@@ -3,6 +3,7 @@ const { User, Group, Location } = require("../models");
 const { GraphQLScalarType, Kind } = require("graphql");
 const { signToken } = require("../utils/auth");
 const { GraphQLJSONObject } = require("graphql-type-json");
+const getCenterPoint = require('./../utils/centerPoint')
 //this is a custom decoding strategy for dealing with dates.
 const dateScalar = new GraphQLScalarType({
   name: "Date",
@@ -172,7 +173,7 @@ const resolvers = {
       context
     ) => {
       console.log(
-        "Add User Location To Group: ",
+        "User Location To Group: ",
         context.user.username,
         groupId,
         userId,
@@ -190,8 +191,8 @@ const resolvers = {
             user.latitude = latitude;
             user.longitude = longitude;
             foundUser = true;
-            console.log(user, "FOUND, updating user");
-            user.save();
+            console.log('  ->',user.locationName, "FOUND, updating user");
+            await user.save();
             break;
           }
         }
@@ -203,11 +204,15 @@ const resolvers = {
             locationName:context.user.username,
             userId,
           });
+          console.log(loc);
           group.userLocations.push(loc);
-          console.log(user, "NOT FOUND adding too userLocation");
-          group.save();
+          console.log('  ->',"NOT FOUND adding too userLocation");   
         }
-
+        let newCenter = await getCenterPoint(group.userLocations);
+        console.log("  -> New Center:", newCenter);
+        group.centerLatitude = newCenter.latitude;
+        group.centerLongitude = newCenter.longitude;
+        group.save();
         return group;
       }
       throw new AuthenticationError("You need to be logged in!");
