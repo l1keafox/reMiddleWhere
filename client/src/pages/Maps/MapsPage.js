@@ -17,7 +17,7 @@ const MapsPage = function (props) {
   const image =
   "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";  
   let groupId = props.groupId;
-  const { loading, data } = useQuery(QUERY_GROUP, {
+  let { loading, data,refetch } = useQuery(QUERY_GROUP, {
     variables: { groupId },
   });
   const containerStyle = {
@@ -65,6 +65,11 @@ const MapsPage = function (props) {
       const { data } = await addUserLocationToGroup({
         variables: { userId, groupId, latitude, longitude },
       });
+      console.log("THIS:",data);
+      if(data){
+        alert('Location Updated');
+        refetch({ variables: { groupId } });
+      }
       console.log(error);
     });
   }

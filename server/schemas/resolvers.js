@@ -202,11 +202,11 @@ const resolvers = {
           const loc = await Location.create({
             latitude,
             longitude,
-            locationName,
+            locationName:context.user.username,
             userId,
           });
           group.userLocations.push(loc);
-          group.userLocations.save();
+          group.save();
         }
 
         return group;
