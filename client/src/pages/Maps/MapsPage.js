@@ -17,7 +17,7 @@ const MapsPage = function (props) {
   const image =
   "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";  
   let groupId = props.groupId;
-  const { loading, data } = useQuery(QUERY_GROUP, {
+  let { loading, data,refetch } = useQuery(QUERY_GROUP, {
     variables: { groupId },
   });
   const containerStyle = {
@@ -54,18 +54,20 @@ const MapsPage = function (props) {
   }, [data]);
   
   function upDatePos() {
-    console.log("doing update");
     navigator.geolocation.getCurrentPosition(async (position) => {
       //mutation AddUserLocationToGroup($userId: ID!, $groupId: ID!, $latitude: Int!, $longitude: Int!)
       // So we need 4 times, userID, groupID, lat, and long, here we get lat/long
       const userId = auth.getUser().data._id;
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
-      console.log(userId, groupId, latitude, longitude);
       const { data } = await addUserLocationToGroup({
         variables: { userId, groupId, latitude, longitude },
       });
-      console.log(error);
+      console.log("THIS:",data);
+      if(data){
+        alert('Location Updated');
+        refetch({  groupId } );
+      }
     });
   }
 

@@ -3,6 +3,7 @@ const { User, Group, Location } = require("../models");
 const { GraphQLScalarType, Kind } = require("graphql");
 const { signToken } = require("../utils/auth");
 const { GraphQLJSONObject } = require("graphql-type-json");
+const getCenterPoint = require('./../utils/centerPoint')
 //this is a custom decoding strategy for dealing with dates.
 const dateScalar = new GraphQLScalarType({
   name: "Date",
@@ -172,8 +173,8 @@ const resolvers = {
       context
     ) => {
       console.log(
-        "Add User Location To Group: ",
-        context.user,
+        "User Location To Group: ",
+        context.user.username,
         groupId,
         userId,
         latitude,
@@ -183,17 +184,15 @@ const resolvers = {
         let group = await Group.findById({ _id: groupId }).populate(
           "userLocations"
         );
-        console.log(group.userLocations, "Group?");
 
         let foundUser = false;
         for (let user of group.userLocations) {
-          console.log(user.locationName, context.user.username);
           if (user.locationName === context.user.username) {
             user.latitude = latitude;
             user.longitude = longitude;
             foundUser = true;
-            console.log(user, "FOUND");
-            user.save();
+            console.log('  ->',user.locationName, "FOUND, updating user");
+            await user.save();
             break;
           }
         }
@@ -202,13 +201,18 @@ const resolvers = {
           const loc = await Location.create({
             latitude,
             longitude,
-            locationName,
+            locationName:context.user.username,
             userId,
           });
+          console.log(loc);
           group.userLocations.push(loc);
-          group.userLocations.save();
+          console.log('  ->',"NOT FOUND adding too userLocation");   
         }
-
+        let newCenter = await getCenterPoint(group.userLocations);
+        console.log("  -> New Center:", newCenter);
+        group.centerLatitude = newCenter.latitude;
+        group.centerLongitude = newCenter.longitude;
+        group.save();
         return group;
       }
       throw new AuthenticationError("You need to be logged in!");

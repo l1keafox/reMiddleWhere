@@ -56,8 +56,16 @@ mutation JoinGroup($name: String!) {
 	  name
 	  centerLongitude
 	  centerLatitude
-	}
-  }  `;
+  userLocations {
+    longitude
+    locationName
+    latitude
+  }
+  users {
+    username
+  }
+}
+  }   `;
 
 
   export const LEAVE_GROUP = gql`
