@@ -42,6 +42,36 @@ const resolvers = {
         .populate("userLocations");
       return retn;
     },
+    localLocales:async(parent,{latitude,longitude})=>{
+      const https = require("https");
+      https
+        .get(
+          `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude}%2C${longitude}&radius=1500&type=restaurant&keyword=cruise&key=${process.env.GMAPS_API}`,
+          (resp) => {
+            let data = "";
+            console.log("statusCode:", resp.statusCode);
+            console.log("headers:", resp.headers);
+      
+            // A chunk of data has been received.
+            resp.on("data", (chunk) => {
+              console.log("chunk");
+              data += chunk;
+            });
+      
+            // The whole response has been received. Print out the result.
+            resp.on("end", () => {
+              let dito = JSON.parse(data);
+              console.log(dito.results);
+              return dito;
+
+            });
+          }
+        )
+        .on("error", (err) => {
+          console.log("Error: " + err.message);
+        });
+      
+    },
 
     //returns the current user id, must be logged in for it to work.
     //userId is passed from JWT - look at ProfilePage.js
