@@ -40,6 +40,7 @@ const typeDefs = gql`
     group(groupId: ID!): Group
     me(userId: ID!): User
     allGroupUserLocations(groupId: ID!): Group
+
   }
 
   type Mutation {
