@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { QUERY_GROUP } from "../../utils/queries";
+import { QUERY_GROUP, QUERY_LOCALES } from "../../utils/queries";
 import { useQuery, useMutation } from "@apollo/client";
 import { ADD_LOCATION_TO_GROUP, LEAVE_GROUP } from "../../utils/mutations";
 import auth from "../../utils/auth";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import Locals from "./Locals";
 
 const MapsPage = function (props) {
   // console.log(ADD_LOCATION_TO_GROUP);
@@ -39,7 +40,8 @@ const MapsPage = function (props) {
         lng: data.group.centerLongitude,
       });
       console.log("CENTER LOCATION IS:",center,data.group.centerLatitude);
-
+    
+      // loc_refetch({  latitude: data.group.centerLatitude , longitude:data.group.centerLongitude } );
       for(let location of data.group.userLocations){
         if(location.locationName === auth.getUser().data.username){
           setMyPos({
@@ -52,7 +54,9 @@ const MapsPage = function (props) {
       }
     }
   }, [data]);
-  
+  // useEffect(()=>{
+  //   console.log(loc_data);
+  // },[loc_data] );
   function upDatePos() {
     navigator.geolocation.getCurrentPosition(async (position) => {
       //mutation AddUserLocationToGroup($userId: ID!, $groupId: ID!, $latitude: Int!, $longitude: Int!)
@@ -135,7 +139,7 @@ const MapsPage = function (props) {
                 <Marker position={{lat: e.latitude,lng: e.longitude}} key={index} title={e.locationName} label={ e.locationName[0]+e.locationName[1]}/>
               ))}
 
-            </GoogleMap> 
+            </GoogleMap  > 
             : <div className="text-3xl font-bold"> NEEDS CENTER LOCATION </div> }
           </LoadScript>
           </div> 
@@ -143,6 +147,7 @@ const MapsPage = function (props) {
           <div className="border-2 border-blue-500 p-3 bg-slate-200  sm:w-1/5"> 
               <h1>Chat Window</h1> 
           </div> 
+          {center.lat?<Locals center={center}/> :<div/> }
         </div>
       ) : (
         <div />
