@@ -1,36 +1,36 @@
-import React,{ useEffect,useState } from 'react'
-import {  QUERY_LOCALES } from "../../utils/queries";
+import React, { useEffect, useState } from "react";
+import { QUERY_LOCALES } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 function Locals(props) {
-    
-    let { loading, data,refetch } = useQuery(QUERY_LOCALES, {
-        variables: { latitude: props.center.lat , longitude:props.center.lng },
-    });
-    let [locals, setLocals] = useState([]);
+  let { loading, data, refetch } = useQuery(QUERY_LOCALES, {
+    variables: { latitude: props.center.lat, longitude: props.center.lng },
+  });
+  let [locals, setLocals] = useState([]);
 
-    console.log(props.center.lat,props.center.lng ,"getting?");
-    useEffect(() => {
-        if(data){
-             console.log("DATA",data.getLocalPlaces.results.length);   
-             data.getLocalPlaces.results.forEach(element => {
-                console.log(element.name);
-                setLocals(locals=>[...locals,element.name]);
-                console.log(locals);
-             });
-             
-            }
+  console.log(props.center.lat, props.center.lng, "getting?");
+  useEffect(() => {
+    if (data && data.getLocalPlaces) {
+      console.log("DATA", data.getLocalPlaces.results.length);
+      data.getLocalPlaces.results.forEach((element) => {
+        console.log(element.name);
+        console.log(locals);
+      });
+      setLocals(locals => [...data.getLocalPlaces.results]);
+      console.log(locals.length,"LENGTH");
+    }
 
-            console.log(locals);
-      }, [data]);
+  }, [loading]);
 
   return (
     <div>
-        <h1>Locals</h1>
-        {locals.map(element => {
-            <h2> {element.name }</h2>
-        })}
+      <h1>Locals</h1>
+      <div>
+      {locals.map((element,index) => {
+        return <h2 key = {index}> {element.name}</h2>;
+      })}
+      </div>
     </div>
-  )
+  );
 }
 
-export default Locals
+export default Locals;

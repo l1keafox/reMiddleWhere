@@ -92,9 +92,10 @@ const MapsPage = function (props) {
     <div className = "container">
       <h1 className ="text-4xl flex text-center justify-center pb-3 font-bold"> {data.group.name}</h1>
       {center ? (
-        <div className="flex flex-col  justify-center sm:flex-row">
+        <div className="flex flex-col"> 
+          <div className="flex flex-col  justify-center sm:flex-row">
 
-          <div className="border-2 border-blue-500 bg-stone-200 flex flex-col p-3  sm:w-1/5"> 
+            <div className="border-2 border-blue-500 bg-stone-200 flex flex-col p-3  sm:w-1/5"> 
           <hr/>
             <h2 className="font-bold text-3xl"> User: {auth.getUser().data.username}  </h2>
             <hr/>
@@ -121,9 +122,9 @@ const MapsPage = function (props) {
             <div key={index}>{e.username[0]+e.username[1]}:  {e.username} </div>
             ))}
 
-          </div>
+            </div>
 
-          <div className=" sm:w-1/3 flex items-center justify-center"> 
+            <div className=" sm:w-1/3 flex items-center justify-center"> 
           <LoadScript googleMapsApiKey={process.env.REACT_APP_GMAPS_API}>
             {center.lat ? 
             <GoogleMap
@@ -142,12 +143,17 @@ const MapsPage = function (props) {
             </GoogleMap  > 
             : <div className="text-3xl font-bold"> NEEDS CENTER LOCATION </div> }
           </LoadScript>
-          </div> 
+            </div> 
 
-          <div className="border-2 border-blue-500 p-3 bg-slate-200  sm:w-1/5"> 
+            <div className="border-2 border-blue-500 p-3 bg-slate-200  sm:w-1/5"> 
               <h1>Chat Window</h1> 
-          </div> 
-          {center.lat?<Locals center={center}/> :<div/> }
+            </div> 
+          
+            </div>
+            <div className="flex container justify-center bg-slate-200">
+
+              {center.lat?<Locals center={center}/> :<div/> }
+            </div>
         </div>
       ) : (
         <div />
