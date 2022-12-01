@@ -7,16 +7,14 @@ function Locals(props) {
   });
   let [locals, setLocals] = useState([]);
 
-  console.log(props.center.lat, props.center.lng, "getting?");
   useEffect(() => {
     if (data && data.getLocalPlaces) {
-      console.log("DATA", data.getLocalPlaces.results.length);
       data.getLocalPlaces.results.forEach((element) => {
         console.log(element.name);
         console.log(locals);
       });
       setLocals(locals => [...data.getLocalPlaces.results]);
-      console.log(locals.length,"LENGTH");
+      props.emitLocals(locals => [...data.getLocalPlaces.results]);
     }
 
   }, [loading]);

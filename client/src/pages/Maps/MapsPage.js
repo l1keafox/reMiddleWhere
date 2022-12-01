@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { QUERY_GROUP, QUERY_LOCALES } from "../../utils/queries";
+import { QUERY_GROUP } from "../../utils/queries";
 import { useQuery, useMutation } from "@apollo/client";
 import { ADD_LOCATION_TO_GROUP, LEAVE_GROUP } from "../../utils/mutations";
 import auth from "../../utils/auth";
@@ -14,9 +14,11 @@ const MapsPage = function (props) {
   const [leaveGroup, { leaveError }] = useMutation(LEAVE_GROUP);
   const [myPos,setMyPos]  = useState({});
   const [center, setCenter] = useState({});
-  const google = window.google;
+  const [localPlaces, setPlaces] = useState([]);
   const image =
-  "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";  
+  "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"; 
+  const image2 =
+  "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngfind.com%2Fmpng%2Foioiio_map-marker-icons-87110-map-marker-icon-gif%2F&psig=AOvVaw1G3waZkWQiIDEDcI3UWau_&ust=1670001879905000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKj6vPj32PsCFQAAAAAdAAAAABAE" 
   let groupId = props.groupId;
   let { loading, data,refetch } = useQuery(QUERY_GROUP, {
     variables: { groupId },
@@ -54,6 +56,9 @@ const MapsPage = function (props) {
       }
     }
   }, [data]);
+  useEffect(()=>{
+    console.log(localPlaces,"Bck on maps");
+  },[localPlaces] )
   // useEffect(()=>{
   //   console.log(loc_data);
   // },[loc_data] );
@@ -140,6 +145,12 @@ const MapsPage = function (props) {
                 <Marker position={{lat: e.latitude,lng: e.longitude}} key={index} title={e.locationName} label={ e.locationName[0]+e.locationName[1]}/>
               ))}
 
+              {localPlaces.map((e, index) => (
+                <Marker position={{lat: e.geometry.location.lat,lng: e.geometry.location.lng}} key={index} title={e.name} label={ e.name[0]}>@ </Marker>
+              ))}
+
+localPlaces
+
             </GoogleMap  > 
             : <div className="text-3xl font-bold"> NEEDS CENTER LOCATION </div> }
           </LoadScript>
@@ -152,7 +163,7 @@ const MapsPage = function (props) {
             </div>
             <div className="flex container justify-center bg-slate-200">
 
-              {center.lat?<Locals center={center}/> :<div/> }
+              {center.lat?<Locals center={center} emitLocals = {setPlaces}/> :<div/> }
             </div>
         </div>
       ) : (
