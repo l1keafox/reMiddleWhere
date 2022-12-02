@@ -4,6 +4,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { ADD_LOCATION_TO_GROUP, LEAVE_GROUP } from "../../utils/mutations";
 import auth from "../../utils/auth";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import Locals from "./Locals";
 
 const MapsPage = function (props) {
   // console.log(ADD_LOCATION_TO_GROUP);
@@ -13,9 +14,11 @@ const MapsPage = function (props) {
   const [leaveGroup, { leaveError }] = useMutation(LEAVE_GROUP);
   const [myPos,setMyPos]  = useState({});
   const [center, setCenter] = useState({});
-  const google = window.google;
+  const [localPlaces, setPlaces] = useState([]);
   const image =
-  "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";  
+  "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"; 
+  const image2 =
+  "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngfind.com%2Fmpng%2Foioiio_map-marker-icons-87110-map-marker-icon-gif%2F&psig=AOvVaw1G3waZkWQiIDEDcI3UWau_&ust=1670001879905000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKj6vPj32PsCFQAAAAAdAAAAABAE" 
   let groupId = props.groupId;
   let { loading, data,refetch } = useQuery(QUERY_GROUP, {
     variables: { groupId },
@@ -39,7 +42,8 @@ const MapsPage = function (props) {
         lng: data.group.centerLongitude,
       });
       console.log("CENTER LOCATION IS:",center,data.group.centerLatitude);
-
+    
+      // loc_refetch({  latitude: data.group.centerLatitude , longitude:data.group.centerLongitude } );
       for(let location of data.group.userLocations){
         if(location.locationName === auth.getUser().data.username){
           setMyPos({
@@ -52,7 +56,12 @@ const MapsPage = function (props) {
       }
     }
   }, [data]);
-  
+  useEffect(()=>{
+    console.log(localPlaces,"Bck on maps");
+  },[localPlaces] )
+  // useEffect(()=>{
+  //   console.log(loc_data);
+  // },[loc_data] );
   function upDatePos() {
     navigator.geolocation.getCurrentPosition(async (position) => {
       //mutation AddUserLocationToGroup($userId: ID!, $groupId: ID!, $latitude: Int!, $longitude: Int!)
@@ -88,9 +97,10 @@ const MapsPage = function (props) {
     <div className = "container">
       <h1 className ="text-4xl flex text-center justify-center pb-3 font-bold"> {data.group.name}</h1>
       {center ? (
-        <div className="flex flex-col  justify-center sm:flex-row">
+        <div className="flex flex-col"> 
+          <div className="flex flex-col  justify-center sm:flex-row">
 
-          <div className="border-2 border-blue-500 bg-stone-200 flex flex-col p-3  sm:w-1/5"> 
+            <div className="border-2 border-blue-500 bg-stone-200 flex flex-col p-3  sm:w-1/5"> 
           <hr/>
             <h2 className="font-bold text-3xl"> User: {auth.getUser().data.username}  </h2>
             <hr/>
@@ -117,9 +127,9 @@ const MapsPage = function (props) {
             <div key={index}>{e.username[0]+e.username[1]}:  {e.username} </div>
             ))}
 
-          </div>
+            </div>
 
-          <div className=" sm:w-1/3 flex items-center justify-center"> 
+            <div className=" sm:w-1/3 flex items-center justify-center"> 
           <LoadScript googleMapsApiKey={process.env.REACT_APP_GMAPS_API}>
             {center.lat ? 
             <GoogleMap
@@ -135,14 +145,26 @@ const MapsPage = function (props) {
                 <Marker position={{lat: e.latitude,lng: e.longitude}} key={index} title={e.locationName} label={ e.locationName[0]+e.locationName[1]}/>
               ))}
 
-            </GoogleMap> 
+              {localPlaces.map((e, index) => (
+                <Marker position={{lat: e.geometry.location.lat,lng: e.geometry.location.lng}} key={index} title={e.name} label={ e.name[0]}>@ </Marker>
+              ))}
+
+localPlaces
+
+            </GoogleMap  > 
             : <div className="text-3xl font-bold"> NEEDS CENTER LOCATION </div> }
           </LoadScript>
-          </div> 
+            </div> 
 
-          <div className="border-2 border-blue-500 p-3 bg-slate-200  sm:w-1/5"> 
+            <div className="border-2 border-blue-500 p-3 bg-slate-200  sm:w-1/5"> 
               <h1>Chat Window</h1> 
-          </div> 
+            </div> 
+          
+            </div>
+            <div className="flex container justify-center bg-slate-200">
+
+              {center.lat?<Locals center={center} emitLocals = {setPlaces}/> :<div/> }
+            </div>
         </div>
       ) : (
         <div />

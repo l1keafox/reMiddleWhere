@@ -18,6 +18,12 @@ query Me($userId: ID!) {
   }
 }`;
 
+export const QUERY_LOCALES = gql`
+query Query($latitude: Float!, $longitude: Float!) {
+  getLocalPlaces(latitude: $latitude, longitude: $longitude)
+}
+`;
+
 export const QUERY_GROUP = gql`
 query Group($groupId: ID!) {
   group(groupId: $groupId) {
