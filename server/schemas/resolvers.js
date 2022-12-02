@@ -1,8 +1,8 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Group, Location } = require("../models");
+const { User, Group, Location, Place } = require("../models");
 const { GraphQLScalarType, Kind } = require("graphql");
 const { signToken } = require("../utils/auth");
-const { GraphQLJSONObject } = require("graphql-type-json");
+const {GraphQLJSON} = require('graphql-type-json');
 const getCenterPoint = require('./../utils/centerPoint')
 //this is a custom decoding strategy for dealing with dates.
 const dateScalar = new GraphQLScalarType({
@@ -27,12 +27,18 @@ const dateScalar = new GraphQLScalarType({
 const resolvers = {
   //specifies that when "Date" is the datatype dateScalar should be used to resolve it.
   Date: dateScalar,
-  JSONObject: GraphQLJSONObject,
+  JSON: {
+    serialize(value) {
+        return GraphQLJSON.parseValue(value);
+    } 
+  },
+
   Query: {
     //Gets user by id
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate("groups");
     },
+
     groups: async () => {
       return Group.find();
     },
@@ -42,6 +48,7 @@ const resolvers = {
         .populate("userLocations");
       return retn;
     },
+
 
     //returns the current user id, must be logged in for it to work.
     //userId is passed from JWT - look at ProfilePage.js
@@ -64,6 +71,23 @@ const resolvers = {
 
       return { userLocations, groupId };
     },
+    // getLocalPlaces: async (parent, { userId }, context) => {
+    //   //userId will return if user is logged in
+    //   if (userId) {
+    //     const user = await User.findOne({ _id: userId }).populate("groups");
+    //     return user;
+    //   }
+    //   throw new AuthenticationError("You need to be logged in!");
+    // },
+
+    getLocalPlaces: async (parent, {latitude,longitude,range}) => {
+      const fetch = require('node-fetch');
+      let data = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude}%2C${longitude}&radius=5000&type=restaurant&keyword=cruise&key=${process.env.GMAPS_API}`)
+      
+      const body = await data.json();
+      return body;
+
+    },        
   },
 
   //NEXT: add mutation to update / add user location in the group -- will need to update groupId location array in User model, and update the locationId in userLocations in the group model

@@ -16,6 +16,7 @@
         "apollo-server-express": "^3.6.2",
         "bcrypt": "^5.0.1",
         "cors": "^2.8.5",
+        "dotenv": "^16.0.3",
         "express": "^4.17.1",
         "graphql": "^16.6.0",
         "graphql-type-json": "^0.3.2",

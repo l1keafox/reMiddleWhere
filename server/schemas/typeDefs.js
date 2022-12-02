@@ -1,9 +1,9 @@
 const { gql } = require("apollo-server-express");
-const { User, Group, Location } = require("./../models");
+const { User, Group, Location, Place } = require("./../models");
 
 const typeDefs = gql`
   scalar Date
-  scalar JSONObject
+  scalar JSON
   type User {
     _id: ID
     username: String
@@ -28,6 +28,12 @@ const typeDefs = gql`
     centerLongitude: Float
     userLocations: [Location]
   }
+  type Place{
+    _id: ID
+    latitude: Float!
+    longitude: Float!
+    locationName: String
+  }
 
   type Auth {
     token: ID!
@@ -40,6 +46,11 @@ const typeDefs = gql`
     group(groupId: ID!): Group
     me(userId: ID!): User
     allGroupUserLocations(groupId: ID!): Group
+    getLocalPlaces(
+      latitude: Float!
+      longitude: Float!
+      range: Int ): JSON
+
   }
 
   type Mutation {
@@ -60,6 +71,7 @@ const typeDefs = gql`
       centerLatitude: Float!
       centerLongitude: Float!
     ): Group
+
   }
 `;
 module.exports = typeDefs;
