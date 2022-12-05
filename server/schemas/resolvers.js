@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Group, Location, Place } = require("../models");
+const { User, Group, Location } = require("../models");
 const { GraphQLScalarType, Kind } = require("graphql");
 const { signToken } = require("../utils/auth");
 const {GraphQLJSON} = require('graphql-type-json');
@@ -219,13 +219,11 @@ const resolvers = {
             break;
           }
         }
-
         if (!foundUser) {
           const loc = await Location.create({
             latitude,
             longitude,
             locationName:context.user.username,
-            userId,
           });
           console.log(loc);
           group.userLocations.push(loc);
