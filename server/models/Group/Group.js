@@ -8,6 +8,7 @@ const groupSchema = new Schema({
     unique: true,
     trim: true,
   },
+  
   // description: {
   //   type: String,
   //   required: false,

@@ -8,11 +8,12 @@ if(process.env.MONGODB_URI && !process.env.LOCAL_CONNECT ){
       "mongodb://127.0.0.1:27017/middleWhere",
     {
       useNewUrlParser: true,
+
       useUnifiedTopology: true,
     }
   );
   
-  
+
 } else {
   console.log("  -MONGOO>Connecting too :  mongodb://127.0.0.1:27017/middleWhere");
   mongoose.connect(
@@ -20,6 +21,7 @@ if(process.env.MONGODB_URI && !process.env.LOCAL_CONNECT ){
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      
     }
   );
   

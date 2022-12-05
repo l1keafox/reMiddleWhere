@@ -202,8 +202,11 @@ const resolvers = {
         userId,
         latitude,
         longitude
+
       );
       if (context.user) {
+        
+
         let group = await Group.findById({ _id: groupId }).populate(
           "userLocations"
         );
@@ -224,6 +227,7 @@ const resolvers = {
             latitude,
             longitude,
             locationName:context.user.username,
+            userId,
           });
           console.log(loc);
           group.userLocations.push(loc);
