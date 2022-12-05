@@ -9,8 +9,7 @@ import Box from "@mui/material/Box";
 const JoinGroup = (props) => {
   const [joinGroup] = useMutation(JOIN_GROUP);
   const [name, setGroupName] = useState("");
-  const [groupPassword, setGroupPassword] = useState("");
-
+  
   const handleFormSubmit = async (event) => {
     try {
       const { data } = await joinGroup({
@@ -27,9 +26,6 @@ const JoinGroup = (props) => {
     const { target } = e;
     if (target.name === "groupName") {
       setGroupName(target.value);
-    }
-    if (target.name === "password") {
-      setGroupPassword(target.value);
     }
   };
 
