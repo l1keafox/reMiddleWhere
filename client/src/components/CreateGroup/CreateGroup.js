@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 const CreateGroup = (props) => {
   const [createGroup] = useMutation(CREATE_GROUP);
   const [name, setGroupName] = useState("");
-  const [groupPassword, setGroupPassword] = useState("");
+  
   const handleFormSubmit = async (event) => {
     try {
 
@@ -29,9 +29,6 @@ const CreateGroup = (props) => {
     const { target } = e;
     if (target.name === "groupName") {
       setGroupName(target.value);
-    }
-    if (target.name === "password") {
-      setGroupPassword(target.value);
     }
   };
 

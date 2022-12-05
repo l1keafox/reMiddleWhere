@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 // user context
-import { useExistingUserContext } from "../../utils/existingUserContext";
 import auth from "../../utils/auth";
 import { QUERY_ME } from "./../../utils/queries";
 import { useQuery } from "@apollo/client";
@@ -9,7 +8,6 @@ import { Button } from "@mui/material";
 import InfoCard from "./InfoCard";
 
 function ProfilePage(props) {
-  const { existingUser } = useExistingUserContext();
 
   //getting decoded data from JWT to pass to me query - this will show maps with seeded data so you don't have to create or join a group to see the map button
   const decodedToken = auth.getUser(); //{data:...{_id:...}}
