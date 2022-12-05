@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { QUERY_LOCALES } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 function Locals(props) {
-  let { loading, data, refetch } = useQuery(QUERY_LOCALES, {
+  let { loading, data } = useQuery(QUERY_LOCALES, {
     variables: { latitude: props.center.lat, longitude: props.center.lng },
   });
   let [locals, setLocals] = useState([]);

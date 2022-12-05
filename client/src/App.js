@@ -53,7 +53,6 @@ function App() {
   const [stage, setStage] = useState(Pages.landing);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [modalContent, changeModal] = useState(null);
   const [mapGroupId, setGroupId] = useState(null);

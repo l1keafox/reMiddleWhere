@@ -8,17 +8,15 @@ import Locals from "./Locals";
 
 const MapsPage = function (props) {
   // console.log(ADD_LOCATION_TO_GROUP);
-  const [addUserLocationToGroup, { error }] = useMutation(
+  const [addUserLocationToGroup, ] = useMutation(
     ADD_LOCATION_TO_GROUP
   );
-  const [leaveGroup, { leaveError }] = useMutation(LEAVE_GROUP);
+  const [leaveGroup,] = useMutation(LEAVE_GROUP);
   const [myPos,setMyPos]  = useState({});
   const [center, setCenter] = useState({});
   const [localPlaces, setPlaces] = useState([]);
   const image =
   "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"; 
-  const image2 =
-  "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngfind.com%2Fmpng%2Foioiio_map-marker-icons-87110-map-marker-icon-gif%2F&psig=AOvVaw1G3waZkWQiIDEDcI3UWau_&ust=1670001879905000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKj6vPj32PsCFQAAAAAdAAAAABAE" 
   let groupId = props.groupId;
   let { loading, data,refetch } = useQuery(QUERY_GROUP, {
     variables: { groupId },
