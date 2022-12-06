@@ -123,7 +123,7 @@ const MapsPage = function (props) {
             <br/>
             <div className="flex justify-evenly"> 
             <button className="bg-green-300 p-2 border-2 border-green-700 hover:bg-green-700" onClick={upDatePos}>
-              Load User Data
+              Update Location
             </button>
             <button className="bg-red-300  p-2 border-2 border-red-700 hover:bg-red-700" onClick={leaveGroupClick}>
               Leave Group

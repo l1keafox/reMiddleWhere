@@ -24,22 +24,25 @@ const initIo = (app) => {
 
   io.on("connection", (socket) => {
     console.log(`  -IO> Connection from User: ${socket.handshake.auth.user} Listening to:${socket.handshake.auth.group}`,);
+    if(globalChat && globalChat[socket.handshake.auth.group]){
+      io.emit(socket.handshake.auth.group,globalChat[socket.handshake.auth.group]);
+    }
     socket.on(socket.handshake.auth.group, (msg) => {
       const groupName = socket.handshake.auth.group;
-      console.log(socket.handshake.auth.group,msg);
+      console.log('  -IO>',socket.handshake.auth.group,msg);
       // When this gets a chat,
       // let's initilize global if needed.
       if(!globalChat) globalChat= {};
       if(!globalChat[groupName])  globalChat[groupName] = [];
       // First it adds the new message to existing chat array.
       globalChat[groupName].push(msg);
-      console.log('adding to globalChat',groupName,globalChat[groupName].length);
+      console.log('  -IO>adding to globalChat',groupName,globalChat[groupName].length);
       // Then it will emit this too all users.
       io.emit(groupName,globalChat[groupName]);
     })
 
     socket.on("disconnect", () => {
-      console.log("user disconnected");
+      console.log(`  -IO> user disconnected`);
     });
   })  
  

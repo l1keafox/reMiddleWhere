@@ -6,7 +6,6 @@ function ChatWindow(props) {
   const [socket, setSocket] = useState(null);
   const [name, setGroupName] = useState("");
   const [chat, setChat] = useState([]);
-
   function doThis() {
     console.log("doing Emit too:",props.groupName);
     if(name !== ""){
@@ -24,7 +23,7 @@ function ChatWindow(props) {
         user: auth.getUser().data.username,
         group: props.groupName
       },
-    }); //`http://${window.location.hostname}:3001`
+    }); 
     console.log(newSocket);
     setSocket(newSocket);
     return () => newSocket.close();
@@ -34,9 +33,7 @@ function ChatWindow(props) {
     if (socket) {
       socket.on("connect", () => {
         socket.on(props.groupName, (obj) => {
-          console.log(obj,": New arrays?");
-          setChat(chat =>  obj );
-          console.log("NEW", chat );
+          setChat(obj );
         });
       });
     }
@@ -48,9 +45,12 @@ function ChatWindow(props) {
       <h1>ChatWindow Bitch</h1>
       <TextField value={name} onChange={handleInputChange}  variant="standard"/>
       <button onClick={doThis}> SEND </button>
-      <div>
-
+      <div style={{overflow:"scroll", height:"400px"}}>
+            {chat.map(e=>(
+               <div> {e.user} : {e.msg} </div>
+            ))}
       </div>
+
     </div>
   );
 }
