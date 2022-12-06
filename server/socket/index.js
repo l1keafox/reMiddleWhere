@@ -3,7 +3,7 @@
 // Once it is initated, you can use this module to grab the io.
 
 //var io; // This will hold the io server.
-
+const { User, Group, Location } = require("../models");
 const initIo = (app) => {
   const http = require("http");
   const ioServer = http.createServer(app);
@@ -26,10 +26,24 @@ const initIo = (app) => {
       console.log("user disconnected");
     });
   });
-
+  Group.find({}).exec((err, collection) => { 
+    collection.map(obj =>{
+      console.log("  -IO>",obj.name,":Io Listening to");
+      io.on("connection", (socket) => {
+        socket.on(obj.name, (msg) => {
+          console.log(msg);
+        })
+      })
+    });
+  } );    
+//   for (let user of allGroups){
+// console.log(user);
+//   }
   // Or we add all socket code here? Mmmm not too bad of an idea, because we can use this folder to store all socket stuff.
   console.log("  -IO> server is initalized, set to global.io");
   return ioServer;
 };
+
+
 
 module.exports = { initIo }; // was trying to make it so io can be exported and used else where, but for waht ever reason this fails.
