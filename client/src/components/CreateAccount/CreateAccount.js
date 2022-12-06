@@ -37,11 +37,11 @@ function CreateAccount(props) {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    if (password !== reTypePassWord) {
-      setErrorMessage("Womp Womp passwords do not match.. Try Again!");
-    }
+    // if (password !== reTypePassWord) {
+    //   setErrorMessage("Womp Womp passwords do not match.. Try Again!");
+    // }
     if (!username) {
-      setErrorMessage("Username can not be blank.");
+      
     }
     try {
       const { data } = await signUp({
@@ -53,6 +53,8 @@ function CreateAccount(props) {
       setLogin(true);
     } catch (e) {
       console.error(e);
+      setErrorMessage(e);
+      console.log(e);
     }
 
     setUsername("");
@@ -140,6 +142,9 @@ function CreateAccount(props) {
           >
             Cancel
           </Button>
+          {errorMessage && (
+            <div className="my-2 p-2 bg-danger text-white text-center">{errorMessage.message}</div>
+          )}
 
             <Grid container justifyContent="flex-end">
               <Grid item>
