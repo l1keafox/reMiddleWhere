@@ -21,6 +21,8 @@ const CreateGroup = (props) => {
       props.mapSelect(data.createGroup._id)
     } catch (e) {
       console.error(e);
+      alert(e.message);
+
     }
     props.doClose();
   };
