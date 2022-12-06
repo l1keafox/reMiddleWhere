@@ -59,7 +59,7 @@ const MapsPage = function (props) {
     console.log(localPlaces,"Bck on maps");
   },[localPlaces] )
   useEffect(() => {
-    startPolling(1000);
+    startPolling(2000);
   }, []);
   useEffect(() => () => stopPolling(), []);
   // useEffect(()=>{
