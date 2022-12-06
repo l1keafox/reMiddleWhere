@@ -18,6 +18,7 @@ const JoinGroup = (props) => {
       props.mapSelect(data.joinGroup._id)
     } catch (e) {
       console.error(e);
+      alert(e.message);
     }
     props.doClose();
   };

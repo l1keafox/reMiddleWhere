@@ -13,7 +13,7 @@ import Container from "@mui/material/Container";
 function CreateAccount(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [reTypePassWord, setReTypePassword] = useState("");
+  // const [reTypePassWord, setReTypePassword] = useState("");
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const { toggleExistingUser, setLogin } = useExistingUserContext();
@@ -27,8 +27,6 @@ function CreateAccount(props) {
       setUsername(inputValue);
     } else if (inputType === "passWord") {
       setPassword(inputValue);
-    } else if (inputType === "reTypePassWord") {
-      setReTypePassword(inputValue);
     } else if (inputType === "email") {
       setEmail(inputValue);
     }
@@ -37,11 +35,11 @@ function CreateAccount(props) {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    if (password !== reTypePassWord) {
-      setErrorMessage("Womp Womp passwords do not match.. Try Again!");
-    }
+    // if (password !== reTypePassWord) {
+    //   setErrorMessage("Womp Womp passwords do not match.. Try Again!");
+    // }
     if (!username) {
-      setErrorMessage("Username can not be blank.");
+      
     }
     try {
       const { data } = await signUp({
@@ -53,12 +51,14 @@ function CreateAccount(props) {
       setLogin(true);
     } catch (e) {
       console.error(e);
+      setErrorMessage(e);
+      console.log(e);
     }
 
     setUsername("");
     setPassword("");
     setEmail("");
-    setReTypePassword("");
+    
   };
 
   return (
@@ -140,6 +140,9 @@ function CreateAccount(props) {
           >
             Cancel
           </Button>
+          {errorMessage && (
+            <div className="my-2 p-2 bg-danger text-white text-center">{errorMessage.message}</div>
+          )}
 
             <Grid container justifyContent="flex-end">
               <Grid item>

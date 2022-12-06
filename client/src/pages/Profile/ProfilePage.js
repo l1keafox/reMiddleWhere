@@ -22,12 +22,13 @@ function ProfilePage(props) {
   // console.log("PROFILE PAGE", auth.getUser().data, data, loading);
 
   useEffect(() => {
-    startPolling(500);
+    // startPolling(500);
     if(!loading && !data){
       console.log('done loading and no data');
     }
   }, []);
-  useEffect(() => () => stopPolling(), []);
+
+  // useEffect(() => () => stopPolling(), []);
   
   return (
     <div>
