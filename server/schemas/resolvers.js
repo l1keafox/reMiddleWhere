@@ -161,15 +161,28 @@ const resolvers = {
     leaveGroup: async (parent, { userId, groupId }, context) => {
       console.log("Leave Group - context.user info:", context.user);
       if (context.user) {
+
+        // So leaving the group
+        // in the Group :
+        // Means users and userLocations will be removed from it.
+        // in teh User : we need to removed from group.
+
         const group = await Group.findOne({ _id: groupId }).populate("users");
-        const user = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { groups: group._id } }
+        await Group.findOneAndUpdate(
+          { _id: group._id },
+          { $pull: { users: context.user._id } }
         );
         await Group.findOneAndUpdate(
           { _id: group._id },
-          { $pull: { users: user._id } }
+          { $pull: { locations: context.user.username } }
         );
+        const user = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { groups: group._id } }
+          
+        );
+
+
         return { user, group };
       }
     },
@@ -205,7 +218,7 @@ const resolvers = {
 
       );
       if (context.user) {
-        
+
 
         let group = await Group.findById({ _id: groupId }).populate(
           "userLocations"
