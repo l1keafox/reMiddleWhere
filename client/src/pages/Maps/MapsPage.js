@@ -26,6 +26,8 @@ const MapsPage = function (props) {
     height: "400px",
   };
 
+  
+
   // let center;
   //  = {
   //   lat: -3.745,
@@ -59,7 +61,7 @@ const MapsPage = function (props) {
     console.log(localPlaces,"Bck on maps");
   },[localPlaces] )
   useEffect(() => {
-    startPolling(1000);
+    startPolling(2000);
   }, []);
   useEffect(() => () => stopPolling(), []);
   // useEffect(()=>{
@@ -93,7 +95,8 @@ const MapsPage = function (props) {
     props.changeStage("profile");
   }
   //console.log(process.env.REACT_APP_GMAPS_API, "AIzaSyDOxXYVOWPzgQcdB8Zc8KTR-P92C8A-K2Y" , process.env.REACT_APP_GMAPS_API === "AIzaSyDOxXYVOWPzgQcdB8Zc8KTR-P92C8A-K2Y");
-
+  const sideStyle = "border-2 border-blue-500 bg-stone-200 flex flex-col p-3 m-3 w-5/6 sm:w-3/4 xl:w-1/4 h-[32rem]";
+  //md:w-1/4 lg:w-1/3 
   return loading ? (
     <div> Loading </div>
   ) : (
@@ -101,9 +104,9 @@ const MapsPage = function (props) {
       <h1 className ="text-4xl flex text-center justify-center pb-3 font-bold"> {data.group.name}</h1>
       {center ? (
         <div className="flex flex-col"> 
-          <div className="flex flex-col  justify-center sm:flex-row">
-
-            <div className="border-2 border-blue-500 bg-stone-200 flex flex-col p-3  sm:w-1/5"> 
+          <div className="flex flex-col  justify-center items-center lg:flex-row">
+          {/*  */}
+            <div className={sideStyle}> 
           <hr/>
             <h2 className="font-bold text-3xl"> User: {auth.getUser().data.username}  </h2>
             <hr/>
@@ -132,7 +135,8 @@ const MapsPage = function (props) {
 
             </div>
 
-            <div className=" sm:w-1/3 flex items-center justify-center"> 
+            <div className=" flex items-center justify-center"> 
+            {/* md:w-1/3  */}
           <LoadScript googleMapsApiKey={process.env.REACT_APP_GMAPS_API}>
             {center.lat ? 
             <GoogleMap
@@ -159,12 +163,12 @@ localPlaces
           </LoadScript>
             </div> 
 
-            <div className="border-2 border-blue-500 p-3 bg-slate-200  sm:w-1/5"> 
+            <div  className={sideStyle}> 
               <h1>Chat Window</h1> 
             </div> 
           
             </div>
-            <div className="flex container justify-center bg-slate-200">
+            <div className="flex container justify-center bg-slate-200 ">
 
               {center.lat?<Locals center={center} emitLocals = {setPlaces}/> :<div/> }
             </div>
