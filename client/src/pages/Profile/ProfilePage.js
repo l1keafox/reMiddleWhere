@@ -13,7 +13,7 @@ function ProfilePage(props) {
   const decodedToken = auth.getUser(); //{data:...{_id:...}}
 
   //added variables (userId) to be passed to the query to return needed user data
-  const { loading, data } = useQuery(QUERY_ME,
+  const { loading, data ,startPolling, stopPolling  } = useQuery(QUERY_ME,
     { variables: { userId: decodedToken.data._id } },
     {
       pollInterval: 500,
@@ -22,13 +22,13 @@ function ProfilePage(props) {
   // console.log("PROFILE PAGE", auth.getUser().data, data, loading);
 
   useEffect(() => {
-    // startPolling(500);
+    startPolling(500);
     if(!loading && !data){
       console.log('done loading and no data');
     }
   }, []);
 
-  // useEffect(() => () => stopPolling(), []);
+  useEffect(() => () => stopPolling(), []);
   
   return (
     <div>

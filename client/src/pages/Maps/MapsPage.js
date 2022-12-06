@@ -96,7 +96,7 @@ const MapsPage = function (props) {
     <div> Loading </div>
   ) : (
     <div className = "container">
-      <h1 className ="text-4xl flex text-center justify-center pb-3 font-bold"> {data.group.name}</h1>
+      <h1 className ="text-6xl flex text-center justify-center pb-3 font-bold"> {data.group.name}</h1>
       {center ? (
         <div className="flex flex-col"> 
           <div className="flex flex-col  justify-center items-center lg:flex-row">
@@ -160,7 +160,7 @@ const MapsPage = function (props) {
             </div> 
           
             </div>
-            <div className="flex container justify-center bg-slate-200 ">
+            <div className="flex container justify-center">
 
               {center.lat?<Locals center={center} emitLocals = {setPlaces}/> :<div/> }
             </div>
