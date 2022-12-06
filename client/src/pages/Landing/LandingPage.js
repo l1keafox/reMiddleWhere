@@ -28,13 +28,13 @@ function LandingPage(props) {
     <div  className="flex flex-col h-screen justify-center" >
       <div className="flex container flex-col lg:flex-row">
         <div className="bg-slate-200 lg:w-1/2 p-3 lg:h-[40rem] cursor-default select-none ">
-          <h1 className="text-7xl  font-marker text-center  "> Middle<span className="text-green-700">Where</span></h1>
+          <h1 className="text-5xl lg:text-7xl  font-marker text-center  "> Middle<span className="text-green-700">Where</span></h1>
           <br />
-          <p className="font-noto text-yellow-800 text-2xl p-3 text-justify cursor-default select-none">
+          <p className="font-noto text-yellow-800 xl:text-2xl p-3 text-justify cursor-default select-none">
             Middle-Where is a web-based application designed to bring friends
             together using a calculated, centralized geolocation.
             </p>
-            <p className="font-noto text-yellow-800 text-2xl p-3 text-justify  cursor-default select-none"> The motivation
+            <p className="font-noto text-yellow-800 xl:text-2xl p-3 text-justify  cursor-default select-none"> The motivation
             behind this project is to streamline the process of deciding the
             best place to meet between multiple group members. Individuals can
             choose to be placed into groups with their friends or colleagues,
