@@ -18,7 +18,7 @@ const MapsPage = function (props) {
   const image =
   "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"; 
   let groupId = props.groupId;
-  let { loading, data,refetch } = useQuery(QUERY_GROUP, {
+  let { loading, data,refetch,startPolling, stopPolling } = useQuery(QUERY_GROUP, {
     variables: { groupId },
   });
   const containerStyle = {
@@ -33,6 +33,7 @@ const MapsPage = function (props) {
   // };
   console.log("MAP PAGE DATA:::", data, groupId);
   useEffect(() => {
+    console.log('new data?',data);
     if (data) {
       setCenter({
         ...center,
@@ -57,6 +58,10 @@ const MapsPage = function (props) {
   useEffect(()=>{
     console.log(localPlaces,"Bck on maps");
   },[localPlaces] )
+  useEffect(() => {
+    startPolling(500);
+  }, []);
+  useEffect(() => () => stopPolling(), []);
   // useEffect(()=>{
   //   console.log(loc_data);
   // },[loc_data] );

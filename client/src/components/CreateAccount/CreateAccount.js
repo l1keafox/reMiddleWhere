@@ -13,7 +13,7 @@ import Container from "@mui/material/Container";
 function CreateAccount(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [reTypePassWord, setReTypePassword] = useState("");
+  // const [reTypePassWord, setReTypePassword] = useState("");
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const { toggleExistingUser, setLogin } = useExistingUserContext();
@@ -27,8 +27,6 @@ function CreateAccount(props) {
       setUsername(inputValue);
     } else if (inputType === "passWord") {
       setPassword(inputValue);
-    } else if (inputType === "reTypePassWord") {
-      setReTypePassword(inputValue);
     } else if (inputType === "email") {
       setEmail(inputValue);
     }
@@ -60,7 +58,7 @@ function CreateAccount(props) {
     setUsername("");
     setPassword("");
     setEmail("");
-    setReTypePassword("");
+    
   };
 
   return (
