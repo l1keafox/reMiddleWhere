@@ -27,16 +27,8 @@ const MapsPage = function (props) {
     height: "400px",
   };
 
-  
-
-  // let center;
-  //  = {
-  //   lat: -3.745,
-  //   lng: -38.523
-  // };
   console.log("MAP PAGE DATA:::", data, groupId);
   useEffect(() => {
-    // console.log('new data?',data);
     if (data) {
       setCenter({
         ...center,
@@ -58,9 +50,6 @@ const MapsPage = function (props) {
       }
     }
   }, [data]);
-  // useEffect(()=>{
-  //   // console.log(localPlaces,"Bck on maps");
-  // },[localPlaces] )
 
   useEffect(() => {
     startPolling(2000);
@@ -73,6 +62,7 @@ const MapsPage = function (props) {
   //   console.log(loc_data);
   // },[loc_data] );
   function upDatePos() {
+    console.log('Update pos');
     navigator.geolocation.getCurrentPosition(async (position) => {
       //mutation AddUserLocationToGroup($userId: ID!, $groupId: ID!, $latitude: Int!, $longitude: Int!)
       // So we need 4 times, userID, groupID, lat, and long, here we get lat/long
@@ -106,7 +96,7 @@ const MapsPage = function (props) {
     <div> Loading </div>
   ) : (
     <div className = "container">
-      <h1 className ="text-4xl flex text-center justify-center pb-3 font-bold"> {data.group.name}</h1>
+      <h1 className ="text-6xl flex text-center justify-center pb-3 font-bold"> {data.group.name}</h1>
       {center ? (
         <div className="flex flex-col"> 
           <div className="flex flex-col  justify-center items-center lg:flex-row">
@@ -160,11 +150,8 @@ const MapsPage = function (props) {
               {localPlaces.map((e, index) => (
                 <Marker position={{lat: e.geometry.location.lat,lng: e.geometry.location.lng}} key={index} title={e.name} label={ e.name[0]}>@ </Marker>
               ))}
-
-localPlaces
-
             </GoogleMap  > 
-            : <div className="text-3xl font-bold"> NEEDS CENTER LOCATION </div> }
+            : <div className="text-3xl font-bold"> Click Update Location </div> }
           </LoadScript>
             </div> 
 
@@ -173,7 +160,7 @@ localPlaces
             </div> 
           
             </div>
-            <div className="flex container justify-center bg-slate-200 ">
+            <div className="flex container justify-center">
 
               {center.lat?<Locals center={center} emitLocals = {setPlaces}/> :<div/> }
             </div>

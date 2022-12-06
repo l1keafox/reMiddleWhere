@@ -204,11 +204,7 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    addUserLocationToGroup: async (
-      parent,
-      { groupId, userId, latitude, longitude },
-      context
-    ) => {
+    addUserLocationToGroup: async ( parent, { groupId, userId, latitude, longitude }, context) => {
       console.log(
         "User Location To Group: ",
         context.user.username,
