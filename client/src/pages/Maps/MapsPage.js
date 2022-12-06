@@ -5,6 +5,7 @@ import { ADD_LOCATION_TO_GROUP, LEAVE_GROUP } from "../../utils/mutations";
 import auth from "../../utils/auth";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import Locals from "./Locals";
+import ChatWindow from "./ChatWindow";
 
 const MapsPage = function (props) {
   // console.log(ADD_LOCATION_TO_GROUP);
@@ -35,7 +36,7 @@ const MapsPage = function (props) {
   // };
   console.log("MAP PAGE DATA:::", data, groupId);
   useEffect(() => {
-    console.log('new data?',data);
+    // console.log('new data?',data);
     if (data) {
       setCenter({
         ...center,
@@ -57,12 +58,16 @@ const MapsPage = function (props) {
       }
     }
   }, [data]);
-  useEffect(()=>{
-    console.log(localPlaces,"Bck on maps");
-  },[localPlaces] )
+  // useEffect(()=>{
+  //   // console.log(localPlaces,"Bck on maps");
+  // },[localPlaces] )
+
   useEffect(() => {
     startPolling(2000);
+
   }, []);
+
+
   useEffect(() => () => stopPolling(), []);
   // useEffect(()=>{
   //   console.log(loc_data);
@@ -164,7 +169,7 @@ localPlaces
             </div> 
 
             <div  className={sideStyle}> 
-              <h1>Chat Window</h1> 
+              <ChatWindow groupName={data.group.name}/>
             </div> 
           
             </div>
