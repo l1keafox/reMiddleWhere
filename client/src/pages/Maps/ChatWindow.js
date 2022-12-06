@@ -42,10 +42,12 @@ function ChatWindow(props) {
 
   return (
     <div>
-      <h1>ChatWindow Bitch</h1>
-      <TextField value={name} onChange={handleInputChange}  variant="standard"/>
-      <button onClick={doThis}> SEND </button>
-      <div style={{overflow:"scroll", height:"400px"}}>
+      <h1 className="font-bold items-center justify-center flex text-xl">ChatWindow</h1>
+      <div className="flex">
+        <TextField value={name} onChange={handleInputChange}  variant="standard" className="w-3/4  m-2 p-1 "/>
+        <button onClick={doThis} className="bg-yellow-300 m-2 p-1 border-1 border-blue-200"> SEND </button>
+      </div>
+      <div style={{overflowX:"scroll",overflowY:"scroll", height:"400px"}}>
             {chat.map(e=>(
                <div> {e.user} : {e.msg} </div>
             ))}

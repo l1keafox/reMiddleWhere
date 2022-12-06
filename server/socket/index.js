@@ -29,14 +29,14 @@ const initIo = (app) => {
     }
     socket.on(socket.handshake.auth.group, (msg) => {
       const groupName = socket.handshake.auth.group;
-      console.log('  -IO>',socket.handshake.auth.group,msg);
+      console.log('  -IO Chat> Group:',socket.handshake.auth.group,"Msg Obj:",msg);
       // When this gets a chat,
       // let's initilize global if needed.
       if(!globalChat) globalChat= {};
       if(!globalChat[groupName])  globalChat[groupName] = [];
       // First it adds the new message to existing chat array.
       globalChat[groupName].push(msg);
-      console.log('  -IO>adding to globalChat',groupName,globalChat[groupName].length);
+      // console.log('  -IO>adding to globalChat',groupName,globalChat[groupName].length);
       // Then it will emit this too all users.
       io.emit(groupName,globalChat[groupName]);
     })

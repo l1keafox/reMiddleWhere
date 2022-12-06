@@ -82,7 +82,7 @@ const MapsPage = function (props) {
       const { data } = await addUserLocationToGroup({
         variables: { userId, groupId, latitude, longitude },
       });
-      console.log("THIS:",data);
+      // console.log("THIS:",data);
       if(data){
         alert('Location Updated');
         refetch({  groupId } );
@@ -92,7 +92,7 @@ const MapsPage = function (props) {
 
   async function leaveGroupClick() {
     // leaveGroup(need groupId);
-    console.log(groupId, "is group ID");
+    //console.log(groupId, "is group ID");
     const { data } = await leaveGroup({
       variables: { groupId },
     });
