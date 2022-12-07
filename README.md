@@ -6,7 +6,7 @@ A web app that will find a center point to meet for a group of users.
 
 Using the MERN + socket.io stack.
 
-![employee tracker screenshot](https://user-images.githubusercontent.com/107587452/189556472-9c0ddb4d-686c-402b-b1ce-78740a187481.png)
+![MiddleWhere Cover Photo](https://user-images.githubusercontent.com/107587452/206061353-946b0715-160b-4fc6-ab0d-d0fbf52ee473.png)
 
 ## Table of Contents
 
