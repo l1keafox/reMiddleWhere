@@ -20,7 +20,7 @@ function Locals(props) {
   }, [loading]);
 
   return (
-    <div className="border-2 border-blue-500 p-3 w-[50rem] lg:w-[65rem] bg-stone-200">
+    <div className="border-2 border-blue-500 p-3 w-[50rem] lg:w-[66rem] bg-stone-200">
       <h1 className="font-bold text-xl">Local Places</h1>
       <hr/>
       <div className="flex flex-col flex-wrap h-[30rem] md:h-[20rem] lg:h-[10rem]">
