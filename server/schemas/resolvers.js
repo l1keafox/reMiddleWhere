@@ -82,7 +82,7 @@ const resolvers = {
 
     getLocalPlaces: async (parent, {latitude,longitude,range}) => {
       const fetch = require('node-fetch');
-      let data = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude}%2C${longitude}&radius=5000&type=restaurant&keyword=cruise&key=${process.env.GMAPS_API}`)
+      let data = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude}%2C${longitude}&radius=5000&type=restaurant&key=${process.env.GMAPS_API}`)
       
       const body = await data.json();
       return body;
