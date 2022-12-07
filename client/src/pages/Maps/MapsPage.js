@@ -128,11 +128,11 @@ const MapsPage = function (props) {
             <hr/>
             <h2 className="font-bold text-3xl"> { data.group.name } Members</h2> 
             <hr/>
-
+            <div style={{overflowX:"hidden",overflowY:"scroll"}} > 
             {data.group.users.map((e, index) => (
             <div key={index}>{e.username[0]+e.username[1]}:  {e.username} </div>
             ))}
-
+            </div>
             </div>
 
             <div className=" flex items-center justify-center"> 
