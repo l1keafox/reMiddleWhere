@@ -4,17 +4,19 @@
 
 A web app that will find a center point to meet for a group of users.
 
-Using the MERN + socket.io stoack.
+Using the MERN + socket.io stack.
+
+![employee tracker screenshot](https://user-images.githubusercontent.com/107587452/189556472-9c0ddb4d-686c-402b-b1ce-78740a187481.png)
 
 ## Table of Contents
 
-1.  [Usage](#Usage)
-2.  [Installation](#Installation)
-3.  [Technologies](#Technologies)
-4.  [Contributing](#Contributing)
-5.  [Questions](#Questions)
-6.  [Tests](#Tests)
-7.  [License](#License)
+1.  [Usage](#usage)
+2.  [Installation](#installation)
+3.  [Technologies](#technologies)
+4.  [Contributing](#contributing)
+5.  [Questions](#questions)
+6.  [Tests](#tests)
+7.  [License](#license)
 
 ## Usage
 
