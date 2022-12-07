@@ -16,15 +16,16 @@ const MapsPage = function (props) {
   const [myPos,setMyPos]  = useState({});
   const [center, setCenter] = useState({});
   const [localPlaces, setPlaces] = useState([]);
-  const image =
-  "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"; 
+  const image = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+  // "http://clipart-library.com/img/2103583.png"
+  // "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"; 
   let groupId = props.groupId;
   let { loading, data,refetch,startPolling, stopPolling } = useQuery(QUERY_GROUP, {
     variables: { groupId },
   });
   const containerStyle = {
-    width: "400px",
-    height: "400px",
+    width: "405px",
+    height: "510px",
   };
 
   console.log("MAP PAGE DATA:::", data, groupId);
@@ -152,9 +153,9 @@ const MapsPage = function (props) {
                 <Marker position={{lat: e.latitude,lng: e.longitude}} key={index} title={e.locationName} label={ e.locationName[0]+e.locationName[1]}/>
               ))}
 
-              {localPlaces.map((e, index) => (
+              {/* {localPlaces.map((e, index) => (
                 <Marker position={{lat: e.geometry.location.lat,lng: e.geometry.location.lng}} key={index} title={e.name} label={ e.name[0]}>@ </Marker>
-              ))}
+              ))} */}
             </GoogleMap  > 
             : <div className="text-3xl font-bold"> Click Update Location </div> }
           </LoadScript>

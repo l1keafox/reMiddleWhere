@@ -48,7 +48,7 @@ function ChatWindow(props) {
         <TextField value={name} onChange={handleInputChange} label="Send a message" variant="standard" className="w-3/4  m-2 p-1 "/>
         <button  className="bg-yellow-300 m-2 p-1 px-3 border-2 border-blue-200 hover:bg-yellow-400" > SEND </button>
       </form>
-      <div style={{overflowX:"scroll",overflowY:"scroll", height:"400px"}}>
+      <div style={{overflowX:"scroll",overflowY:"scroll", height:"390px"}}>
             {chat.map(e=>(
                <div> {e.user} : {e.msg} </div>
             ))}
