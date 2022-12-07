@@ -36,8 +36,8 @@ function ProfilePage(props) {
         <div />
       ) : (
         <div className="container">
-        <div id="profileBgWrap"> 
-          <div id="profileBg" >
+        <div className="profileBgWrap"> 
+          <div className="profileBg" >
           </div>
         </div>
           <InfoCard />

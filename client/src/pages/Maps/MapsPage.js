@@ -96,7 +96,12 @@ const MapsPage = function (props) {
     <div> Loading </div>
   ) : (
     <div className = "container">
-      <h1 className ="text-6xl flex text-center justify-center pb-3 font-bold"> {data.group.name}</h1>
+        <div className="profileBgWrap"> 
+          <div className="profileBg" >
+          </div>
+        </div>
+
+      <h1 className ="text-6xl flex text-center justify-center pb-3 font-bold text-slate-200 font-marker"> {data.group.name}</h1>
       {center ? (
         <div className="flex flex-col"> 
           <div className="flex flex-col  justify-center items-center lg:flex-row">
