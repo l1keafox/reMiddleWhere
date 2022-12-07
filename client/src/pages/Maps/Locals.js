@@ -20,8 +20,9 @@ function Locals(props) {
   }, [loading]);
 
   return (
-    <div>
-      <h1>Locals</h1>
+    <div className="border-2 border-blue-500 p-3 w-[50rem] bg-stone-200">
+      <h1 className="font-bold text-xl">Local Places</h1>
+      <hr/>
       <div>
       {locals.map((element,index) => {
         return <h2 key = {index}> {element.name}</h2>;

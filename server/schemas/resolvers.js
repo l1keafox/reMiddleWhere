@@ -111,6 +111,8 @@ const resolvers = {
     },
     //adds a user to the database, used on signup.
     addUser: async (parent, { username, email, password }) => {
+
+      
       const user = await User.create({ username, email, password });
 
       const token = signToken(user);
@@ -179,7 +181,6 @@ const resolvers = {
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $pull: { groups: group._id } }
-          
         );
 
 
@@ -203,11 +204,7 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    addUserLocationToGroup: async (
-      parent,
-      { groupId, userId, latitude, longitude },
-      context
-    ) => {
+    addUserLocationToGroup: async ( parent, { groupId, userId, latitude, longitude }, context) => {
       console.log(
         "User Location To Group: ",
         context.user.username,

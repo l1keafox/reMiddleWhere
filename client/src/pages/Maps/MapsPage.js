@@ -5,6 +5,7 @@ import { ADD_LOCATION_TO_GROUP, LEAVE_GROUP } from "../../utils/mutations";
 import auth from "../../utils/auth";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import Locals from "./Locals";
+import ChatWindow from "./ChatWindow";
 
 const MapsPage = function (props) {
   // console.log(ADD_LOCATION_TO_GROUP);
@@ -26,14 +27,8 @@ const MapsPage = function (props) {
     height: "400px",
   };
 
-  // let center;
-  //  = {
-  //   lat: -3.745,
-  //   lng: -38.523
-  // };
   console.log("MAP PAGE DATA:::", data, groupId);
   useEffect(() => {
-    console.log('new data?',data);
     if (data) {
       setCenter({
         ...center,
@@ -55,17 +50,19 @@ const MapsPage = function (props) {
       }
     }
   }, [data]);
-  useEffect(()=>{
-    console.log(localPlaces,"Bck on maps");
-  },[localPlaces] )
+
   useEffect(() => {
-    startPolling(1000);
+    startPolling(2000);
+
   }, []);
+
+
   useEffect(() => () => stopPolling(), []);
   // useEffect(()=>{
   //   console.log(loc_data);
   // },[loc_data] );
   function upDatePos() {
+    console.log('Update pos');
     navigator.geolocation.getCurrentPosition(async (position) => {
       //mutation AddUserLocationToGroup($userId: ID!, $groupId: ID!, $latitude: Int!, $longitude: Int!)
       // So we need 4 times, userID, groupID, lat, and long, here we get lat/long
@@ -75,7 +72,7 @@ const MapsPage = function (props) {
       const { data } = await addUserLocationToGroup({
         variables: { userId, groupId, latitude, longitude },
       });
-      console.log("THIS:",data);
+      // console.log("THIS:",data);
       if(data){
         alert('Location Updated');
         refetch({  groupId } );
@@ -85,7 +82,7 @@ const MapsPage = function (props) {
 
   async function leaveGroupClick() {
     // leaveGroup(need groupId);
-    console.log(groupId, "is group ID");
+    //console.log(groupId, "is group ID");
     const { data } = await leaveGroup({
       variables: { groupId },
     });
@@ -93,17 +90,23 @@ const MapsPage = function (props) {
     props.changeStage("profile");
   }
   //console.log(process.env.REACT_APP_GMAPS_API, "AIzaSyDOxXYVOWPzgQcdB8Zc8KTR-P92C8A-K2Y" , process.env.REACT_APP_GMAPS_API === "AIzaSyDOxXYVOWPzgQcdB8Zc8KTR-P92C8A-K2Y");
-
+  const sideStyle = "border-2 border-blue-500 bg-stone-200 flex flex-col p-3 m-3 w-5/6 sm:w-3/4 xl:w-1/4 h-[32rem]";
+  //md:w-1/4 lg:w-1/3 
   return loading ? (
     <div> Loading </div>
   ) : (
     <div className = "container">
-      <h1 className ="text-4xl flex text-center justify-center pb-3 font-bold"> {data.group.name}</h1>
+        <div className="profileBgWrap"> 
+          <div className="profileBg" >
+          </div>
+        </div>
+
+      <h1 className ="text-6xl flex text-center justify-center pb-3 font-bold text-slate-200 font-marker"> {data.group.name}</h1>
       {center ? (
         <div className="flex flex-col"> 
-          <div className="flex flex-col  justify-center sm:flex-row">
-
-            <div className="border-2 border-blue-500 bg-stone-200 flex flex-col p-3  sm:w-1/5"> 
+          <div className="flex flex-col  justify-center items-center lg:flex-row">
+          {/*  */}
+            <div className={sideStyle}> 
           <hr/>
             <h2 className="font-bold text-3xl"> User: {auth.getUser().data.username}  </h2>
             <hr/>
@@ -115,7 +118,7 @@ const MapsPage = function (props) {
             <br/>
             <div className="flex justify-evenly"> 
             <button className="bg-green-300 p-2 border-2 border-green-700 hover:bg-green-700" onClick={upDatePos}>
-              Load User Data
+              Update Location
             </button>
             <button className="bg-red-300  p-2 border-2 border-red-700 hover:bg-red-700" onClick={leaveGroupClick}>
               Leave Group
@@ -132,7 +135,8 @@ const MapsPage = function (props) {
 
             </div>
 
-            <div className=" sm:w-1/3 flex items-center justify-center"> 
+            <div className=" flex items-center justify-center"> 
+            {/* md:w-1/3  */}
           <LoadScript googleMapsApiKey={process.env.REACT_APP_GMAPS_API}>
             {center.lat ? 
             <GoogleMap
@@ -151,20 +155,17 @@ const MapsPage = function (props) {
               {localPlaces.map((e, index) => (
                 <Marker position={{lat: e.geometry.location.lat,lng: e.geometry.location.lng}} key={index} title={e.name} label={ e.name[0]}>@ </Marker>
               ))}
-
-localPlaces
-
             </GoogleMap  > 
-            : <div className="text-3xl font-bold"> NEEDS CENTER LOCATION </div> }
+            : <div className="text-3xl font-bold"> Click Update Location </div> }
           </LoadScript>
             </div> 
 
-            <div className="border-2 border-blue-500 p-3 bg-slate-200  sm:w-1/5"> 
-              <h1>Chat Window</h1> 
+            <div  className={sideStyle}> 
+              <ChatWindow groupName={data.group.name}/>
             </div> 
           
             </div>
-            <div className="flex container justify-center bg-slate-200">
+            <div className="flex container justify-center">
 
               {center.lat?<Locals center={center} emitLocals = {setPlaces}/> :<div/> }
             </div>

@@ -15,6 +15,7 @@ import MapsPage from "./pages/Maps/MapsPage";
 import NavBar from "./components/NavBar/NavBar";
 import CreateGroup from "./components/CreateGroup/CreateGroup";
 import JoinGroup from "./components/JoinGroup/JoinGroup";
+import Feedback from "./components/Feedback/GetFeedback"
 import auth from "./utils/auth";
 import Modal from "@mui/material/Modal";
 import { Box } from "@mui/material";
@@ -28,6 +29,7 @@ const Pages = {
 const Modals = {
   create: "create",
   join: "join",
+  feedback:"feedback"
 };
 
 const httpLink = createHttpLink({
@@ -78,6 +80,11 @@ function App() {
     if (nextStage === Modals.join) {
       setOpen(true);
       changeModal(<JoinGroup doClose={handleClose}  mapSelect={mapSelect}/>);
+      return;
+    }
+    if (nextStage === Modals.feedback) {
+      setOpen(true);
+      changeModal(<Feedback doClose={handleClose}  />);
       return;
     }
     if (nextStage === "logout") {
