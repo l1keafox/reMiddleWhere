@@ -17,7 +17,7 @@ if(process.env.MONGODB_URI && !process.env.LOCAL_CONNECT ){
 } else {
   console.log("  -MONGOO>Connecting too :  mongodb://127.0.0.1:27017/middleWhere");
   mongoose.connect(
-      "mongodb://127.0.0.1:27017/middleWhere",
+      "mongodb://root:example@raspberrypi.local:27017",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

@@ -6,7 +6,7 @@
   "scripts": {
     "start:dev": "concurrently \"cd client && npm run build\" \"cd server && npm run server\" ",
     "start": "npm run build && cd server && node server.js",
-    "server": "cd server && node server.js --ignore client",
+    "server": "cd server && node server.js ",
     "build": "cd client && npm run build --max_old_space_size=4096 node_modules/.bin/react-scripts build",
     "install": "cd server && npm i && cd ../client && npm i",
     "client": "cd client && npm start",
