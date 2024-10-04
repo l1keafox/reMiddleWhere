@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 
 
 if(process.env.MONGODB_URI && !process.env.LOCAL_CONNECT ){
-  console.log("  -MONGOO>Connecting too : ",process.env.MONGODB_URI);
+  console.log("  -MONGOO>Connecting too :  ENV",process.env.MONGODB_URI);
   mongoose.connect(
     process.env.MONGODB_URI||
-      "mongodb://127.0.0.1:27017/middleWhere",
+      "mongodb://root:example@192.168.0.15:27017/?authSource=admin",
     {
       useNewUrlParser: true,
 
@@ -15,9 +15,9 @@ if(process.env.MONGODB_URI && !process.env.LOCAL_CONNECT ){
   
 
 } else {
-  console.log("  -MONGOO>Connecting too :  mongodb://127.0.0.1:27017/middleWhere");
+  console.log("  -MONGOO>Connecting too : Lacking ENV mongodb://root:example@raspberrypi.local:27017/middleWhere");
   mongoose.connect(
-      "mongodb://root:example@raspberrypi.local:27017",
+      "mongodb://root:example@raspberrypi.local:27017/?authSource=admin",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
