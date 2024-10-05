@@ -1,0 +1,19 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - backend
+    env_file:
+      - ./server/.env
+    command: node server.js
+networks:
+  backend:
+    driver: bridge
+  frontend:
+    driver: bridge
