@@ -1,5 +1,6 @@
 services:
   server:
+    restart: unless-stopped
     build:
       context: .
       dockerfile: Dockerfile
