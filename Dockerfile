@@ -1,27 +1,24 @@
-# Use a base image for Node.js
-FROM node:21.6.2
+# ---------- Build client ----------
+FROM node:21.6.2 as client
 
 WORKDIR /app/client
-# Copy client files and install dependencies
 COPY client/package*.json ./
-COPY client/ ./
-
-# Build the client for production
 RUN npm install
+COPY client/ ./
 RUN npm run build
 
+# ---------- Build server ----------
+FROM node:21.6.2 as server
 
-# Set working directory for the server
-WORKDIR /app/server
-
-# Copy server files and install dependencies
+WORKDIR /app
 COPY server/package*.json ./
-# Copy the rest of the server code
-COPY server/ ./
 RUN npm install
 
-# Expose port for the Node server
-EXPOSE 3001
+# Copy server source
+COPY server/ ./
 
-# Start the server
+# Copy client build into server's public folder
+COPY --from=client /app/client/build ./client_build
+
+EXPOSE 3001
 CMD ["node", "server.js"]

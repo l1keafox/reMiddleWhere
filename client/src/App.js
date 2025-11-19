@@ -33,7 +33,7 @@ const Modals = {
 };
 
 const httpLink = createHttpLink({
-  uri: "http://raspberrypi.local:3001/graphql",
+  uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
